@@ -9,7 +9,8 @@ test -f ~/.config/zsh/variables.zsh && source ~/.config/zsh/variables.zsh
 if [ ! $(pgrep Xorg) ] && [ "tty1" = "$(basename $(tty))" ]
 then
 	clear
-	test -f ~/.config/zsh/startup.sh && . ~/.config/zsh/startup.sh
+	eval `keychain --eval --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D`
+	eval `keychain --noask --eval --quiet --agents ssh`
     startx 2&> /dev/null
     exit
 fi
