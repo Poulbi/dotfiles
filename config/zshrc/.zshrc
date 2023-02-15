@@ -19,7 +19,8 @@ autoload -U select-word-style
 select-word-style bash
 autoload -z edit-command-line
 zle -N edit-command-line
-zstyle :compinstall filename '/home/aluc/.zshrc'
+zstyle ':compinstall' filename '/home/aluc/.zshrc'
+zstyle ':completion:*' menu select
 autoload -Uz compinit
 compinit
 
