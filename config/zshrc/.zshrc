@@ -76,14 +76,12 @@ setopt correct
 setopt nonomatch 
 setopt autocd
 setopt completeinword
-#regexlike matching
 setopt extendedglob
-setopt histignoredups
+setopt histignorealldups
 setopt histreduceblanks
-#enable comments on commandline
-setopt interactive_comments
-#say status of bg jobs immediately
+setopt interactivecomments
 setopt notify
+setopt cdablevars
 
 for f in \
 	/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
