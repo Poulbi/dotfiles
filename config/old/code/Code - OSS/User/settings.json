@@ -1,0 +1,21 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "terminal.integrated.fontFamily": "mononoki Nerd Font Mono",
+    "terminal.integrated.fontWeight": "bold",
+    "keyboard.dispatch": "keyCode",
+    "files.autoSave": "onFocusChange",
+    "vim.useSystemClipboard": true,
+    "editor.cursorBlinking": "solid",
+    "editor.lineNumbers": "relative",
+    "git.autorefresh": false,
+    "debug.onTaskErrors": "abort",
+    "editor.smoothScrolling": true,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "extensions.ignoreRecommendations": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "window.menuBarVisibility": "toggle",
+    "explorer.confirmDelete": false,
+    "workbench.startupEditor": "none",
+    "git.confirmSync": false,
+    "liveServer.settings.NoBrowser": true
+}

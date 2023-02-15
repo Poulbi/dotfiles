@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+choice="$(echo -ne "multiline\nsingle" | dmenu -l 1 -g 2)"
+test -z "${choice}" && exit 1
+
+password="$(echo -n "" | dmenu -p "name:")"
+test -z "${password}" && exit 1
+
+if [[ "${choice}" == "multiline" ]]
+then
+	logins="$(ls -1 ~/.password-store/e-mails | awk -F '.gpg' '{print $1}')"
+    login="$(echo "$logins" | dmenu -g 1 -l 8 -p "login:")"
+    test -z "${login}" && exit 1
+    url="$(echo -n "" | dmenu -p "url:")"
+    test -z "${url}" && exit 1
+    echo -e "${password}\nlogin: ${login}\nurl: ${url}" | pass insert -mf "${password}"
+    pass generate -ci "${password}"
+else
+    pass generate -cf "${password}"
+fi
+

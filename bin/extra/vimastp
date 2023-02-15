@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+for var in name vcpus memory cdrom disk_size osinfo
+do
+ read -p "${var}:" "$var"
+done
+echo "virt-install --name=$name \
+--vcpus ${vcpus:-4} \
+--memory ${memory:-4096} \
+--cdrom ${cdrom} \
+--disk size=${disk_size-30},pool=VMs \
+--osinfo ${osinfo:-detect=on}\
+--boot cdrom,hd,network"

@@ -1,0 +1,3 @@
+#!/bin/sh
+dmenu -l 10 -g 1 -c -x < /tmp/tmpclip.txt | xclip -sel c 
+xdotool key Ctrl+Shift+v

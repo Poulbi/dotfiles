@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+echo "name: $1"
+echo "icon: $2"
+echo "sentence: $3"

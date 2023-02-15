@@ -1,0 +1,10 @@
+require("tlast.cmp.setup")
+
+require("tlast.cmp.arduino")
+require("tlast.cmp.clangd")
+require("tlast.cmp.html")
+require("tlast.cmp.css")
+require("tlast.cmp.js")
+require("tlast.cmp.emmet")
+require("tlast.cmp.lua")
+require("tlast.cmp.python")

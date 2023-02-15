@@ -1,0 +1,68 @@
+return require('packer').startup(function(use)
+	use('wbthomason/packer.nvim')
+
+	-- files
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.0',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	}
+	use('nvim-telescope/telescope-symbols.nvim')
+	use('theprimeagen/harpoon')
+
+	-- colors
+	use('shaunsingh/nord.nvim')
+	use('folke/tokyonight.nvim')
+	use {
+		'glepnir/dashboard-nvim',
+		event = 'VimEnter',
+		config = {
+			theme = 'hyper',
+		},
+		requires = {'nvim-tree/nvim-web-devicons'}
+	}
+	use('norcalli/nvim-colorizer.lua')
+
+	use('airblade/vim-gitgutter')
+
+	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+	use('nvim-treesitter/playground')
+
+	use('mbbill/undotree')
+
+	use('tpope/vim-capslock')
+	use('tpope/vim-commentary')
+	use('tpope/vim-endwise')
+	use('tpope/vim-fugitive')
+	use('tpope/vim-repeat')
+	use('tpope/vim-surround')
+	use('tpope/vim-vinegar')
+
+	-- utils
+	use('godlygeek/tabular')
+	use('renerocksai/calendar-vim')
+	use('LordTlasT/live-server')
+	use('ojroques/vim-oscyank', {branch = "main"})
+
+	-- objects
+	use('michaeljsmith/vim-indent-object')
+
+	-- completion
+	use('neovim/nvim-lspconfig')
+	use('hrsh7th/nvim-cmp')
+	use('hrsh7th/cmp-nvim-lua')
+	use('hrsh7th/cmp-nvim-lsp')
+	use('hrsh7th/cmp-buffer')
+	use('hrsh7th/cmp-path')
+	use('hrsh7th/cmp-cmdline')
+
+	-- snippets
+	use('L3MON4D3/LuaSnip')
+	use('saadparwaiz1/cmp_luasnip')
+
+	-- notes
+	use('renerocksai/telekasten.nvim')
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function() vim.fn["mkdp#util#install"]() end,
+	})
+end)

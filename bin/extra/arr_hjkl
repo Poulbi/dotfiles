@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$(xmodmap -pke | grep ' = h')" ]
+then
+  xmodmap -e 'keycode 43 = Left'
+  xmodmap -e 'keycode 44 = Down Return'
+  xmodmap -e 'keycode 45 = Up'
+  xmodmap -e 'keycode 46 = Right'
+  dunstify "arr hjkl" "arrows <b>on</b>"
+else
+  export ARRKEYMODE="hjkl"
+  xmodmap -e 'keycode 43 = h'
+  xmodmap -e 'keycode 44 = j'
+  xmodmap -e 'keycode 45 = k'
+  xmodmap -e 'keycode 46 = l'
+  dunstify "arr hjkl" "arrows <b>off</b>"
+fi

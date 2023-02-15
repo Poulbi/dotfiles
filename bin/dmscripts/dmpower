@@ -1,0 +1,3 @@
+#!/bin/sh
+choice="$(echo -e "poweroff\nreboot\nhibernate" | dmenu -l 1 -g 3)"
+test -z "$choice" || systemctl "$choice"

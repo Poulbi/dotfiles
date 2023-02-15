@@ -1,0 +1,2 @@
+#!/bin/sh
+grep -v '^#' ~/.local/share/bookmarks | dmenu -c -x -g 1 -l 10 | cut -f1 -d' ' | xclip -sel c && xdotool key Ctrl+Shift+v

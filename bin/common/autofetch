@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+GREEN='\033[0;32m'
+NC='\033[0m'
+# Fetches for git repos, meant to run at startup
+for directory in "." "installdrier" ".config" ".password-store"
+do
+    if cd ~/$directory
+    then
+        echo -ne "Fetching in ${GREEN}'~/${directory}'${NC}"
+        git fetch origin || exit 1
+        echo ", done."
+    fi
+done

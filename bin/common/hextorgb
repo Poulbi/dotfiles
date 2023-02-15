@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+cat /dev/stdin \
+    | tr -d '#' | tr '[:lower:]' '[:upper:]' \
+	| sed -r 's/([0-9A-F]{2})/\1\n/g ; i ibase=16' \
+	| bc \
+	| tr '\n' ',' \
+	| sed 's/.$// ; s/.*/rgb(&)/'

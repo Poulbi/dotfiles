@@ -1,0 +1,124 @@
+#!/bin/bash
+XMDIR="$HOME/.config/xmobar"
+
+terminal="$(\
+  grep -m 1 "myTerminal *=" ~/.config/xmonad/xmonad.hs \
+    | cut -f 2 -d '"' \
+)"
+
+# Gets info over active window in X server
+# made to work with xmobar
+# Make option to change the terminal
+
+# ID of focused window
+GetWinID () {
+  xdotool getWindowfocus
+}
+
+# Gets name of program running active window
+GetWinName () {
+  xdotool getwindowclassname $(GetWinID)
+}
+
+GetWinIcons () {
+    NAME="$(GetWinName | cut -f 1 -d " ")"
+    test -z "$NAME" || \
+    grep -i -m 1 "${NAME}" "$XMDIR/scripts/winfo_icons" | cut -f1 -d' '
+}
+
+# Get current directory of active window 
+# for st
+GetCWD (){
+  # Parent PID of process running in window
+  PARENT_PID="$(\
+    xdotool getwindowpid $(GetWinID)\
+    )"
+
+  # PID of process runnning in window
+  PROCESS="$(\
+    pstree -p ${PARENT_PID} \
+      | head -n1 \
+      | sed \
+      -e 's/^.*-\(.*\)$/\1/g' \
+      -e 's/^ *\([^{:( ]*\).*$/\1/g' \
+  )"
+
+  echo -n "${PROCESS}" \
+    | sed \
+    -e "s;^zsh$;<fn=1></fn>&;g" \
+    -e "s;^htop$;<fn=1></fn> &;g" \
+    -e "s;^ranger$;<fn=1></fn> &;g"
+}
+
+# Get title of window / name of process
+# takes one argument, window name
+GetWinTitle() {
+  # Max length of string
+  MAX_LEN=64
+  xdotool GetWindowName $(GetWinID) \
+    | sed \
+    -e 's/ — Mozilla Firefox//g' \
+    -e "s;${HOME};~;g" \
+    -e "s/^\(.\{$MAX_LEN\}\).*$/\1../g" \
+    -e 's/ *\.\.$/\.\./g' \
+    -e "s;^${terminal^}$;$(GetCWD);g"
+}
+
+# Help function
+Help () {
+  echo "-- This is winfo --"
+  echo "Gets information over focused window"
+  echo
+  echo "Usage: getFWinfo [OPTION]"
+  echo "  -h   display this help and exit"
+  echo "  -n   for name"
+  echo "  -i   for icons"
+  echo "  -t   for titles"
+}
+
+##############################################
+#################### MAIN ####################
+##############################################
+
+# Handles options
+if [ $# -eq 0 ]
+then
+  Help
+  exit 0
+fi
+
+while getopts ":hinTt" option
+do
+  case "$option" in
+
+    h) # Prints help message
+      Help
+      exit 0
+      ;;
+
+    T) # Get terminal specified by xmonad
+      echo ${terminal}
+      exit 0
+      ;;
+
+    i) # Get window icons, uses GetWinName
+      GetWinIcons
+      exit 0
+      ;;
+
+    n) # Get window name "WM_CLASS"
+      GetWinName
+      # Capitalize
+      exit 0
+      ;;
+
+    t) # Get window title, like name of webpage/working dir
+      GetWinTitle
+      exit 0
+      ;;
+
+  esac
+done
+  echo "Invalid option."
+  Help
+  exit 1

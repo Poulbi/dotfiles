@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Depends on passmenu
+if [ -z "$1" ]
+then
+    echo -n ">"
+    read prompt
+else
+    prompt="$@"
+fi
+
+API_KEY="$(pass tokens/openai-api)"
+
+data=$(echo \
+'{
+  "prompt": "'"$prompt"'",
+  "model": "text-davinci-003",
+  "max_tokens": 1024,
+  "temperature": 0
+}')
+
+output=$(curl -s -X POST \
+	-H 'Content-Type: application/json' \
+    -H "Authorization: Bearer $API_KEY" \
+	-d "$data" \
+	https://api.openai.com/v1/completions \
+	| jq -r '.choices[0].text')
+
+echo "${output:1}"

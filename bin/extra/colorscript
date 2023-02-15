@@ -1,0 +1,40 @@
+#!/bin/bash
+
+counter=0
+var1="$(seq 30 38)"
+var2="$(seq 39 47)"
+var3="$(seq 0 5) $(seq 7 9)"
+
+
+echo
+echo    "  ________________________________________________________"
+echo    " |"
+echo -n " | "
+
+for j in $var2
+do
+  echo -ne "\e[0;37;${j}m  ${j}  \e[0m"
+done
+
+echo
+echo    " |"
+echo -n " |"
+
+for j in $var1
+do
+  echo -n "   $j "
+done
+
+echo
+echo -n " |________________________________________________________"
+
+for k in $var3
+do
+  echo
+  echo -n "$k| "
+  for i in $var1
+  do
+    echo -ne " \e[${k};${i}m[${i}]\e[0m "
+  done
+done
+echo

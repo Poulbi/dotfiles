@@ -1,0 +1,6 @@
+#!/bin/bash
+appimage="$(\
+  find ~/.local/share/appimages -type f -printf "%f\n" \
+  | sed 's/\.[Aa]pp[Ii]mage$//g' \
+  | dmenu -x -l 10 -g 1 -p "AppImage:")"
+setsid ~/AppImages/"${appimage:-NOSEL}"*

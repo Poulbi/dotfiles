@@ -1,0 +1,6 @@
+require("tlast.packer")
+require("tlast.remap")
+require("tlast.set")
+require("tlast.cmp")
+require("tlast.zk")
+vim.cmd.source(vim.fn.stdpath("config") .. "/lua/tlast/aucommands.vim")

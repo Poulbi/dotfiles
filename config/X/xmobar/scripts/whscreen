@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# # -- Based on mouse
+# # Get mouse location, only X matters
+# X=$(\
+#   xdotool getmouselocation -s \
+#   | head -n1 \
+#   | cut -f2 -d'='\
+# )
+
+# Based on active window
+X=$(xdotool getwindowgeometry -s $(xdotool getwindowfocus) | grep "X" | cut -d'=' -f2)
+
+# For dual monitor setup
+monitor_width="$(\
+  xdotool getdisplaygeometry \
+    | cut -d ' ' -f 1 \
+)"
+
+# If '-' number is negative
+[[ "$((${X} - ${monitor_width}))" -lt 0 ]] \
+  && echo -n '<' \
+  || echo -n '>'

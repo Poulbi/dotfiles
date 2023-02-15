@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+dirname "$(find "${1:-$HOME}" -type f 2> /dev/null | fzf)"

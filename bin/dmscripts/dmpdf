@@ -1,0 +1,21 @@
+#!/bin/bash
+directory="${1:-$PWD}"
+choice="$(\
+    find "${directory}" \
+        -type f \
+        -iname "*.pdf" \
+        -printf "%p\n" \
+        | awk -F '/' '{print $(NF - 1) "/" $NF}' \
+    | sort \
+    | uniq \
+    | dmenu -i -x -p "pdf:" -l 10 -g 2 \
+    | awk -F '/' '{print $2}' \
+)"
+
+# find matching file
+file="$(\
+  find "$directory" -name "*$choice*" \
+)"
+
+[[ -f "$file" ]] || exit 1
+evince "$file" &
