@@ -6,14 +6,14 @@ vim.keymap.set("n", "-", vim.cmd.Ex)
 vim.keymap.set("i", "<C-a>", "<C-o>I")
 vim.keymap.set("i", "<C-e>", "<C-o>A")
 
--- add closing
-vim.keymap.set("i", "\"", "\"\"<Left>")
-vim.keymap.set("i", "'", "''<Left>")
-vim.keymap.set("i", "(", "()<Left>")
-vim.keymap.set("i", "[", "[]<Left>")
-vim.keymap.set("i", "{", "{}<Left>")
-vim.keymap.set("i", "{<CR>", "{<CR>}<C-o>O")
-vim.keymap.set("i", "{;<CR>", "{<CR>};<C-o>O")
+-- -- add closing
+-- vim.keymap.set("i", '"', '""<Left>')
+-- vim.keymap.set("i", "'", "''<Left>")
+-- vim.keymap.set("i", "(", "()<Left>")
+-- vim.keymap.set("i", "[", "[]<Left>")
+-- vim.keymap.set("i", "{", "{}<Left>")
+-- vim.keymap.set("i", "{<CR>", "{<CR>}<C-o>O")
+-- vim.keymap.set("i", "{;<CR>", "{<CR>};<C-o>O")
 
 -- buffers
 vim.keymap.set("n", "gb", "<cmd>buffers<CR>:buffer<Space>")
