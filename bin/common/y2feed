@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+test -z "${url:=$1}" \
+	&& url="$(cat /dev/stdin)"
+
+echo "url: ${url}" 1>&2
+
+curl -s "$url" | pup 'link attr{href}' | grep 'feeds'
