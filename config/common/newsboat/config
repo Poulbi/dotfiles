@@ -1,0 +1,33 @@
+browser firefox
+
+# from contrib
+color background          color15    default
+color listnormal          color248   default
+color listnormal_unread   color4     default
+color listfocus           color0     color4
+color listfocus_unread    color0     color4   bold
+color info                color12    color0
+color article             color248   default
+# highlights
+highlight article "^(Feed|Link):.*$" color6 default bold
+highlight article "^(Title|Date|Author):.*$" color6 default bold
+highlight article "https?://[^ ]+" color10 default underline
+highlight article "\\[[0-9]+\\]" color10 default bold
+highlight article "\\[image\\ [0-9]+\\]" color10 default bold
+highlight feedlist "^─.*$" color6 color0 bold
+
+bind-key j next all
+bind-key k prev all
+bind-key h quit
+bind-key l open
+bind-key g home
+bind-key G end
+bind-key n next-unread
+bind-key N prev-unread
+bind-key U show-urls
+bind-key a toggle-article-read
+
+show-keymap-hint no
+swap-title-and-hints yes
+
+browser linkhandler
