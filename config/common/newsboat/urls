@@ -1,12 +1,16 @@
-https://www.linuxjournal.com/node/feed "~The Linux Journal"
-https://hackaday.com/blog/feed/ "~Hackaday"
-https://thisweek.gnome.org/index.xml "~This Week in GNOME"
-https://itsfoss.com/rss "~It's FOSS"
-https://archlinux.org/feeds/news/ "~Archlinux News"
-https://www.youtube.com/feeds/videos.xml?channel_id=UC5UAwBUum7CPN5buc-_N1Fw "~YOUTUBE: The Linux Experiment"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCngn7SVujlvskHRvRKc1cTw "~YOUTUBE: Bugswriter"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "~YOUTUBE: DistroTube"
-https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "~YOUTUBE: MentalOutlaw"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA "~YOUTUBE: Fireship"
-https://www.reddit.com/r/linux.rss "~REDDIT: r/linux"
+https://www.linuxjournal.com/node/feed
+https://hackaday.com/blog/feed/
+https://thisweek.gnome.org/index.xml
+https://itsfoss.com/rss
+https://archlinux.org/feeds/news/
+"---YOUTUBE---"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCngn7SVujlvskHRvRKc1cTw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg
+https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA
+https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA
+https://www.youtube.com/feeds/videos.xml?channel_id=UC5UAwBUum7CPN5buc-_N1Fw
+"---REDDIT---"
+https://www.reddit.com/r/linux.rss
+https://www.reddit.com/r/danklinuxusers.rss
 # Missing github feed
