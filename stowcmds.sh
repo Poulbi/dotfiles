@@ -9,7 +9,7 @@ if [ -n "$MACH" ]
 then
 	echo "I: stowing for $MACH"
 else
-	echo "E: MACH not set"
+	echo "E: MACH not set" 1>&2
 	exit 1
 fi
 
@@ -36,5 +36,6 @@ case "$MACH" in
 		stow -d config/ -t "$HOME/" -R zshrc
 		;;
 	*)
+		echo "E: invalid value for 'MACH'" 1>&2
 		break
 esac
