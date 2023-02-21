@@ -34,3 +34,5 @@ vim.opt.smartcase = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
+
+vim.opt.spelllang = "en_us"
