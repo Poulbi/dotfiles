@@ -18,11 +18,12 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lua' },
-		{ name = 'nvim_lsp', keyword_length = 4 },
+		{ name = 'nvim_lsp'},
 		{ name = 'path' },
 		{ name = 'luasnip' },
 		{ name = 'buffer', keyword_length = 4 },
 	}),
+	preselect = cmp.PreselectMode.None,
 })
 
 cmp.setup.filetype('gitcommit', {
