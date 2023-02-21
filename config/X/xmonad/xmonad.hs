@@ -137,7 +137,7 @@ myLayoutPrinter x = xmobarColor colorfg colorbg x
 
 myLayout =
     onWorkspace "gam" Full $
-    avoidStruts(gaps [(L,3), (D,3), (U,3), (R,3)] $ smartSpacing 2 $ tiled ||| Mirror tiled ||| fib ||| Full)
+    avoidStruts(smartSpacing 2 $ tiled ||| Mirror tiled ||| fib ||| Full)
     where
         -- default tiling algorithm partitions the screen into two panes
         tiled   = Tall nmaster delta ratio
