@@ -265,7 +265,7 @@ defaults = ewmh def {
 
         , ("M-<Space>", spawn "cycleKB")
         -- Resize viewed windows to the correct size
-        , ("M-n",       refresh) 
+        , ("M-f",       refresh) 
         -- Move focus to the next window
         , ("M-j",       windows W.focusDown)
         -- Move focus to the previous window
