@@ -4,6 +4,17 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
+export XINITRC="$HOME/.config/x11/xinitrc"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+
+export GNUPGHOME="$HOME/.config/gnupg"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+
+export PASSWORD_STORE_CLIP_TIME=5
+
 if [ ! $(pgrep Xorg) ] && [ "tty1" = "$(basename $(tty))" ]
 then
 	clear
@@ -96,21 +107,8 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
-
-export ZOT="${HOME}/zot"
-
-export EDITOR="nvim"
-export VISUAL="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
-
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-export XINITRC="$HOME/.config/x11/xinitrc"
-export GNUPGHOME="$HOME/.config/gnupg"
-export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-
-export PASSWORD_STORE_CLIP_TIME=5
+GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+ZOT="${HOME}/zot"
 
 # old
 # export RANGER_LOAD_DEFAULT_RC=FALSE
