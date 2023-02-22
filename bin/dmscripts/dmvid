@@ -3,10 +3,7 @@
 find ${1:-~/movies ~/Downloads} 2> /dev/null | grep -E ".+\.(webm|mp4|mpeg|mkv)$" | sort > /tmp/dmvids
 choice="$(\
         sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmvids \
-        | tr '\n' '\0' \
-        | xargs -0 -I {} echo " {}" \
-        | tr '\0' '\n' \
-		| awk '{printf "%-3s %s\n", NR ":", $0}' \
+		| awk '{printf "%s %s\n", NR ":", $0}' \
         | dmenu -l 10 -g 1 -x -i \
 		| grep -zoE "^[0-9]+:" \
 )"
