@@ -1,21 +1,14 @@
 #!/bin/bash
-directory="${1:-$PWD}"
+
+find ${1:-~/docs ~/Downloads} 2> /dev/null | grep -E ".+\.pdf" | sort > /tmp/dmpdf
 choice="$(\
-    find "${directory}" \
-        -type f \
-        -iname "*.pdf" \
-        -printf "%p\n" \
-        | awk -F '/' '{print $(NF - 1) "/" $NF}' \
-    | sort \
-    | uniq \
-    | dmenu -i -x -p "pdf:" -l 10 -g 2 \
-    | awk -F '/' '{print $2}' \
+        sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmpdf \
+		| awk '{printf "%s %s\n", NR ":", $0}' \
+        | dmenu -l 10 -g 1 -x -i \
+		| grep -oE "^[0-9]+:" \
 )"
-
-# find matching file
-file="$(\
-  find "$directory" -name "*$choice*" \
-)"
-
-[[ -f "$file" ]] || exit 1
+if [ -z "$choice" ]; then
+	exit
+fi
+file="$(sed -n "${choice::-1}p" /tmp/dmpdf)"
 evince "$file" &
