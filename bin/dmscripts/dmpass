@@ -4,7 +4,7 @@ lscmd="ls --group-directories-first"
 dmenucmd="dmenu -l 4 -g 2"
 while [ -d "${store}/${file}" ]
 do
-	choice="$($lscmd "${store}/${file}" | awk -F'.gpg' '{print $1}' | $dmenucmd)"
+	choice="$($lscmd "${store}/${file}" | sed 's/\.gpg$//'| $dmenucmd)"
 	[ "$choice" ] || break
 	file="${file}/${choice}"
 done
