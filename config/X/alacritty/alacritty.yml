@@ -67,7 +67,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.80
+  opacity: 0.97
 
   # Startup Mode (changes require restart)
   #
@@ -504,6 +504,13 @@ hints:
        mods: Control
      binding:
        key: U
+       mods: Control|Shift
+   - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+             [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+     action: Copy
+     post_processing: false
+     binding:
+       key: L
        mods: Control|Shift
    - regex: "([0-9]{2}[0-9]*)"
      action: Copy
