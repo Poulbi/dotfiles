@@ -40,13 +40,13 @@ alias dopacs='dopac -S'
 alias doprm='dopac -Rns'
 
 alias yay='pikaur'
-alias yayup='yay -Syu'
-alias yaysi='yay -Si'
-alias yayss='yay -Ss'
-alias yayqs='yay -Qs'
-alias yayql='yay -Ql'
+alias yup='yay -Syu'
+alias ysi='yay -Si'
+alias yss='yay -Ss'
+alias yqs='yay -Qs'
+alias yql='yay -Ql'
 alias yays='yay -S'
-alias yayrm='yay -Rns'
+alias yrm='yay -Rns'
 # 
 # 
 # -----------------------------------------------------------
