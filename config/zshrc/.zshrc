@@ -81,17 +81,17 @@ add-zsh-hook -Uz precmd rehash_precmd
 
 # prompt
 PS1=' %B%(#.%F{1}.%F{13})[%n%b%f@%B%F{6}%m]%b%f %3~ '
-RPROMPT='%F{red}$(parse_git_remote)$(parse_git_status)%f%F{green}$(parse_git_branch)%f%(?.. %?)'
+RPROMPT='%F{blue}$(parse_git_remote)%f%F{red}$(parse_git_status)%f%F{green}$(parse_git_branch)%f%(?.. %?)'
 
 setopt prompt_subst
 parse_git_remote() {
 	b="$(git branch -v 2> /dev/null | grep "^*" | sed 's/.\+\[\([^ ]\+\).*$/\1/')"
 	if [ "$b" = "behind" ]
 	then
-		echo -n "v "
+		echo -n "↓ "
 	elif [ "$b" = "ahead" ]
 	then
-		echo -n "^ "
+		echo -n "↑ "
 	fi
 }
 parse_git_branch() {
