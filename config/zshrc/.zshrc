@@ -85,7 +85,7 @@ RPROMPT='%F{red}$(parse_git_remote)$(parse_git_status)%f%F{green}$(parse_git_bra
 
 setopt prompt_subst
 parse_git_remote() {
-	b="$(git branch -vv 2>/dev/null | grep "^*" | sed 's/^.\+: \([^ ]\+\) .\+$/\1/')"
+	b="$(git branch -v 2> /dev/null | grep "^*" | sed 's/.\+\[\([^ ]\+\).*$/\1/')"
 	if [ "$b" = "behind" ]
 	then
 		echo -n "v "
