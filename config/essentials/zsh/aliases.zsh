@@ -99,7 +99,7 @@ alias -g eza='$EDITOR ~/.config/zsh/aliases.zsh'
 alias -g eto='$EDITOR ~/sync/TODO'
 alias -g edw='$EDITOR ~/src/dwm/config.def.h'
 alias -g edm='$EDITOR ~/src/dmenu/config.def.h'
-alias -g est='$EDITOR ~/src/slstatus/config.def.h'
+alias -g est='$EDITOR ~/src/st/config.def.h'
 alias -g esl='$EDITOR ~/src/slock/config.def.h'
 
 alias -g ff='`fzffile`'
