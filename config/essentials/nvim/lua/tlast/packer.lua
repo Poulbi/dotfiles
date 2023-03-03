@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
 	use('renerocksai/calendar-vim')
 	use('LordTlasT/live-server')
 	use('ojroques/vim-oscyank', {branch = "main"})
+	use("potamides/pantran.nvim")
 
 	-- objects
 	use('michaeljsmith/vim-indent-object')
