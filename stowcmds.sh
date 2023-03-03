@@ -23,7 +23,7 @@ fi
 case "$MACH" in
 	"desktop" | "d")
 		mkdir -p "$HOME/bin"
-		stow -d bin/ -t "$HOME/bin" -R common dmscripts extra
+		stow -d bin/ -t "$HOME/bin" -R common guiscripts extra
 		mkdir -p "$HOME/.config"
 		stow -d config/ -t "$HOME/.config" -R essentials common extra X theme xdg
 		stow -d config/ -t "$HOME/" -R zshrc
@@ -37,7 +37,7 @@ case "$MACH" in
 		;;
 	"laptop" | "l")
 		mkdir -p "$HOME/bin"
-		stow -d bin/ -t "$HOME/bin" -R common dmscripts extra
+		stow -d bin/ -t "$HOME/bin" -R common guiscripts extra
 		mkdir -p "$HOME/.config"
 		stow -d config/ -t "$HOME/.config" -R essentials common extra theme xdg hyprland X
 		stow -d config/ -t "$HOME/" -R zshrc
