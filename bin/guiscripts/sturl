@@ -1,0 +1,4 @@
+#!/bin/sh
+regex='\(ipfs:\|ipns:\|magnet:\|mailto:\|gemini:\|gopher:\|https:\|http:\|news:\|file:\|git:\|ssh:\|ftp:\)[^\<>"{-}\^`]\+' 
+url="$(grep "$regex" | sort | uniq | dmenu -g 1 -l 10 -x -c)"
+linkhandler $url
