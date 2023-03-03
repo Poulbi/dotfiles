@@ -70,7 +70,7 @@ vim.keymap.set("i", "<LocalLeader>r", "<CMD>r!echo -n $RANDOM<CR><esc>kJA")
 -- write
 vim.keymap.set("n", "<LocalLeader>w", "<CMD>write<CR>")
 vim.keymap.set("n", "<LocalLeader>W", "<CMD>write!<CR>")
-vim.keymap.set("n", "<LocalLeader>e", "<CMD>edit<CR><CMD>set nohls<CR>")
+vim.keymap.set("n", "<LocalLeader>e", "<CMD>edit<CR>")
 vim.keymap.set("n", "<Leader><M-s>", "<CMD>source<CR>")
 
 -- Packer

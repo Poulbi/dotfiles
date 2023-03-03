@@ -12,6 +12,7 @@ vim.opt.ruler = true
 
 vim.opt.wildmenu = true
 vim.opt.incsearch = true
+vim.opt.hlsearch = false
 
 vim.opt.mouse = ""
 
