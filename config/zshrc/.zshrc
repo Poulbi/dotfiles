@@ -7,7 +7,7 @@ export PATH="$HOME/go/bin:$PATH"
 export XINITRC="$HOME/.config/x11/xinitrc"
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="st"
 export BROWSER="firefox"
 
 export GNUPGHOME="$HOME/.config/gnupg"
