@@ -8,9 +8,6 @@
 
 if [ -z "$1" ]; then
 	url="$(xclip -sel c -o)"
-else
-	url="$1"
-fi
 dunstify "linkhandler" "<b>handling</b> $url"
 
 case "$url" in
