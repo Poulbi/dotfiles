@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find ${1:-~/docs ~/Downloads} 2> /dev/null | grep -E ".+\.pdf" | sort > /tmp/dmpdf
+find ${1:-~/docs ~/dl} 2> /dev/null | grep -E ".+\.pdf" | sort > /tmp/dmpdf
 choice="$(\
         sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmpdf \
 		| awk '{printf "%s %s\n", NR ":", $0}' \

@@ -40,3 +40,17 @@ require('telekasten').setup({
 	media_previewer = "telescope-media-files",
 	follow_url_fallback = nil,
 })
+
+vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<cr>")
+vim.keymap.set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>")
+vim.keymap.set("n", "<leader>zT", "<cmd>Telekasten goto_today<cr>")
+vim.keymap.set("n", "<leader>zW", "<cmd>Telekasten goto_thisweek<cr>")
+vim.keymap.set("n", "<leader>zd", "<cmd>Telekasten find_daily_notes<cr>")
+vim.keymap.set("n", "<leader>zf", "<cmd>Telekasten find_notes<cr>")
+vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<cr>")
+vim.keymap.set("n", "<leader>zm", "<cmd>Telekasten browse_media<cr>")
+vim.keymap.set("n", "<leader>zn", "<cmd>Telekasten new_note<cr>")
+vim.keymap.set("n", "<leader>zp", "<cmd>Telekasten preview_img<cr>")
+vim.keymap.set("n", "<leader>zs", "<cmd>Telekasten switch_vault<cr>")
+vim.keymap.set("n", "<leader>zw", "<cmd>Telekasten find_weekly_notes<cr>")
+vim.keymap.set("n", "<leader>#", "<cmd>Telekasten show_tags<cr>")
