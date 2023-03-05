@@ -1,4 +1,5 @@
 vim.opt.spell = true
+vim.opt.textwidth = 65
 
 -- syntax highlighting
 vim.cmd("hi tklink ctermfg=72 guifg=#81a1c1 cterm=bold,underline gui=bold,underline")
