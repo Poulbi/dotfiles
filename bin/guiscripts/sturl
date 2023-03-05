@@ -1,4 +1,11 @@
 #!/bin/sh
-regex='\(ipfs:\|ipns:\|magnet:\|mailto:\|gemini:\|gopher:\|https:\|http:\|news:\|file:\|git:\|ssh:\|ftp:\)[^\<>"{-}\^`]\+' 
-url="$(grep "$regex" | sort | uniq | dmenu -g 1 -l 10 -x -c)"
-linkhandler $url
+
+regex='(((https?|gopher|gemini|ftps?|git)://|www\.)[a-zA-Z0-9.]*[:;a-zA-Z0-9./+@$&%?$\#=_~-]*)|(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)'
+url="$(cat | tr -d '\n' | grep -Eo "$regex" | dmenu -x -c -g 1 -l 10)"
+[ -z "$url" ] && exit 1
+
+case $1 in
+	'c') echo -n "$url" | xclip -sel c -r ;;
+	'o') linkhandler "$url" ;;
+	*) echo "no option" ;;
+esac
