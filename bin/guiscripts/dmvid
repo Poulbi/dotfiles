@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-find ${1:-~/movies ~/Downloads} 2> /dev/null | grep -E ".+\.(webm|mp4|mpeg|mkv)$" | sort > /tmp/dmvids
+find ${1:-~/vids ~/dl} 2> /dev/null | grep -E ".+\.(webm|mp4|mpeg|mkv)$" | sort > /tmp/dmvids
 choice="$(\
         sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmvids \
 		| awk '{printf "%s %s\n", NR ":", $0}' \

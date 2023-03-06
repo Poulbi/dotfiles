@@ -6,11 +6,8 @@
 # if a music file or pdf, it will download,
 # otherwise it opens link in browser.
 
-if [ -z "$1" ]; then
+test -z "${url:=$1}" &&
 	url="$(xclip -sel c -o)"
-else
-	url="$1"
-fi
 dunstify "linkhandler" "<b>handling</b> $url"
 
 case "$url" in

@@ -28,6 +28,10 @@ vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-j>", "<C-W>j")
 vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-k>", "<C-W>k")
 vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-l>", "<C-W>l")
 vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-o>", "<C-W>o")
+-- command line
+vim.keymap.set("c", "<M-b>", "<C-Left>")
+vim.keymap.set("c", "<M-f>", "<C-Right>")
+vim.keymap.set("c", "<M-d>", "<C-Right><C-w>")
 
 -- move visual selection up/down wards
 vim.keymap.set("v", "J",  "<CMD>m '>+1<CR>gv=gv")
@@ -89,4 +93,17 @@ vim.keymap.set("n", "<Return>", function ()
             -- Do nothing here
         end
     })
+end)
+
+
+-- clear registers
+vim.keymap.set("n", "<Leader>rc", function ()
+	local regs = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+				  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+				  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+				  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+				  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '-', '"'}
+	for _, r in ipairs(regs) do
+	  vim.fn.setreg(r, {})
+	end
 end)
