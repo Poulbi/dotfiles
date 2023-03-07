@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find ${1:-~/docs ~/Downloads} 2> /dev/null | grep -E ".+\.pdf" | sort > /tmp/dmpdf
+find ${1:-$HOME/docs $HOME/dl} 2> /dev/null | grep -E ".+\.pdf" | sort > /tmp/dmpdf
 choice="$(\
         sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmpdf \
 		| awk '{printf "%s %s\n", NR ":", $0}' \
@@ -11,4 +11,4 @@ if [ -z "$choice" ]; then
 	exit
 fi
 file="$(sed -n "${choice::-1}p" /tmp/dmpdf)"
-evince "$file" &
+zathura "$file" &

@@ -10,6 +10,7 @@ export VISUAL="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
 
+export CARGO_HOME=~/.config/cargo
 export GNUPGHOME="$HOME/.config/gnupg"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 export QT_QPA_PLATFORMTHEME="qt5ct"
@@ -19,8 +20,8 @@ export PASSWORD_STORE_CLIP_TIME=5
 if [ ! $(pgrep Xorg) ] && [ "tty1" = "$(basename $(tty))" ]
 then
 	clear
-	eval `keychain --eval --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D 2>/dev/null`
-	eval `keychain --noask --eval --quiet --agents ssh 2>/dev/null`
+	eval "$(keychain --dir "$HOME/.config/keychain" --eval --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D 2> /dev/null)"
+	eval "$(keychain --dir "$HOME/.config/keychain" --noask --eval --quiet --agents ssh 2> /dev/null)"
 	clear
     startx 2&> /dev/null
     exit
