@@ -20,3 +20,11 @@ https://www.reddit.com/r/danklinuxusers.rss
 # Missing github feed
 "---MUSIC---"
 https://mastodonmusic.social/@djomnimaga.rss
+"---REPOS---"
+https://github.com/vim/vim/releases.atom
+https://github.com/neovim/neovim/releases.atom
+https://github.com/yt-dlp/yt-dlp/releases.atom
+https://github.com/hrsh7th/nvim-cmp/releases.atom
+https://github.com/L3MON4D3/LuaSnip/releases.atom
+https://github.com/alacritty/alacritty/releases.atom
+https://github.com/umlaeute/v4l2loopback/releases.atom
