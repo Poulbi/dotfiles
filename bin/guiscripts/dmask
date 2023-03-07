@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# requirements
+which dmenu Xdialog ask > /dev/null ||
+	exit 1
+
+prompt="$(echo -n | dmenu -p "prompt:" | tr -d '\n')"
+test -z "$prompt" && exit 1
+Xdialog --wrap --msgbox "$(ask "$prompt")" 20 40

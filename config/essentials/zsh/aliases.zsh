@@ -5,7 +5,8 @@
 alias nv='nvim'
 alias -g nb='newsboat'
 alias -g sr='surfraw'
-alias -g cursus='firefox "$(find ~/docs/school | grep "Cursus/index.html" 2> /dev/null | sed "s;${HOME};~;" | dmenu -g 1 -l 10 -x -i)"'
+alias -g ccu='calcurse'
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     # alias ls='ls -h --color --group-directories-first'
@@ -57,6 +58,7 @@ alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 alias scr='nvim +"setlocal buftype=nofile bufhidden=hide noswapfile filetype=txt" scratch'
 alias -g vimp="vim '+PlugInstall'"
 alias -g nvimp="nvim '+PackerSync'"
+alias -g nvg='git status > /dev/null 2>&1 && nv "+Git"'
  
 alias -g xclipp='xclip -selection clipboard -r'
 alias -g xclipo='xclip -o -selection clipboard -r'

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# requirements
+which dmenu firefox > /dev/null ||
+	exit 1
+
+choice="$(find ${1:-$HOME/docs/school} | grep "Cursus/index.html" 2> /dev/null | sed "s;${HOME};~;" | dmenu -g 1 -l 10 -x -i)"
+test -z "$choice" && exit 1
+firefox "$choice"
