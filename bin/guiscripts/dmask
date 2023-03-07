@@ -4,6 +4,12 @@
 which dmenu Xdialog ask > /dev/null ||
 	exit 1
 
-prompt="$(echo -n | dmenu -p "prompt:" | tr -d '\n')"
+prompt="$(echo -n | dmenu -p "prompt:" | tr '"' "'")"
+
 test -z "$prompt" && exit 1
-Xdialog --wrap --msgbox "$(ask "$prompt")" 20 40
+answer="$(ask "$prompt" | tr '"' "'" | fold -w 80 -s)"
+
+if ! Xdialog --wrap --msgbox "${answer:1}" 0 0
+then
+	echo -n "$answer" | xclip -r -sel c
+fi
