@@ -1,27 +1,27 @@
 #!/bin/sh
-if [ -z "$1" ]
-then
-    echo -n ">"
-    read prompt
-elif [ "$1" = "-1" ]
-then
-	shift
-	prompt=$1
-	test -z "$1" || exit 1
-else
-    prompt="$@"
-fi
 
-prompt="$(echo "$prompt" | tr "\n\t" ' ' | tr '"' "'")"
+# requirements
+which pass jq > /dev/null ||
+	exit 1
+
+# input
+test -z "${inp:=$@}" &&
+	inp="$(cat /dev/stdin)"
+
+# \n\t -> ' ' && " -> ' 
+prompt="$(echo "$inp" | tr "\n\t\"" "  '")"
 
 API_KEY="$(pass tokens/openai-api)"
+model="text-ada-001"
+tokens="1024"
+temperature=0
 
 data=$(echo \
 '{
   "prompt": "'"$prompt"'",
-  "model": "text-davinci-003",
-  "max_tokens": 1024,
-  "temperature": 0
+  "model": "'"$model"'",
+  "max_tokens": '$tokens',
+  "temperature": '$temperature'
 }')
 
 output=$(curl -s -X POST \
@@ -31,4 +31,5 @@ output=$(curl -s -X POST \
 	https://api.openai.com/v1/completions \
 	| jq -r '.choices[0].text')
 
+# remove newline
 echo "${output:1}"
