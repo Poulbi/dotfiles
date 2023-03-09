@@ -99,13 +99,13 @@ alias -g pi='ping archlinux.org -c4'
 alias -g sba='source bin/activate'
 alias -g smc='systemctl'
 alias -g smcu='systemctl --user'
-alias zsr='source ~/.zshrc && rehash'
+alias zsr='source ${ZDOTDIR:-$HOME}/.zshrc && rehash'
 alias -g wf='doas wipefs -a'
 alias -g dmci="doas make clean install"
 
 # quick config
-alias -g ez='$EDITOR ~/.zshrc'
-alias -g eza='$EDITOR ~/.config/zsh/aliases.zsh'
+alias -g ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
+alias -g eza='$EDITOR ${ZDOTDIR}/aliases.zsh'
 alias -g eto='$EDITOR ~/sync/TODO'
 alias -g edw='$EDITOR ~/src/dwm/config.def.h'
 alias -g edm='$EDITOR ~/src/dmenu/config.def.h'
