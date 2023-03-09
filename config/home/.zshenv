@@ -16,7 +16,7 @@ export XDG_STATE_HOME="$HOME"/.local/state
 test ! -d "$XDG_CONFIG_HOME"/x11 &&
 	mkdir "$XDG_CONFIG_HOME"/x11
 export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
-# export XAUTHORITY="$XDG_RUNTIME_DIR/x11"/Xauthority
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export CARGO_HOME="$XDG_CONFIG_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
