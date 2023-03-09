@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.localleader = "\\"
+vim.g.maplocalleader = "\\"
 
 vim.keymap.set("n", "-", vim.cmd.Ex)
 
@@ -8,12 +8,6 @@ vim.keymap.set("i", "<C-a>", "<C-o>I")
 vim.keymap.set("i", "<C-e>", "<C-o>A")
 vim.keymap.set("i", "<C-k>", "<C-o>D")
 
--- -- add closing
-vim.keymap.set("i", '"', '""<Left>')
--- vim.keymap.set("i", "'", "''<Left>")
--- vim.keymap.set("i", "(", "()<Left>")
--- vim.keymap.set("i", "[", "[]<Left>")
--- vim.keymap.set("i", "{", "{}<Left>")
 vim.keymap.set("i", "{<cr>", "{<cr>}<C-o>O")
 vim.keymap.set("i", "{;<cr>", "{<cr>};<C-o>O")
 
