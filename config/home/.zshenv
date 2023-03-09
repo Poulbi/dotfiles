@@ -36,8 +36,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
-export _JAVA_AWT_WM_NONREPARENTING=1
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# export _JAVA_AWT_WM_NONREPARENTING=1
+# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 export PASSWORD_STORE_CLIP_TIME=5
 
