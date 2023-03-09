@@ -10,6 +10,8 @@ vim.opt.showcmd = true
 vim.opt.cursorline = true
 vim.opt.ruler = true
 
+vim.opt.path:append("**")
+
 vim.opt.wildmenu = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
