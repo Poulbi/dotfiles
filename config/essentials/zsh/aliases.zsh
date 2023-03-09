@@ -87,7 +87,7 @@ alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
 alias penv='python -m venv'
-alias ytclipo='yt-dlp "$(xclip -sel c -o)" -f "b" -S "res:720" -P $HOME/movies -o "%(title)s.%(ext)s"'
+alias ytclipo='yt-dlp "$(xclip -sel c -o)" -f "b" -S "res:720" -P $HOME/vids -o "%(title)s.%(ext)s"'
 
 alias -g '...'='../..'
 alias -g '....'='../../..'
