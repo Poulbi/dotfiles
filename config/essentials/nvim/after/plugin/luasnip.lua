@@ -34,20 +34,9 @@ vim.keymap.set("n", "<leader><leader>s", function()
 	print("snippets reloaded.")
 end, { noremap = true })
 
-
-local same = function(index)
-	return f(function (arg)
-		return arg[1]
-	end, { index })
-end
-
 ls.add_snippets("lua", {
 	-- print
-	s("pt", {
-		t("print(\""),
-		i(1, "Hello World!"),
-		t("\")"), i(0)
-	}),
+	s("pt", fmt([[print("{}")]], { i(1, "Hello World!") })),
 	-- local function
 	parse("lf", "local $1 = function($2)\n\t$3\nend$0", {}),
 	-- require
