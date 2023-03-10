@@ -51,8 +51,10 @@ ls.add_snippets("lua", {
 	-- local function
 	parse("lf", "local $1 = function($2)\n\t$3\nend$0", {}),
 	-- require
-	s("req", fmt("local {} = require('{}')", { i(1), rep(1) })),
+	s("lrq", fmt("local {} = require('{}')", { i(1), rep(1) })),
 	parse("rq", "require('$1')$0", {}),
+	parse("rqs", "require('$1').setup {\n\t$2\n}$0", {}),
+	parse("use", "use('$1')$0", {}),
 	-- function
 	s("fn", fmt(
 		[[
