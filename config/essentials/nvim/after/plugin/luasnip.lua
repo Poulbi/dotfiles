@@ -77,28 +77,52 @@ ls.add_snippets("html", {
 })
 
 ls.add_snippets("java", {
-	s("gfn", fmt(
-			[[
-				{}static void get_{} () {{
-					return this.{};
-				}}
-			]],
-			{ c(1, {t "", t "public ", t "private "}), i(2), rep(2) }
-		)),
+	-- function
 	s("fn", fmt(
-			[[
-				{}static {} {} ({}) {{
-					{}
-					return ({});
-				}}
-			]],
-			{
-				c(1, {t "", t "public ", t "private "}),
-				i(2, "type"),
-				i(3, "\"name\""),
-				i(4), i(5),
-				rep(2)
-			}
-		))
+	[[
+	{}static {} {} ({}) {{
+		{}
+	}}
+	]],
+	{
+		c(1, {t "", t "public ", t "private "}),
+		i(2, "type"),
+		i(3, "f"),
+		i(4), i(0)
+	})),
+	-- setter function
+	s("sfn", fmt(
+	[[
+	{}void set_{} ({}) {{
+		this.{} = {};
+	}}
+	]],
+	{ c(1, {t "", t "public ", t "private "}),
+	i(2), rep(2), rep(2), rep(2) })),
+	-- getter function
+	s("gfn", fmt(
+	[[
+	{}void get_{} () {{
+		return this.{};
+	}}
+	]],
+	{ c(1, {t "", t "public ", t "private "}), i(2), rep(2) })),
+	s("psv", fmt(
+	[[
+	public class Main
+	{{
+		public static void main (String[] args)
+		{{
+			{}
+		}}
+	}}
+	]],
+	{ i(0) })),
+	s("pt", fmt(
+	[[
+	System.out.{}("{}");
+	{}
+	]],
+	{ c(1, {t "print", t "println", t "printf"}), i(2), i(0) })),
 })
 
