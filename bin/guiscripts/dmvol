@@ -1,0 +1,10 @@
+#!/bin/sh
+volume=0
+while true
+do 
+	volume="$(dmenu -p "$(mpc volume)" < /dev/null)"
+	test -z "$volume" && break
+	mpc volume "$(echo -e "plus\nmin" | 
+		dmenu -g 2 -l 1 | 
+		sed 's/plus/+/;s/min/-/')$volume"
+done

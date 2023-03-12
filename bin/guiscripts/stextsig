@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dunstify "" "got called"
+cat | dmenu -g 1 -l 20

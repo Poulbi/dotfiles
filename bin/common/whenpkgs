@@ -1,0 +1,30 @@
+#!/bin/sh
+
+m="$(date +%m)"
+d="$(date +%d)"
+y="$(date +%y)"
+
+# Trying to make a regex that will match expac's date format
+
+# 1. create ranges based on command line arguments
+# 2. change this to \(n-2\|n-1\|n\)
+# 	I. 	generate sequence
+# 	II. remove trailing space
+# 	III.translate space to '\|'
+#	IV. wrap everything in '\( ... \)'
+# 	V.	shift command line arguments
+# repeat 2. for month and year
+# 3. seq outputs a newline, translate this to slash
+# 4. remove trailing slash
+regex="$(for var in m d y
+do
+	seq -w -s ' ' $((${!var} - ${1:-0})) ${!var} |
+		sed 's/ /\\|/g;s/.*/\\(&\\)/'
+	shift 2>/dev/null
+done |
+	tr '\n' '/' | 
+	sed 's/.$//')"
+
+expac -t %D '%l %n' | 
+	grep "$regex" |
+	sort -k 2 -t '/' -n

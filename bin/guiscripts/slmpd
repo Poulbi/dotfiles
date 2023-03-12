@@ -1,0 +1,6 @@
+#!/bin/sh
+if mpc > /dev/null 2>&1 
+then
+	test "`mpc status %totaltime%`" = "0:00" ||
+		echo -n "$(mpc status "%currenttime%/%totaltime%") $(mpc current)"
+fi
