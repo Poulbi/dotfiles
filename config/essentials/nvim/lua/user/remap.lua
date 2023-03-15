@@ -18,11 +18,11 @@ vim.keymap.set("n", "<Leader>q", "<cmd>q!<cr>", { noremap = true })
 vim.keymap.set("n", "<Leader>Q", "<cmd>qa!<cr>", { noremap = true })
 
 -- Windows
-vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-h>", "<C-W>h", { noremap = true })
-vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-j>", "<C-W>j", { noremap = true })
-vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-k>", "<C-W>k", { noremap = true })
-vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-l>", "<C-W>l", { noremap = true })
-vim.keymap.set({"n", "i", "v", "c", "o", "s", "x"}, "<A-o>", "<C-W>o", { noremap = true })
+vim.keymap.set("n", "<A-h>", "<C-W>h", { noremap = true })
+vim.keymap.set("n", "<A-j>", "<C-W>j", { noremap = true })
+vim.keymap.set("n", "<A-k>", "<C-W>k", { noremap = true })
+vim.keymap.set("n", "<A-l>", "<C-W>l", { noremap = true })
+vim.keymap.set("n", "<A-o>", "<C-W>o", { noremap = true })
 -- command line
 vim.keymap.set("c", "<M-b>", "<C-Left>", { noremap = true })
 vim.keymap.set("c", "<M-f>", "<C-Right>", { noremap = true })
@@ -56,7 +56,7 @@ end, { noremap = true })
 -- utils
 vim.keymap.set("i", "<LocalLeader>r", "<cmd>r!echo -n $RANDOM<cr><esc>kJA", { noremap = true })
 -- ordered list
-vim.keymap.set("v", "<Leader>n", "I0. <esc>gvg<C-a>", { noremap = true })
+vim.keymap.set("n", "<LocalLeader>n", "0vap<C-v>I0. <esc>gvg<C-a>", { noremap = true })
 vim.keymap.set("v", "<Leader>u", "<cmd>'<,'>s/^[0-9]\\+\\. //<cr><esc>", { noremap = true })
 -- scripts
 vim.keymap.set("n", "<Leader>x", "<cmd>!chmod +x %<cr>", { noremap = true, silent = true})
