@@ -1,0 +1,6 @@
+require("user.packer")
+require("user.remap")
+require("user.set")
+require("user.cmp")
+require("user.zk")
+vim.cmd.source(vim.fn.stdpath("config") .. "/lua/user/aucommands.vim")

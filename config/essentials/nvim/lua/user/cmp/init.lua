@@ -1,0 +1,12 @@
+require("user.cmp.setup")
+
+require("user.cmp.arduino")
+require("user.cmp.bash")
+require("user.cmp.clangd")
+require("user.cmp.html")
+require("user.cmp.css")
+require("user.cmp.java")
+require("user.cmp.js")
+require("user.cmp.emmet")
+require("user.cmp.lua")
+require("user.cmp.python")
