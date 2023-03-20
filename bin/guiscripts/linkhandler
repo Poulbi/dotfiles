@@ -12,7 +12,7 @@ dunstify "linkhandler" "<b>handling</b> $url"
 
 case "$url" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtube.com/shorts*|*youtu.be*|*hooktube.com*|*bitchute.com*|*videos.lukesmith.xyz*|*odysee.com*)
-		setsid -f mpv -quiet "$url" >/dev/null 2>&1 ;;
+		setsid -f mpv --quiet --ytdl --ytdl-raw-options="format-sort=res:720" "$url" > /dev/null 2>&1 ;;
 	*png|*jpg|*jpe|*jpeg|*gif)
 		curl -sL "$url" > "/tmp/$(echo "$url" | sed "s/.*\///;s/%20/ /g")" && sxiv -a "/tmp/$(echo "$url" | sed "s/.*\///;s/%20/ /g")"  >/dev/null 2>&1 & ;;
 	*pdf|*cbz|*cbr)
