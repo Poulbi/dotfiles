@@ -8,11 +8,12 @@ which pass jq > /dev/null ||
 test -z "${inp:=$@}" &&
 	inp="$(cat /dev/stdin)"
 
-# \n\t -> ' ' && " -> ' 
+# \n\t -> ' ' && "->' 
 prompt="$(echo "$inp" | tr "\n\t\"" "  '")"
+test -z "$prompt" && exit 1
 
 API_KEY="$(pass tokens/openai-api)"
-model="text-curie-001"
+model="text-davinci-003"
 tokens="1024"
 temperature=0
 
