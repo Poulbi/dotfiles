@@ -91,7 +91,10 @@ alias -g sha 'ssh-add'
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
-alias penv='python -m venv'
+
+# Python
+alias penv='python -m venv env'
+alias pipreq='pip install -r requirements.txt'
 
 alias -g '...'='../..'
 alias -g '....'='../../..'
