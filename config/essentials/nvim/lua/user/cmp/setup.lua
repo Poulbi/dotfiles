@@ -22,7 +22,6 @@ cmp.setup({
 		{ name = 'path' },
 		{ name = 'luasnip' },
 		{ name = 'nvim_lsp_signature_help' },
-		{ name = 'buffer', keyword_length = 4 },
 	}),
 	preselect = cmp.PreselectMode.None,
 })
@@ -30,15 +29,11 @@ cmp.setup({
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources({
 		{ name = 'cmp_git' },
-		{ name = 'buffer', keyword_length = 4 },
 	})
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = 'buffer', keyword_length = 4 }
-	},
 })
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
