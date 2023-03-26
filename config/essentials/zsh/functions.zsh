@@ -70,3 +70,10 @@ __git_files () {
 esc () {
 	$EDITOR "$(which $1)"
 }
+
+delfile () {
+	curl "https://upfast.craftmenners.men/delete/$1"
+}
+upfile () {
+	curl -F "file=@\"$1\"" "https://upfast.craftmenners.men"
+}
