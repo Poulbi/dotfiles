@@ -78,7 +78,6 @@ alias -g xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of
 alias mv='mv -i'
 alias df='df -h'
 alias -g dud='du -d 1 -h 2>/dev/null | sort -h'
-alias -g d='du --max-depth=0 -h'
 alias df='df -h'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
