@@ -13,18 +13,18 @@ ranger() { test -z "$RANGER_LEVEL" && /usr/bin/ranger "$@" || exit }
 # googoo
 o ()
 {
-	f="$(fzffile $1)"
-	test "$#" -gt 0 && shift
+	f="$(fhome f ${1:-$HOME} | fzf)"
+	test "$1" && shift
 	test -n "$f" && $EDITOR $@ "$f"
 }
 go ()
 {
-	d="$(fzfdir $1)"
+	d="$(fhome d ${1:-$HOME} | fzf)"
 	test -d "$d" && cd "$d"
 }
 ogo ()
 {
-	d="$(fzfdirfile $1)"
+	d="$(fhome f ${1:-$HOME} | fzf | xargs dirname)"
 	test -d "$d" && cd "$d"
 }
 

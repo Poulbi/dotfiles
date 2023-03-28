@@ -1,0 +1,21 @@
+#!/bin/sh
+
+exclude="
+.cache 
+.mozilla
+.npm
+.git
+site-packages
+objects
+instances
+discord
+Steam
+?eclipse
+arduino15"
+
+for dir in $exclude; do
+    dirs="$dirs -name \"$dir\" -o "
+done
+cmd="find ${2:-$HOME} \(${dirs} -false \) -prune -o -type ${1:-f} -print"
+
+eval "$cmd" 2>/dev/null

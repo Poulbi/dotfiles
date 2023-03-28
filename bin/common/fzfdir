@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-find "${1:-$HOME}" -type \d 2> /dev/null | fzf
+fzhome d | fzf
