@@ -185,11 +185,14 @@ def_key "l"
 def_key "l"
   play_item
 def_key "l"
-  play
-def_key "l"
   next_column
 def_key "l"
   slave_screen
+
+def_key "p"
+  pause
+def_key "P"
+  play
 
 def_key "H"
 	move_home
@@ -203,10 +206,8 @@ def_key "ctrl-d"
 
 def_key "x"
   delete_playlist_items
-
 def_key "x"
   delete_browser_items
-
 def_key "x"
   delete_stored_playlist
 
@@ -238,8 +239,6 @@ def_key ">"
   next
 def_key "s"
   stop
-def_key "p"
-  pause
 
 def_key "q"
   quit
