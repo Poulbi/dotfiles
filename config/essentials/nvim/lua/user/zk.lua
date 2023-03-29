@@ -42,6 +42,7 @@ require('telekasten').setup({
 })
 
 vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<cr>")
+vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<cr>")
 vim.keymap.set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>")
 vim.keymap.set("n", "<leader>zT", "<cmd>Telekasten goto_today<cr>")
 vim.keymap.set("n", "<leader>zW", "<cmd>Telekasten goto_thisweek<cr>")
