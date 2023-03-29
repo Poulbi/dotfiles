@@ -1,12 +1,9 @@
 #!/bin/sh
-dmenu -p Calculate: < /dev/null | 
-	xargs echo | 
-	bc 2>&1 | 
-	xargs -I {} echo -e "{}\n" | 
-	dmenu -p Answer: -l 1 -g 1 | 
-	xclipp
-# TODO
-# ask for calculation
-# shows answer
-# if esc -> quit
-# if enter, continue with answer
+calc=0
+result="calc:"
+while [ "$calc" ]
+do
+	calc="$(echo -n | dmenu -p "$result")"
+	result="$(echo "$result $calc" | bc)"
+done
+echo -n "$result" | xclip
