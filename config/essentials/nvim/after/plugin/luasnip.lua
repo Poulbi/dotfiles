@@ -36,7 +36,7 @@ end, { noremap = true })
 
 ls.add_snippets("lua", {
 	-- print
-	s("pt", fmt([[print("{}")]], { i(1, "Hello World!") })),
+	s("pt", fmt("print({}){}", { i(1, "\"Hello World!\"") , i(0) })),
 	-- local function
 	parse("lf", "local $1 = function($2)\n\t$3\nend$0", {}),
 	-- require
