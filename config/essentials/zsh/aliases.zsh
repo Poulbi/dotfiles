@@ -90,7 +90,7 @@ alias -g sha 'ssh-add'
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
-alias srcgd='
+alias sgd='
 for dir in ~/src/* 
 do 
 	cd $dir 
