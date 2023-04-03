@@ -76,9 +76,7 @@ alias -g xclipcp='xclip -o -selection clipboard | xclip'
 alias -g xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
 alias -g xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
  
-alias mv='mv -i'
-alias df='df -h'
-alias -g dud='du -d 1 -h 2>/dev/null | sort -h'
+alias -g dud='du * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
@@ -93,7 +91,7 @@ alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
 
 # Python
-alias penv='python -m venv env'
+alias penv='python3 -m venv env'
 alias pipreq='pip install -r requirements.txt'
 
 alias -g '...'='../..'
