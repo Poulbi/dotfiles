@@ -89,6 +89,14 @@ alias -g sha 'ssh-add'
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
+alias webcam='v4l2-ctl --set-fmt-video=width=1280,height=720; mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --no-resume-playback'
+alias wtip='wt ip -c -brief addr'
+# swallow gui
+if which devour > /dev/null
+then
+	alias mpv='devour mpv'
+	alias zathura='devour zathura'
+fi
 
 # Python
 alias penv='python3 -m venv env'
