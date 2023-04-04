@@ -85,7 +85,11 @@ alias -g dloc='doas find / -type "d" 2> /dev/null | grep'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
 alias -g fif='find . -type "f" | grep'
 alias -g fid='find . -type "d" | grep'
-alias -g sha 'ssh-add'
+
+# ssh
+alias sha='ssh-add'
+alias ssh-start='eval "$(ssh-agent)" && ssh-add'
+
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
