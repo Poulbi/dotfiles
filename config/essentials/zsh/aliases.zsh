@@ -115,6 +115,7 @@ alias -g smcu='systemctl --user'
 alias zsr='source ${ZDOTDIR:-$HOME}/.zshrc && rehash'
 alias -g wf='doas wipefs -a'
 alias -g dmci="doas make clean install"
+alias rmd='rm -f *.{orig,rej}'
 
 # quick config
 alias -g ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
