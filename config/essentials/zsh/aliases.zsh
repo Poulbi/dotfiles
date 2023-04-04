@@ -1,6 +1,11 @@
 #!/bin/zsh
 # s/alias \([^-]\)/alias -g \1
 
+if grep -qi "debian\|ubuntu" /etc/os-release
+then
+	alias aptup='apt update && apt upgrade -y'
+fi
+
 # Programs
 alias nv='nvim'
 alias -g nb='newsboat'
