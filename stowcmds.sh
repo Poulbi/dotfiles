@@ -1,7 +1,5 @@
 #!/bin/sh
 
-
-
 trap "echo -ne '\nbye'; exit 1" EXIT
 
 if ! stow --version > /dev/null 2>&1
@@ -21,11 +19,11 @@ else
 fi
 
 case "$MACH" in
-	"desktop" | "d")
+	"desktop" | "d" | "laptop" | "l")
 		mkdir -p "$HOME/bin"
 		stow -d bin/ -t "$HOME/bin" -R common guiscripts extra
 		mkdir -p "$HOME/.config"
-		stow -d config/ -t "$HOME/.config" -R essentials common extra X theme xdg
+		stow -d config/ -t "$HOME/.config" -R essentials common extra X theme xdg hyprland
 		stow -d config/ -t "$HOME/" -R home
 		;;
 	"server" | "s")
@@ -33,13 +31,6 @@ case "$MACH" in
 		stow -d bin/ -t "$HOME/bin" -R common
 		mkdir -p "$HOME/.config"
 		stow -d config/ -t "$HOME/.config" -R essentials common
-		stow -d config/ -t "$HOME/" -R home
-		;;
-	"laptop" | "l")
-		mkdir -p "$HOME/bin"
-		stow -d bin/ -t "$HOME/bin" -R common guiscripts extra
-		mkdir -p "$HOME/.config"
-		stow -d config/ -t "$HOME/.config" -R essentials common extra theme xdg hyprland X
 		stow -d config/ -t "$HOME/" -R home
 		;;
 	*)
