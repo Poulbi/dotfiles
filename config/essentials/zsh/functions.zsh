@@ -136,3 +136,13 @@ gpg_backup ()
 	tar czf gpg_backup.tar.gz {public,private,trust}.asc
 	shred -uz {public,private,trust}.asc
 }
+
+gpg_import ()
+{
+	tar xf $1
+	shred -uz $1
+	gpg --import public.asc
+	gpg --import-ownertrust trust.asc
+	gpg --import private.asc
+	shred -uz {public,private,trust}.asc
+}
