@@ -128,6 +128,7 @@ alias rmd='rm -f *.{orig,rej}'
 # quick config
 alias -g ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
 alias -g eza='$EDITOR ${ZDOTDIR}/aliases.zsh'
+alias -g ezf='$EDITOR ${ZDOTDIR}/functions.zsh'
 alias -g eto='$EDITOR ~/sync/TODO'
 alias -g edw='$EDITOR ~/src/dwm/config.def.h'
 alias -g edm='$EDITOR ~/src/dmenu/config.def.h'
