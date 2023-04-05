@@ -94,4 +94,38 @@ sgd () {
 		test "$(parse_git_remote)" && 
 			echo "$PWD \e[0;32m*push/pull\e[0m"
 		done
-	}
+}
+
+# Git functions
+# Returns current branch
+function git_current_branch()
+{
+	command git rev-parse --git-dir &>/dev/null || return
+	git branch --show-current
+}
+
+# Check if main exists and use instead of master
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return
+    fi
+  done
+  echo master
+}
+
+# Check for develop and similarly named branches
+function git_develop_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local branch
+  for branch in dev devel development; do
+    if command git show-ref -q --verify refs/heads/$branch; then
+      echo $branch
+      return
+    fi
+  done
+  echo develop
+}
