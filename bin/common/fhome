@@ -11,6 +11,8 @@ instances
 discord
 Steam
 ?eclipse
+VisualParadigm
+intellij
 arduino15"
 
 for dir in $exclude; do
