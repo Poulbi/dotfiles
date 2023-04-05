@@ -1,12 +1,14 @@
 #!/usr/bin/env sh
 
-find ${1:-~/vids ~/dl} 2> /dev/null | grep -E ".+\.(webm|mp4|mpeg|mkv)$" | sort > /tmp/dmvids
+find ${1:-~/vids ~/dl} 2> /dev/null |
+	grep ".\+\.\(webm\|mp4\|mpeg\|mkv\)$" |
+	sort > /tmp/dmvids
 
 choice="$(sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmvids | 
 	awk '{printf "%s %s\n", NR ":", $0}' | 
 	dmenu -l 10 -g 1 -x -i | 
-	grep -zoE "^[0-9]+:")"
+	cut -f 1 -d ':')"
 test -z "$choice" &&
 	exit 1
 
-mpv "$(sed -n "${choice::-1}p" /tmp/dmvids)"
+mpv "$(sed -n "${choice}p" /tmp/dmvids)"
