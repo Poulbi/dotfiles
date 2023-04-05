@@ -72,8 +72,57 @@ esc () {
 }
 
 delfile () {
-	curl "https://upfast.craftmenners.men/delete/$1"
+	curl ${2:-"https://upfast.craftmenners.men/delete/$1"}
 }
 upfile () {
-	curl -F "file=@\"$1\"" "https://upfast.craftmenners.men"
+	curl -F "file=@\"$1\"" ${2:-"https://upfast.craftmenners.men"}
+}
+
+sgd () {
+	for dir in ${1:-$HOME/src/*} 
+	do 
+		cd $dir 
+		if [ "$(git status --short 2>/dev/null | grep -v "??" | head -1)" ]
+		then
+			# There are changes, and this is a git repo
+			echo "$PWD \e[1;31m*changes\e[0m"
+			git fetch > /dev/null 2>&1
+		fi
+		test "$(parse_git_remote)" && 
+			echo "$PWD \e[0;32m*push/pull\e[0m"
+		done
+}
+
+# Git functions
+# Returns current branch
+function git_current_branch()
+{
+	command git rev-parse --git-dir &>/dev/null || return
+	git branch --show-current
+}
+
+# Check if main exists and use instead of master
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return
+    fi
+  done
+  echo master
+}
+
+# Check for develop and similarly named branches
+function git_develop_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local branch
+  for branch in dev devel development; do
+    if command git show-ref -q --verify refs/heads/$branch; then
+      echo $branch
+      return
+    fi
+  done
+  echo develop
 }

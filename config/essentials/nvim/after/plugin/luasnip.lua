@@ -39,19 +39,19 @@ ls.add_snippets("lua", {
 	s("pt", fmt("print({}){}", { i(1, "\"Hello World!\"") , i(0) })),
 	-- local function
 	parse("lf", "local $1 = function($2)\n\t$3\nend$0", {}),
-	-- require
-	s("lrq", fmt("local {} = require('{}')", { i(1), rep(1) })),
-	parse("rq", "require('$1')$0", {}),
-	parse("rqs", "require('$1').setup {\n\t$2\n}$0", {}),
-	parse("use", "use('$1')$0", {}),
-	-- function
-	s("fn", fmt(
+		-- require
+		s("lrq", fmt("local {} = require('{}')", { i(1), rep(1) })),
+		parse("rq", "require('$1')$0", {}),
+		parse("rqs", "require('$1').setup {\n\t$2\n}$0", {}),
+		parse("use", "use('$1')$0", {}),
+		-- function
+		s("fn", fmt(
 		[[
 		function {}({})
-			{}
-		end{}
-		]],
-    { i(1), i(2), i(3), i(0) })),
+		{}
+	end{}
+	]],
+	{ i(1), i(2), i(3), i(0) })),
 	parse("sn", "s(\"$1\", fmt(\n[[\n$2\n]],\n{ $3 })),$0", {}),
 })
 
@@ -59,7 +59,7 @@ ls.add_snippets("html", {
 	s("<!DOCTYPE>", {
 		t({"<!DOCTYPE html>", "<html lang=\"en\">", "\t<head>", "\t\t<title>"}),
 		i(1, "title"),
-  		t("</title>"), i(2),
+		t("</title>"), i(2),
 		t({"", "\t</head>", "\t<body>", "\t\t<h1>"}),
 		i(3, "Header"),
 		t("</h1>"), i(0),
@@ -136,4 +136,20 @@ ls.add_snippets("sh", {
 ls.add_snippets("javascript", {
 	-- print
 	s("pt", fmt("console.log({}){}", { i(1, "\"Hello World!\"") , i(0) })),
+})
+
+ls.add_snippets("telekasten", {
+	--link
+	s("ln", fmt(
+	[[
+	[{}]({}){}
+	]],
+	{
+		i(1),
+		f(function ()
+			return vim.fn.getreg('+')
+		end),
+		i(0)
+	}
+	)),
 })

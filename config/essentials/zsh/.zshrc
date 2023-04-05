@@ -23,13 +23,23 @@ zle -N add-surround surround
 zle -N change-surround surround
 compinit
 
-for f in \
-	/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	~/.config/zsh/functions.zsh \
-	~/.config/zsh/aliases.zsh
-do
-	test -f $f && source $f
+if grep -qi "debian\|ubuntu" /etc/os-release; then
+    sfiles=(
+        /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    )
+else
+    sfiles=(
+        /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+        /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    )
+fi
+sfiles+=(
+		~/.config/zsh/functions.zsh
+		~/.config/zsh/aliases.zsh
+)
+for f in "${sfiles[@]}"; do
+    test -f "$f" && source "$f"
 done
 
 bindkey -v

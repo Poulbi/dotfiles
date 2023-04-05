@@ -1,11 +1,16 @@
 #!/bin/zsh
 # s/alias \([^-]\)/alias -g \1
 
+if grep -qi "debian\|ubuntu" /etc/os-release
+then
+	alias aptup='apt update && apt upgrade -y'
+fi
+
 # Programs
 alias nv='nvim'
-alias -g nb='newsboat'
-alias -g sr='surfraw'
-alias -g ccu='calcurse'
+alias nb='newsboat'
+alias sr='surfraw'
+alias ccu='calcurse'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
@@ -63,43 +68,46 @@ alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 
 # vim
 alias scr='nvim +"setlocal buftype=nofile bufhidden=hide noswapfile filetype=txt" scratch'
-alias -g vimp="vim '+PlugInstall'"
-alias -g nvimp="nvim '+PackerSync'"
-alias -g nvg='git status > /dev/null 2>&1 && nv "+Git"'
+alias vimp="vim '+PlugInstall'"
+alias nvimp="nvim '+PackerSync'"
+alias nvg='git status > /dev/null 2>&1 && nv "+Git"'
+alias nvn='nv "+Telekasten panel"'
  
 alias -g xclipp='xclip -selection clipboard -r'
 alias -g xclipo='xclip -o -selection clipboard -r'
 alias -g xclippc='xclip -o -selection primary | xclip -selection clipboard -r'
 alias -g xclipcp='xclip -o -selection clipboard | xclip'
  
-alias -g xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
-alias -g xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
+alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
+alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
  
-alias mv='mv -i'
-alias df='df -h'
-alias -g dud='du -d 1 -h 2>/dev/null | sort -h'
+alias dud='du * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
-alias -g floc='doas find / -type "f" 2> /dev/null | grep'
-alias -g dloc='doas find / -type "d" 2> /dev/null | grep'
-alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
-alias -g fif='find . -type "f" | grep'
-alias -g fid='find . -type "d" | grep'
-alias -g sha 'ssh-add'
+alias floc='doas find / -type "f" 2> /dev/null | grep'
+alias dloc='doas find / -type "d" 2> /dev/null | grep'
+alias fif='find . -type "f" | grep'
+alias fid='find . -type "d" | grep'
+
+# ssh
+alias sha='ssh-add'
+alias ssh-start='eval "$(ssh-agent)" && ssh-add'
+
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl "ifconfig.me"'
 alias icognito='unset HISTFILE'
-alias sgd='
-for dir in ~/src/* 
-do 
-	cd $dir 
-	test "$(git status --short 2>/dev/null | grep -v "??" | head -1)" && echo "$PWD \e[1;31m*changes\e[0m"
-	test "$(parse_git_remote)" && echo "$PWD \e[0;32m*push/pull\e[0m" ;
-done'
+alias webcam='v4l2-ctl --set-fmt-video=width=1280,height=720; mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --no-resume-playback'
+alias wtip='wt ip -c -brief addr'
+# swallow gui
+if which devour > /dev/null
+then
+	alias mpv='devour mpv'
+	alias zathura='devour zathura'
+fi
 
 # Python
-alias penv='python -m venv env'
+alias penv='python3 -m venv env'
 alias pipreq='pip install -r requirements.txt'
 
 alias -g '...'='../..'
@@ -115,10 +123,12 @@ alias -g smcu='systemctl --user'
 alias zsr='source ${ZDOTDIR:-$HOME}/.zshrc && rehash'
 alias -g wf='doas wipefs -a'
 alias -g dmci="doas make clean install"
+alias rmd='rm -f *.{orig,rej}'
 
 # quick config
 alias -g ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
 alias -g eza='$EDITOR ${ZDOTDIR}/aliases.zsh'
+alias -g ezf='$EDITOR ${ZDOTDIR}/functions.zsh'
 alias -g eto='$EDITOR ~/sync/TODO'
 alias -g edw='$EDITOR ~/src/dwm/config.def.h'
 alias -g edm='$EDITOR ~/src/dmenu/config.def.h'
@@ -126,18 +136,24 @@ alias -g ehist='$EDITOR $ZDOTDIR/histfile'
 alias -g est='$EDITOR ~/src/st/config.def.h'
 alias -g esl='$EDITOR ~/src/slock/config.def.h'
 alias -g esls='$EDITOR ~/src/slstatus/config.def.h'
-alias -g cfdef='$EDITOR config.def.h'
+alias -g cfd='$EDITOR config.def.h'
 alias -g cdo='$HOME/src/dotfiles'
 
-alias -g ff='"`fzffile`"'
-alias -g fd='"`fzfdir`"'
-alias -g fdf='"`fzfdirfile`"'
+# googoo aliases
+alias o.='o .'
+alias go.='go .'
+alias ogo.='ogo .'
+alias o/='o /'
+alias go/='go /'
+alias ogo/='ogo /'
+
 alias fzps='ps aux | tail +2 | fzf --bind \
 "1:execute(echo -n {} | awk '\''{print \$1}'\'' | xclip -sel c -r),\
 2:execute(echo -n {} | awk '\''{print \$2}'\'' | xclip -sel c -r),\
 3:execute(echo -n {} | awk '\''{print \$7}'\'' | xclip -sel c -r),\
 4:execute(echo -n {} | awk '\''{print \$9}'\'' | xclip -sel c -r),\
 5:execute(echo -n {} | tr -s '\'' '\'' | cut -f 11- -d '\'' '\'' | xclip -sel c -r)"'
+alias asf='alias | fzf'
 
 alias -s conf="$EDITOR"
 alias -s txt="$EDITOR"
@@ -190,6 +206,7 @@ alias gclr='git clone --recurse-submodules'
 alias gc1='git clone --depth 1'
 alias gclean='git clean --interactive -d'
 alias gpristine='git reset --hard && git clean --force -dfx'
+alias grsf='git reset --soft HEAD~'
 alias gcm='git checkout $(git_main_branch)'
 alias gcd='git checkout $(git_develop_branch)'
 alias gcmsg='git commit --message'
@@ -210,6 +227,7 @@ alias gds='git diff --staged'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gdup='git diff @{upstream}'
 alias gdw='git diff --word-diff'
+alias gdl='git diff HEAD^ HEAD'
 alias gf='git fetch'
 alias gfo='git fetch origin'
 alias gfg='git ls-files | grep'
