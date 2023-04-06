@@ -81,6 +81,7 @@ alias -g xclipo='xclip -o -selection clipboard -r'
 alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
 alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
  
+alias d='du -d 0 -h'
 alias dud='du * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
 alias shred='shred -uz'
