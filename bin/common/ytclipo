@@ -1,7 +1,13 @@
 #!/bin/sh
 
 # argument ($1) -> clipboard -> stdin
-test -z "${inp:=${1:-"$(xclip -sel c -o)"}}" &&
+if [ "$WAYLAND_DISPLAY" ]
+then
+	paste="$(wl-paste)"
+else
+	paste="$(xclip -o -sel c)"
+fi
+test -z "${inp:=${1:-$paste}}" &&
 	inp="$(cat /dev/stdin)"
 
 # take last link from clipboard
