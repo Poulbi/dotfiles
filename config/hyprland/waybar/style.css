@@ -1,127 +1,167 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "FiraCode Nerd Font";
+    font-family: JetBrains Mono;
+	font-weight: bold;
     font-size: 13px;
-    min-height: 0;
 }
 
 window#waybar {
-    background: rgba(129,161,193,0.54);
-    color: #2e3440;
-	border-radius: 3px;
-	border: solid #2e3449 1px;
+    background-color: rgba(46, 52, 64, 0.5);
+    border-bottom: 3px solid rgba(76, 86, 106, 0.5);
+	color: #d8dee9;
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
-#window {
-    font-weight: normal;
-    font-family: "FiraCode Nerd Font";
+window#waybar.hidden {
+    opacity: 0.2;
 }
 
-#workspaces {
-    padding: 0 5px;
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #d8dee9;
 }
 
 #workspaces button {
     padding: 0 5px;
-    color: #BBBBBB;
+    color: #d8dee9;
 }
 
-#workspaces button.visible {
-  color: inherit;
-  background-color: #ff007c;
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
 }
 
-#workspaces button.active{
-  color: inherit;
-  background-color: #ff007c;
-}
-
-#workspaces button.focused {
-    color: #BBBBBB;
-    background-color: #ff007c;
+#workspaces button.active {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #bcb4ee;
 }
 
 #workspaces button.urgent {
-  color: #F44747;
-}
-#workspaces button.hidden {
-  color: #F44747;
-}
-
-#tags button {
-    padding: 0 5px;
-    color: #BBBBBB;
-}
-
-#tags button.occupied {
-  color: inherit;
-  background-color: #ff007c;
-}
-
-
-
-#tags button.focused {
-    color: #BBBBBB;
-    background-color: #ff007c;
-}
-
-#tags button.urgent {
-  color: #F44747;
+    background-color: #eb4d4b;
 }
 
 #mode {
-    background: #ff007c;
-    border-bottom: 3px solid #BBBBBB;
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode, #custom-wofi-power {
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
     padding: 0 10px;
-    margin: 0 2px;
+}
+
+#window {
+	background-color: #88c0d0;
+	color: #2e3440;
+	border-radius: 20px;
+	padding: 0 10px;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
 }
 
 #clock {
-    font-weight: normal;
+    background-color: #64727D;
 }
 
-#battery icon {
-    color: #F44747;
+#battery {
+    background-color: #ffffff;
+    color: #000000;
 }
 
-@keyframes blink {
-    to {
-        background-color: #ff007c;
-        color: black;
-    }
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+    background-color: #26A65B;
 }
 
-#battery.warning:not(.charging) {
-    color: #F44747;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
 }
 
-#cpu {
+label:focus {
+    background-color: #000000;
 }
 
-#memory {
+#backlight {
+    background-color: #90b1b1;
 }
 
-#network {
-}
-
-#network.disconnected {
-    background: #F44747;
+#mpd {
+    background-color: #d08770;
+    color: #2e3440;
 }
 
 #pulseaudio {
+    background-color: #ebcb8b;
+    color: #2e3440;
 }
 
 #pulseaudio.muted {
+    background-color: #b48ead;
+    color: #2a5c45;
+}
+
+#cpu {
+    background-color: #a3be8c;
+    color: #2e3440;
+}
+
+#memory {
+    background-color: #b48ead;
 }
 
 #tray {
+    background-color: #2980b9;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
 }
