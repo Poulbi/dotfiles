@@ -94,7 +94,7 @@ window#waybar.PCSX2 #window {
 
 #pulseaudio {
 	color: #2e3440;
-	background: #bf616a;
+	background: #b48ead;
 }
 
 #temperature {
@@ -130,7 +130,7 @@ window#waybar.PCSX2 #window {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+    background-color: #bf616a;
 }
 
 #tray > .passive {
