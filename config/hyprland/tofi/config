@@ -27,7 +27,7 @@ min-input-width = 0
 ### Window theming
 width = 20%
 height = 20%
-background-color = #2e3440a0
+background-color = #2e3440f0
 outline-width = 0
 outline-color = #81a1c1
 border-width = 2
