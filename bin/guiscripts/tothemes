@@ -1,0 +1,8 @@
+#!/bin/sh
+
+tofi_path="$HOME/.config/tofi"
+choice="$(find "$tofi_path/themes" -type f |
+	xargs -I {} basename {} |
+	tofi --placeholder-text "theme")"
+
+ln -sf "$tofi_path/themes/${choice:-nord}" $tofi_path/config
