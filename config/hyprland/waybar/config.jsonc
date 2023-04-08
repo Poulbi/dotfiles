@@ -40,5 +40,8 @@
 	"memory": {
 		"tooltip": false,
 		"format": " {used}G"
+	},
+	"tray": {
+		"spacing": 5,
 	}
 }
