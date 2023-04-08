@@ -64,12 +64,12 @@ window#waybar.PCSX2 #window {
 }
 
 #workspaces button.active {
-	color: #88c0d0;
+	color: #5e81ac;
 }
 
 #workspaces button:hover {
 	transition: none;
-	color: #b48ead;
+	color: #d08770;
 }
 
 #mpd {
