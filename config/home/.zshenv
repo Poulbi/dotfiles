@@ -5,19 +5,24 @@ export PATH="$HOME/go/bin:$PATH"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="st"
+
+if [ -n  "$WAYLAND_DISPLAY" ]
+then
+	export TERMINAL="foot"
+	export MENUCMD="tofi"
+else
+	export TERMINAL="dmenu"
+	export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
+	export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+fi
+
 export BROWSER="firefox"
-export MENUCMD="tofi"
 
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_STATE_HOME="$HOME"/.local/state
 
-test ! -d "$XDG_CONFIG_HOME"/x11 &&
-	mkdir "$XDG_CONFIG_HOME"/x11
-export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export CARGO_HOME="$XDG_CONFIG_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
