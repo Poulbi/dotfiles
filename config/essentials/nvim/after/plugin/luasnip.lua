@@ -130,14 +130,15 @@ ls.add_snippets("java", {
 })
 
 ls.add_snippets("sh", {
-	parse("fn", "function $1 {\n\t$2\n}$0", {}),
-	parse("die",
+	parse("fn", "$1 ()\n{\n\t$2\n}$0", {}),
+	parse("fdie",
 	[[
 	die ()
 	{
 		echo "\$1" >&2
 	}
 	]], {}),
+	parse("die", "die \"$1\"$0", {}),
 })
 
 ls.add_snippets("javascript", {
