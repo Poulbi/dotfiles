@@ -1,5 +1,5 @@
 ### Font
-font = /usr/share/fonts/TTF/JetBrainsMono-Bold.ttf
+font = monospace bold
 font-size = 12
 
 text-color = #d8dee9
@@ -25,7 +25,8 @@ corner-radius = 26
 
 padding-top = 0
 padding-bottom = 0
-padding-left = 7%
+padding-left = 0
+# padding-left = 7%
 padding-right = 0
 
 require-match = false
