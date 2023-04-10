@@ -86,6 +86,7 @@ upfile () {
 }
 
 sgd () {
+	d="$PWD"
 	for dir in ${1:-$HOME/src/*} 
 	do 
 		cd $dir 
@@ -98,6 +99,8 @@ sgd () {
 		test "$(parse_git_remote)" && 
 			echo "$PWD \e[0;32m*push/pull\e[0m"
 		done
+	cd "$d"
+	unset d
 }
 
 # Git functions
