@@ -1,5 +1,5 @@
 ### Font
-font = monospace bold
+font = /usr/share/fonts/TTF/JetBrainsMono-Bold.ttf
 font-size = 12
 
 text-color = #d8dee9
