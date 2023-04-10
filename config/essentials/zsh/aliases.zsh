@@ -147,6 +147,7 @@ alias esls='$EDITOR ~/src/slstatus/config.def.h'
 alias ehy='$EDITOR ~/.config/hypr/hyprland.conf'
 # quick cd
 alias cfd='$EDITOR config.def.h'
+alias cds='cd $HOME/src/'
 alias cdo='cd $HOME/src/dotfiles'
 alias cdi='cd $HOME/src/installdrier'
 alias cdm='cd $HOME/music'
