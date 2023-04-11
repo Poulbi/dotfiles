@@ -132,6 +132,11 @@ alias wf='doas wipefs -a'
 alias dmci="doas make clean install"
 alias rmd='rm -f *.{orig,rej}'
 
+alias vbm='vboxmanage'
+alias vbls='vbm list vms'
+alias vblsr='vbm list runningvms'
+alias vb='vbm startvm'
+
 # quick config
 alias ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
 alias eza='$EDITOR ${ZDOTDIR}/aliases.zsh'
