@@ -157,6 +157,11 @@ gpg_import ()
 	shred -uz {public,private,trust}.asc
 }
 
+ngenable ()
+{
+	ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
+}
+
 vbsr ()
 {
 	vboxmanage snapshot "$1" restore "$2" &&

@@ -165,8 +165,11 @@ alias o.='o .'
 alias go.='go .'
 alias ogo.='ogo .'
 alias o/='o /'
+alias o/s='o /srv'
 alias go/='go /'
+alias go/s='go /srv'
 alias ogo/='ogo /'
+alias ogo/s='ogo /srv'
 
 alias fzps='ps aux | tail +2 | fzf --bind \
 "1:execute(echo -n {} | awk '\''{print \$1}'\'' | xclip -sel c -r),\
