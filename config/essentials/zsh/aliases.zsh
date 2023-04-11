@@ -38,6 +38,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias ip='ip -color=auto'
+    alias ipa='ip -br a'
 fi
 
 alias l='ls -l'
@@ -106,7 +107,7 @@ alias sha='ssh-add'
 alias ssh-start='eval "$(ssh-agent)" && ssh-add'
 
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
-alias whatsmyip='curl "ifconfig.me"'
+alias whatsmyip='curl -s "ifconfig.co"'
 alias icognito='unset HISTFILE'
 alias webcam='v4l2-ctl --set-fmt-video=width=1280,height=720; mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --no-resume-playback'
 alias wtip='wt ip -c -brief addr'
@@ -146,7 +147,9 @@ alias esls='$EDITOR ~/src/slstatus/config.def.h'
 alias ehy='$EDITOR ~/.config/hypr/hyprland.conf'
 # quick cd
 alias cfd='$EDITOR config.def.h'
+alias cds='cd $HOME/src/'
 alias cdo='cd $HOME/src/dotfiles'
+alias cdi='cd $HOME/src/installdrier'
 alias cdm='cd $HOME/music'
 alias cdd='cd $HOME/dl'
 alias cdrs='cd /srv/'
@@ -157,8 +160,11 @@ alias o.='o .'
 alias go.='go .'
 alias ogo.='ogo .'
 alias o/='o /'
+alias o/s='o /srv'
 alias go/='go /'
+alias go/s='go /srv'
 alias ogo/='ogo /'
+alias ogo/s='ogo /srv'
 
 alias fzps='ps aux | tail +2 | fzf --bind \
 "1:execute(echo -n {} | awk '\''{print \$1}'\'' | xclip -sel c -r),\

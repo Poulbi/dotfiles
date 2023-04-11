@@ -5,27 +5,31 @@ export PATH="$HOME/go/bin:$PATH"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="st"
+
 export BROWSER="firefox"
-export MENUCMD="tofi"
 
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_STATE_HOME="$HOME"/.local/state
 
-test ! -d "$XDG_CONFIG_HOME"/x11 &&
-	mkdir "$XDG_CONFIG_HOME"/x11
-export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export CARGO_HOME="$XDG_CONFIG_HOME"/cargo
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
-export CUDA_CACHE_PATH="$XDG_CONFIG_HOME"/nv
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export W3M_DIR="$XDG_STATE_HOME"/w3m
+
+if [ -n  "$WAYLAND_DISPLAY" ]
+then
+	export TERMINAL="foot"
+	export MENUCMD="tofi"
+else
+	export TERMINAL="dmenu"
+	export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
+	export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+fi
 
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$ZDOTDIR"/histfile
@@ -46,3 +50,4 @@ export PASSWORD_STORE_CLIP_TIME=5
 # export RANGER_LOAD_DEFAULT_RC=FALSE
 # export VIMINIT="source ~/.config/vim/vimrc"
 # export fpath=($XDG_CONFIG_HOME/zsh/completion/ $fpath)
+# export CUDA_CACHE_PATH="$XDG_CONFIG_HOME"/nv

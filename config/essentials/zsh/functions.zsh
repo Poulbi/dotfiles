@@ -86,6 +86,7 @@ upfile () {
 }
 
 sgd () {
+	d="$PWD"
 	for dir in ${1:-$HOME/src/*} 
 	do 
 		cd $dir 
@@ -98,6 +99,8 @@ sgd () {
 		test "$(parse_git_remote)" && 
 			echo "$PWD \e[0;32m*push/pull\e[0m"
 		done
+	cd "$d"
+	unset d
 }
 
 # Git functions
@@ -152,4 +155,26 @@ gpg_import ()
 	gpg --import-ownertrust trust.asc
 	gpg --import private.asc
 	shred -uz {public,private,trust}.asc
+}
+
+ngenable ()
+{
+	ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
+}
+
+vbsr ()
+{
+	vboxmanage snapshot "$1" restore "$2" &&
+		vboxmanage startvm "$1" ||
+		vboxmanage controlvm "$1" poweroff
+}
+vbsrr ()
+{
+	vbsr "$1" "$2"
+	sleep 3
+	vbsr "$1" "$2"
+}
+vbst ()
+{
+	vboxmanage snapshot "$1" take "$2"
 }
