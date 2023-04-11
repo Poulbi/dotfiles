@@ -156,3 +156,8 @@ gpg_import ()
 	gpg --import private.asc
 	shred -uz {public,private,trust}.asc
 }
+
+ngenable ()
+{
+	ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
+}
