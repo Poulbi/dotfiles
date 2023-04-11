@@ -161,3 +161,20 @@ ngenable ()
 {
 	ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
 }
+
+vbsr ()
+{
+	vboxmanage snapshot "$1" restore "$2" &&
+		vboxmanage startvm "$1" ||
+		vboxmanage controlvm "$1" poweroff
+}
+vbsrr ()
+{
+	vbsr "$1" "$2"
+	sleep 3
+	vbsr "$1" "$2"
+}
+vbst ()
+{
+	vboxmanage snapshot "$1" take "$2"
+}
