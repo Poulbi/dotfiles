@@ -1,3 +1,13 @@
 #!/bin/sh
-choice="$(echo "poweroff\nreboot\nhibernate" | dmenu -l 1 -g 3)"
+if [ "$MENUCMD" = "tofi" ]
+then
+	menucmd="tofi --width 10% --height 10% --padding-left 2%" 
+elif [ "$MENUCMD" = "dmenu" ]
+then
+	menucmd="dmenu -g 2 -l 1"
+else
+	menucmd="fzf"
+fi
+
+choice="$(echo "poweroff\nreboot\nhibernate" | $menucmd)"
 test -z "$choice" || doas "$choice"
