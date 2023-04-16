@@ -93,7 +93,7 @@ alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HD
 alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
  
 alias d='du -d 0 -h'
-alias dud='du * -d 0 -h 2>/dev/null | sort -h'
+alias dud='du .* * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
@@ -101,6 +101,7 @@ alias floc='doas find / -type "f" 2> /dev/null | grep'
 alias dloc='doas find / -type "d" 2> /dev/null | grep'
 alias fif='find . -type "f" | grep'
 alias fid='find . -type "d" | grep'
+alias sxt='sxiv -t'
 
 # ssh
 alias sha='ssh-add'
@@ -128,9 +129,15 @@ alias -g sba='source env/bin/activate || source bin/activate'
 alias -g smc='systemctl'
 alias smcu='systemctl --user'
 alias zsr='source ${ZDOTDIR:-$HOME}/.zshrc && rehash'
+alias rh='rehash'
 alias wf='doas wipefs -a'
 alias dmci="doas make clean install"
 alias rmd='rm -f *.{orig,rej}'
+
+alias vbm='vboxmanage'
+alias vbls='vbm list vms'
+alias vblsr='vbm list runningvms'
+alias vb='vbm startvm'
 
 # quick config
 alias ez='$EDITOR ${ZDOTDIR:-$HOME}/.zshrc'
@@ -145,11 +152,19 @@ alias est='$EDITOR ~/src/st/config.def.h'
 alias esl='$EDITOR ~/src/slock/config.def.h'
 alias esls='$EDITOR ~/src/slstatus/config.def.h'
 alias ehy='$EDITOR ~/.config/hypr/hyprland.conf'
-# quick cd
 alias cfd='$EDITOR config.def.h'
+# quick cd
 alias cds='cd $HOME/src/'
+alias cdw='cd $HOME/src/dwm'
+alias cddm='cd $HOME/src/dmenu'
+alias cdslo='cd $HOME/src/slock'
+alias cdsl='cd $HOME/src/slstatus'
+alias cdst='cd $HOME/src/st'
+alias cdsta='cd $HOME/src/stable-diffusion-webui'
 alias cdo='cd $HOME/src/dotfiles'
 alias cdi='cd $HOME/src/installdrier'
+alias cdia='cd $HOME/src/installdrier/arch'
+alias cdib='cd $HOME/src/installdrier/deb'
 alias cdm='cd $HOME/music'
 alias cdd='cd $HOME/dl'
 alias cdrs='cd /srv/'

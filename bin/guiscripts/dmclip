@@ -11,16 +11,16 @@ NotImage () {
 
 selection="$(echo "primary\nclipboard\nswap" | 
 	dmenu -l 1 -g 3 -p "selection:")"
-if [[ "$selection" == "swap" ]]
+if [ "$selection" = "swap" ]
 then
     clipboard="$(xclip -o)"
     xclip -o | xclip -sel c
     echo -n "$clipboard" | xclip -sel c
     exit
-elif [ "$selection" == "" ]
+elif [ "$selection" = "" ]
 then
     exit 1
-elif  [ "$selection" == "primary" ]
+elif  [ "$selection" = "primary" ]
 then
     selection2="clipboard"
 else

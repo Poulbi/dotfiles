@@ -138,7 +138,14 @@ ls.add_snippets("sh", {
 		echo "\$1" >&2
 	}
 	]], {}),
-	parse("die", "die \"$1\"$0", {}),
+	parse("die", "die \"I: $1\"$0", {}),
+	s("inp", fmt(
+	[[
+	test -z "${{{}:=$1}}" && 
+		{}="$(cat /dev/stdin)"
+	echo "{}: ${}" 1>&2{}
+	]],
+	{ i(1), rep(1), rep(1), rep(1), i(0) })),
 })
 
 ls.add_snippets("javascript", {

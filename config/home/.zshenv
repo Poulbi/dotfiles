@@ -21,15 +21,8 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export W3M_DIR="$XDG_STATE_HOME"/w3m
 
-if [ -n  "$WAYLAND_DISPLAY" ]
-then
-	export TERMINAL="foot"
-	export MENUCMD="tofi"
-else
-	export TERMINAL="dmenu"
-	export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
-	export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-fi
+export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$ZDOTDIR"/histfile
@@ -43,6 +36,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # export _JAVA_AWT_WM_NONREPARENTING=1
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
 export PASSWORD_STORE_CLIP_TIME=5
 

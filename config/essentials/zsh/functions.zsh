@@ -79,10 +79,10 @@ esc () {
 }
 
 delfile () {
-	curl ${2:-"https://upfast.craftmenners.men/delete/$1"}
+	curl ${2:-"https://up.kallipso.be/delete/$1"}
 }
 upfile () {
-	curl -F "file=@\"$1\"" ${2:-"https://upfast.craftmenners.men"}
+	curl -F "file=@\"$1\"" ${2:-"https://up.kallipso.be"}
 }
 
 sgd () {
