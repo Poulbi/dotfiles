@@ -93,7 +93,7 @@ alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HD
 alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
  
 alias d='du -d 0 -h'
-alias dud='du * -d 0 -h 2>/dev/null | sort -h'
+alias dud='du .* * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,size,fstype,label,mountpoint'
@@ -101,6 +101,7 @@ alias floc='doas find / -type "f" 2> /dev/null | grep'
 alias dloc='doas find / -type "d" 2> /dev/null | grep'
 alias fif='find . -type "f" | grep'
 alias fid='find . -type "d" | grep'
+alias sxt='sxiv -t'
 
 # ssh
 alias sha='ssh-add'
