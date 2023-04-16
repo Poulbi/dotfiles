@@ -7,3 +7,4 @@ config/common/mpd/database
 config/essentials/nvim/plugin/
 config/common/newsboat/urls
 config/extra/jftui/settings
+config/essentials/nvim/spell/
