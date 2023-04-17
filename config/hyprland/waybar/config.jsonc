@@ -40,7 +40,7 @@
 		"interval": 3,
 	},
 	"custom/memory": {
-		"exec": "/home/aluc/script.sh",
+		"exec": "free -h | awk '(NR==2){ print $3 }'",
 		"format": "{}",
 		"restart-interval": 3,
 	},
