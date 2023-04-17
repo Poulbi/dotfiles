@@ -29,6 +29,9 @@
 			"default": ["奄", "奔", "墳"]
 		},
 	},
+	"temperature": {
+		"interval": 3,
+	},
 	"network": {
 		"tooltip": false,
 		"format-wifi": " {essid}",
