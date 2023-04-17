@@ -1,9 +1,22 @@
 #!/bin/sh
 
+if [ "$MENUCMD" = "tofi" ]
+then
+	menucmd="tofi --width 30% --height 20% --padding-left 2%"
+elif [ "$MENUCMD" = "dmenu" ]
+then
+	menucmd="dmenu -l 10 -g 1 -x -i" 
+else
+	menucmd="fzf"
+fi
+
 # requirements
-which dmenu firefox > /dev/null ||
+which $MENUCMD firefox > /dev/null ||
 	exit 1
 
-choice="$(find ${1:-$HOME/docs/school} | grep "Cursus/index.html" 2> /dev/null | sed "s;${HOME};~;" | dmenu -g 1 -l 10 -x -i)"
+choice="$(find ${1:-$HOME/docs/school} |
+	grep "Cursus/index.html" 2> /dev/null |
+	sed "s;$HOME;~;" |
+	$menucmd)"
 test -z "$choice" && exit 1
 firefox "$choice"
