@@ -21,14 +21,14 @@ fi
 case "$MACH" in
 	"desktop" | "d" | "laptop" | "l")
 		mkdir -p "$HOME/bin"
-		stow -d bin/ -t "$HOME/bin" -R common guiscripts extra
+		stow -d bin/ -t "$HOME/bin" -R common guiscripts menuscripts extra
 		mkdir -p "$HOME/.config"
 		stow -d config/ -t "$HOME/.config" -R essentials common extra X theme xdg hyprland
 		stow -d config/ -t "$HOME/" -R home
 		;;
 	"server" | "s")
 		mkdir -p "$HOME/bin"
-		stow -d bin/ -t "$HOME/bin" -R common serverscripts
+		stow -d bin/ -t "$HOME/bin" -R common serverscripts menuscripts
 		mkdir -p "$HOME/.config"
 		stow -d config/ -t "$HOME/.config" -R essentials common
 		stow -d config/ -t "$HOME/" -R home
