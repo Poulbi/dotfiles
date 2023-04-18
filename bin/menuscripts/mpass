@@ -8,7 +8,7 @@ elif [ "$MENUCMD" = "dmenu" ]
 then
 	menucmd="dmenu -l 4 -g 2 -x -i -p pass:" 
 else
-	menucmd="fzf"
+	menucmd="fzf --prompt pass:"
 fi
 while [ -d "${store}/${file}" ]
 do
