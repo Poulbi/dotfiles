@@ -8,7 +8,7 @@ cat /tmp/dmvids
 
 if [ "$MENUCMD" = "tofi" ]
 then
-	menucmd="tofi --width 30% --height 30%"
+	menucmd="tofi --width 30% --height 30% --matching-algorithm normal"
 elif [ "$MENUCMD" = "dmenu" ]
 then
 	menucmd="dmenu -l 10 -g 1 -x -i" 

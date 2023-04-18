@@ -3,12 +3,12 @@ store="$HOME/.password-store"
 lscmd="ls --group-directories-first"
 if [ "$MENUCMD" = "tofi" ]
 then
-	menucmd="tofi --matching-algorithm prefix --prompt pass:"
+	menucmd="tofi --prompt pass:"
 elif [ "$MENUCMD" = "dmenu" ]
 then
 	menucmd="dmenu -l 4 -g 2 -x -i -p pass:" 
 else
-	menucmd="fzf"
+	menucmd="fzf --prompt pass:"
 fi
 while [ -d "${store}/${file}" ]
 do

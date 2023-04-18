@@ -29,6 +29,7 @@ padding-left = 0
 # padding-left = 7%
 padding-right = 0
 
+matching-algorithm = prefix
 require-match = false
 auto-accept-single = true
 hidden-character = ""
