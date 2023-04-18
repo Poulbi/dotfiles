@@ -1,0 +1,9 @@
+#!/bin/sh
+dim="$(hyprctl -j getoption decoration:dim_strength | jq -r '.float')"
+if [ "$dim" = "0.08" ]
+then
+	hyprctl keyword decoration:dim_strength 0.58
+else
+	hyprctl keyword decoration:dim_strength 0.08
+fi
+
