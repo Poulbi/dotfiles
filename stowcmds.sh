@@ -18,6 +18,8 @@ else
 	read MACH
 fi
 
+ln -sf "$(realpath $0)" "$(realpath $0 | xargs dirname)"/bin/common/stowdots
+cd "$(realpath $0 | xargs dirname)" || exit 1
 case "$MACH" in
 	"desktop" | "d" | "laptop" | "l")
 		mkdir -p "$HOME/bin"
