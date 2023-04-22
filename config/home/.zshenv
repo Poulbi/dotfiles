@@ -20,6 +20,8 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export W3M_DIR="$XDG_STATE_HOME"/w3m
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 
 export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
