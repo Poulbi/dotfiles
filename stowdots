@@ -18,8 +18,8 @@ else
 	read MACH
 fi
 
-ln -sf "$(realpath $0)" $HOME/bin/
-cd "$(realpath $0 | xargs dirname)" || exit 1
+ln -sf "$(realpath "$0")" $HOME/bin/
+cd "$(dirname "$(realpath "$0")")" || exit 1
 case "$MACH" in
 	"desktop" | "d" | "laptop" | "l")
 		mkdir -p "$HOME/bin"
