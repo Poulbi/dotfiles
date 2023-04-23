@@ -113,14 +113,6 @@ noremap <A-l> <C-W>l
 noremap <A-o> <C-W>o
 nnoremap <C-H> :call ToggleHiddenAll()<CR>
 
-" Closing brackets and quotes
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ` ``<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-
 " goto buffer
 nnoremap gb :buffers<CR>:buffer<Space>
 
@@ -134,11 +126,6 @@ nnoremap - <cmd>Ex<cr>
 inoremap <C-a> <C-o>I
 inoremap <C-e> <C-o>A
 inoremap <C-k> <C-o>D
-
-inoremap (<cr> (<cr>)<C-o>O
-inoremap (;<cr> (<cr>);<C-o>O
-inoremap {<cr> {<cr>}<C-o>O
-inoremap {;<cr> {<cr>};<C-o>O
 
 " buffers
 nnoremap gb <cmd>buffers<cr>:buffer<Space>
