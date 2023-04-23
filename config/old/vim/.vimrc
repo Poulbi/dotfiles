@@ -33,7 +33,6 @@ set updatetime=100
 
 set tabstop=4 shiftwidth=4 " Turn tab to spaces
 set backspace=2 backspace=indent,eol,start " Turn backspaces into tabspaces
-set incsearch " Incremental search
 set clipboard=unnamed " Use system primary clipboard
 
 set number " Set (absolute) line numbers
@@ -45,9 +44,20 @@ set cursorline " Highlight line at cursor
 set ruler " Show cursor and progress in file
 set wildmenu " Show command options (autocomplete)
 
+set hlsearch
+set incsearch
+set smartcase ignorecase
+set path += **
+
+set scrolloff=8
+set smartindent
+
 set mouse= "nomouse
 set encoding=utf-8 " Set encoding
 set history=200 " Keep a lot more command history
+
+set noswapfile nobackup
+set formatoptions = "cqrnj"
 
 """"""""""""COLORSCHEME"""""""""""""""""""""""
 colo nord
