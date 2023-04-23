@@ -41,9 +41,11 @@
 		},
 	},
 	"network": {
-		"tooltip": false,
-		"format-wifi": " {essid}",
+		"format-wifi": "",
+		"tooltip-format-wifi": "{ifname} {essid}",
 		"format-ethernet": "",
+		"tooltip-format-ethernet": "{ifname} {ipaddr}",
+		"format-disconnected": "裏",
 	},
 	"cpu": {
 		"tooltip": false,
