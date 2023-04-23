@@ -35,7 +35,7 @@ feh --no-fehbg --bg-scale ~/pics/wallpaper
 setxkbmap -option ctrl:nocaps
 xmodmap -e "keycode 135 = Super_L"
 xautolock -time 5 -locker slock &
-redshift &
+gammastep -m randr &
 slstatus &
 unclutter --timeout 3 --jitter 50 -b
 exec startdwm
