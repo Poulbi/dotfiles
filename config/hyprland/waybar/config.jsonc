@@ -11,10 +11,10 @@
 		"format": "{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
 		"format-disconnected": "ﳌ",
 		"format-stopped": "",
-        "state-icons": {
-            "playing": "",
-            "paused": "",
-        },
+		"state-icons": {
+			"playing": "",
+			"paused": "",
+		},
 		"on-click": "mpc toggle",
 	},
 	"battery": {
@@ -31,14 +31,19 @@
 		"format-icons": {
 			"default": ["奄", "奔", "墳"]
 		},
+		"on-click": "pavucontrol",
 	},
 	"temperature": {
 		"interval": 3,
+		"format": "{icon} {temperatureC}°C",
+		"format-icons": {
+			"default":["", "", "", "", ""]
+		},
 	},
 	"network": {
 		"tooltip": false,
 		"format-wifi": " {essid}",
-		"format-ethernet": "",
+		"format-ethernet": "",
 	},
 	"cpu": {
 		"tooltip": false,
@@ -52,7 +57,7 @@
 	},
 	"clock": {
 		"format": "{:%H:%M}",
-        "format-alt": " {:%A, %B %d, %Y (%R)}",
+		"format-alt": " {:%A, %B %d, %Y (%R)}",
 		"interval": 1,
 	},
 	"tray": {
