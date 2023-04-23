@@ -138,7 +138,11 @@ ls.add_snippets("sh", {
 		echo "\$1" >&2
 	}
 	]], {}),
-	parse("die", "die \"I: $1\"$0", {}),
+	s("die", fmt(
+	[[
+	die "{}: {}"{}
+	]],
+	{ c(1, {t "I", t "E", t "W"}), i(2), i(0) })),
 	s("inp", fmt(
 	[[
 	test -z "${{{}:=$1}}" && 
