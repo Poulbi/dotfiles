@@ -1,0 +1,156 @@
+#!/bin/sh
+assume_yes=0
+verbose=0
+
+die ()
+{
+	# always print errors
+	if [ "$verbose" -eq 1 ] || echo "$1" | grep -q "^E:"
+	then
+		echo "$1" >&2
+	fi
+}
+
+help ()
+{
+	local verbose=1
+	die "ladd [OPTION [ARG]...] [FILE]"
+	die "\t-c CATEGORY\t\twill be uppercased"
+	die "\t-d DESCRIPTION"
+	die "\t-f FILE"
+	die "\t-l LINK"
+	die "\t-v\t\t\tverbose"
+	die "\t-y\t\t\tassume yes"
+}
+
+alias shiftt='
+if [ $# -gt 0 ]
+then
+	shift
+else
+	die "E: No argument provided."
+	exit 1
+fi'
+
+ftest ()
+{
+	if [ ! -f "$1" ]; then
+		die "E: '$1' not found."
+		exit 1
+	fi
+}
+
+# Main execution
+
+if [ $# -eq 0 ]
+then
+	help
+	exit
+fi
+while [ $# -ne 0 ]
+do
+	case "$1" in
+		'-c')
+			shiftt
+			category="$(echo "$1" | tr '[:lower:]' '[:upper:]')" 
+			die "I: category -> '$category'"
+			shiftt
+			;;
+		'-d')
+			shiftt
+			description="$1"
+			die "I: description -> '$description'"
+			shiftt
+			;;
+		'-f')
+			shiftt
+			test -n "$1" &&
+				ftest "$1"
+			file="$1"
+			shiftt
+			die "I: file -> '$file'"
+			;;
+		'-l')
+			shiftt
+			link="$1"
+			die "I: link -> '$link'"
+			shiftt
+			;;
+		'-v')
+			verbose=1
+			die "I: verbose -> $verbose"
+			shiftt
+			;;
+		'-y')
+			assume_yes=1
+			die "I: assume_yes -> $assume_yes"
+			shiftt
+			;;
+		*)
+			if [ ! "$file" ]
+			then
+				ftest "$1"
+				file="$1"
+				die "I: file -> '$file'"
+				shiftt
+			else
+				die "E: not a valid argument."
+				help
+				exit 1
+			fi
+			;;
+	esac
+done
+
+# Tests
+# Check on file and/or link
+if [ -z "$file" ] || [ -z "$link" ]
+then
+	die "E: no file and/or link supplied."
+	exit 1
+fi
+# Check on valid category
+categories="$(pup -f "$file" -p 'h2 text{}' |
+	tr '\n' ',' | sed 's/,$//')"
+die ""
+die "categories: $categories"
+if ! echo "$categories" | grep -q "$category"
+then
+	die "E: '$category' is not a valid category."
+fi
+# Check on empty values
+for var in category description
+do
+	eval value=\$$var
+	if [ -z "$value" ]
+	then
+		die "W: $var is empty"
+		if [ "$assume_yes" -eq 0 ]
+		then
+			die "W: are you sure you want to proceed? (Y/n)"
+			echo -n ">" >&2
+			read input
+			test "$input" = "n" &&
+				exit 1
+		fi
+		eval $var="'UNDEFINED'"
+		die "I: $var -> $(eval echo "\$$var")"
+	fi
+done
+# Checks if the link has already been added
+if grep -q "$link" "$file"
+then
+	die "E: link already in $file"
+	exit 1
+fi
+
+# constructing the tag
+tag="<li><a href=\"$link\">$link</a> - $description</li>"
+die "tag: $tag"
+
+die "I: appending tag"
+# use grep line numbers to add link after match of the category header
+# header will have an <ul> element this one is used with -A 1 | tail -1
+sed -i "$(grep -n "<h2.*$category" -A 1 "$file" |
+	tail -n 1 |
+	cut -f 1 -d '-')a $tag" "$file"
