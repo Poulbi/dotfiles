@@ -65,7 +65,7 @@ bindkey "^Xe" edit-command-line
 bindkey "^[." insert-last-word
 bindkey "^['" quote-line
 
-# pacman synced rehash
+# rehash hook
 zshcache_time="$(date +%s%N)"
 autoload -Uz add-zsh-hook
 rehash_precmd() {
@@ -77,12 +77,8 @@ rehash_precmd() {
     fi
   fi
 }
+# window title hooks
 add-zsh-hook -Uz precmd rehash_precmd
-
-# prompt
-PS1=' %B%(#.%F{1}.%F{13})[%n%b%f@%B%F{6}%m]%b%f %3~ '
-RPROMPT='%F{blue}$(parse_git_remote)%f%F{red}$(parse_git_status)%f%F{green}$(parse_git_branch)%f%(?.. %?)'
-
 set_wt_action () {
 	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~} | $1\a"
 }
@@ -91,6 +87,11 @@ set_wt () {
 	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~}\a"
 }
 add-zsh-hook -Uz precmd set_wt
+
+
+# prompt
+PS1=' %B%(#.%F{1}.%F{13})[%n%b%f@%B%F{6}%m]%b%f %3~ '
+RPROMPT='%F{blue}$(parse_git_remote)%f%F{red}$(parse_git_status)%f%F{green}$(parse_git_branch)%f%(?.. %?)'
 
 setopt prompt_subst
 parse_git_remote() {
