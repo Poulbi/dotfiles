@@ -28,7 +28,8 @@ zle -N add-surround surround
 zle -N change-surround surround
 compinit
 
-if grep -qi "debian\|ubuntu" /etc/os-release; then
+if grep -qi "debian\|ubuntu" /etc/os-release 2> /dev/null
+then
     sfiles=(
         /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -36,8 +37,7 @@ if grep -qi "debian\|ubuntu" /etc/os-release; then
 else
     sfiles=(
         /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-        /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    )
+        /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh)
 fi
 sfiles+=(
 		~/.config/zsh/functions.zsh
@@ -65,7 +65,7 @@ bindkey "^Xe" edit-command-line
 bindkey "^[." insert-last-word
 bindkey "^['" quote-line
 
-# pacman synced rehash
+# rehash hook
 zshcache_time="$(date +%s%N)"
 autoload -Uz add-zsh-hook
 rehash_precmd() {
@@ -77,15 +77,21 @@ rehash_precmd() {
     fi
   fi
 }
+# window title hooks
 add-zsh-hook -Uz precmd rehash_precmd
+set_wt_action () {
+	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~} | $1\a"
+}
+add-zsh-hook -Uz preexec set_wt_action
+set_wt () {
+	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~}\a"
+}
+add-zsh-hook -Uz precmd set_wt
+
 
 # prompt
 PS1=' %B%(#.%F{1}.%F{13})[%n%b%f@%B%F{6}%m]%b%f %3~ '
 RPROMPT='%F{blue}$(parse_git_remote)%f%F{red}$(parse_git_status)%f%F{green}$(parse_git_branch)%f%(?.. %?)'
-
-precmd () {
-	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~}\a"
-}
 
 setopt prompt_subst
 parse_git_remote() {
@@ -107,6 +113,7 @@ parse_git_status() {
 
 export REPORTTIME=2
 export TIMEFMT="-> %*E"
+# override built-in time command
 alias time='/usr/bin/time'
 export MENUCMD='fzf'
 
