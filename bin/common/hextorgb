@@ -1,6 +1,14 @@
 #!/usr/bin/env sh
-tr -d '#' |
-	tr '[:lower:]' '[:upper:]' |
+test which > /dev/null ||
+	exit 1
+if test -t 0
+then
+	echo "$1"
+else
+	cat /dev/stdin
+fi |
+	tr -d '#' | # remove '#'
+	tr '[:lower:]' '[:upper:]' | # uppercase is needed for bc
 	sed 's/\([0-9A-F]\{2\}\)/\1\n/g;iibase=16' |
 	bc |
 	tr '\n' ',' |
