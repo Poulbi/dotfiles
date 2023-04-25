@@ -80,11 +80,11 @@ rehash_precmd() {
 # window title hooks
 add-zsh-hook -Uz precmd rehash_precmd
 set_wt_action () {
-	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~} | $1\a"
+	print -Pn "\e]0;👉 $1\a"
 }
 add-zsh-hook -Uz preexec set_wt_action
 set_wt () {
-	print -Pn "\e]0;$USER@$HOST on ${PWD//$HOME/\~}\a"
+	print -Pn "\e]0;%n@%m on %~\a"
 }
 add-zsh-hook -Uz precmd set_wt
 
