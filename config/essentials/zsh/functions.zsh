@@ -1,11 +1,18 @@
 #!/bin/zsh
 
+die ()
+{
+	echo "$1" >&2
+}
+
 vmp() {
     col -b | \
     vim -MR \
     -c 'set ft=man nolist nonu nornu'
 }
-vimh() { vim -c "help $1" -c 'call feedkeys("\<c-w>o")' }
+vimh() {
+	vim -c "help $1" -c 'call feedkeys("\<c-w>o")'
+}
 
 nnn() { test -z "$NNNLVL" && /usr/bin/nnn "$@" || exit }
 ranger() { test -z "$RANGER_LEVEL" && /usr/bin/ranger "$@" || exit }
@@ -195,4 +202,18 @@ pacsize ()
 	echo $packages |
 		expac '%m %n' - |
 		numfmt --to=iec-i --suffix=B --format="%.2f"
+}
+pkbs ()
+{
+	pkgfile -b "$1" | tee /dev/stderr | doas pacman -S -
+}
+
+mime-default ()
+{
+	die "Setting '$1' as default for its mimetypes"
+	grep "MimeType=" /usr/share/applications/"$1" |
+		cut -d '=' -f 2- |
+		tr ';' '\n' |
+		xargs -I {} xdg-mime default "$1" "{}"
+	die "Done."
 }

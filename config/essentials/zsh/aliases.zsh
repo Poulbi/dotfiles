@@ -80,6 +80,8 @@ alias yql='yay -Ql'
 alias yays='yay -S'
 alias yrm='yay -Rns'
 
+alias pkb='pkgfile -b'
+
 alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 
 # vim
