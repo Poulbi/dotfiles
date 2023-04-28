@@ -22,6 +22,7 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export W3M_DIR="$XDG_STATE_HOME"/w3m
 export GOPATH="$XDG_DATA_HOME"/go
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
+export TNS_ADMIN=/opt/oracle/instantclient_21_9/network/admin
 
 export XINITRC="$XDG_CONFIG_HOME/x11"/xinitrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
