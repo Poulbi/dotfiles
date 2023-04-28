@@ -15,7 +15,7 @@ function M.start_live_server()
         end
     end
 
-    local command = "live-server --no-browser --port=" .. port .. " " .. vim.fn.expand("%:p:h")
+    local command = "live-server --no-browser --port=" .. port .. " \"" .. vim.fn.expand("%:p:h") .. "\""
 	-- run
     local job_id = vim.fn.jobstart(command, {
         on_exit = function(_, _, _) end
