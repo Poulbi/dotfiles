@@ -3,6 +3,13 @@ local M = {}
 local live_servers = {}
 
 function M.start_live_server()
+	if vim.fn.executable('lsof') == 0 then
+		print("Error: 'lsof' command not found")
+	elseif vim.fn.executable('lsof') == 0 then
+		print("Error: 'live-server' command not found")
+		return
+	end
+
 	-- Search for available port and use it
     local port = 5500
     local running = true
