@@ -41,3 +41,7 @@ opt.backup = false
 
 opt.spelllang = "en_us,nl"
 opt.formatoptions = "cqrnj"
+
+-- current dir, where $HOME is replaced by ~
+opt.titlestring = "%{substitute(getcwd(), getenv('HOME'), '~', 'g')} -> %t "
+opt.title = true
