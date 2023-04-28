@@ -42,6 +42,14 @@ opt.backup = false
 opt.spelllang = "en_us,nl"
 opt.formatoptions = "cqrnj"
 
--- current dir, where $HOME is replaced by ~
-opt.titlestring = "%{substitute(getcwd(), getenv('HOME'), '~', 'g')} -> %t "
+-- Get the current working directory, replace the $HOME portion of the path with ~,
+-- and extract the last three directories
+local cwd = vim.fn.getcwd():gsub(os.getenv('HOME'), '~')
+local last_dirs = string.match(cwd, "[^/]+/[^/]+/[^/]+/?$")
+if last_dirs then
+	opt.titlestring = last_dirs .. " -> %t"
+else
+	opt.titlestring = cwd .. " -> %t"
+end
+
 opt.title = true
