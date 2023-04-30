@@ -157,8 +157,8 @@ vnoremap <Leader>u <cmd>'<,'>s/^[0-9]\\+\\. //<cr><esc>
 " scripts
 nnoremap <Leader>x <cmd>!chmod +x %<cr>
 " replace
-nnoremap <Leader>sf [[:%s/\<<C-r><C-w>\>/<C-r><C-w><C-w>/gI<Left><Left><Left>]]
-nnoremap <Leader>sl [[:s/\<<C-r><C-w>\>/<C-r><C-w><C-w>/gI<Left><Left><Left>]]
+nnoremap <Leader>sf yiw:%s/\<<C-r>"\>//gI<Left><Left><Left>
+nnoremap <Leader>sl yiw:s/\<<C-r>"\>//gI<Left><Left><Left>
 
 " write
 nnoremap <LocalLeader>w <cmd>write<cr>
