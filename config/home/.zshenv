@@ -2,6 +2,7 @@
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$PATH:./node_modules/.bin"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
