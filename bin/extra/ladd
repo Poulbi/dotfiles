@@ -87,6 +87,10 @@ do
 			die "I: assume_yes -> $assume_yes"
 			shiftt
 			;;
+		'-h')
+			help
+			exit 1
+			;;
 		*)
 			if [ ! "$file" ]
 			then
