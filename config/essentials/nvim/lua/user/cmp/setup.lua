@@ -14,7 +14,7 @@ cmp.setup({
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-c>'] = cmp.mapping.abort(),
-		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-k>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lua' },
