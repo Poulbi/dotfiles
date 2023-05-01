@@ -17,6 +17,7 @@ set searchurls.mcf https://www.curseforge.com/minecraft/mc-mods/search?search=%s
 set searchurls.mcm https://modrinth.com/mods?q=%s
 set searchurls.dhu https://hub.docker.com/search?q=%s
 set searchurls.plu https://app.pluralsight.com/search/?q=%s
+set searchurls.ru https://rutracker.org/forum/tracker.php?nm=%s
 set searchurls.google https://www.google.com/search?q=
 set searchurls.googlelucky https://www.google.com/search?btnI=I'm+Feeling+Lucky&q=
 set searchurls.scholar https://scholar.google.com/scholar?q=
