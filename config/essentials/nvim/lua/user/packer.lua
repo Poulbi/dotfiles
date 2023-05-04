@@ -13,7 +13,8 @@ return require('packer').startup(function(use)
 	use('theprimeagen/harpoon')
 
 	-- colors
-	use('shaunsingh/nord.nvim')
+	-- use('shaunsingh/nord.nvim')
+	use({ 'AlphaTechnolog/pywal.nvim', as = 'pywal' })
 	use('norcalli/nvim-colorizer.lua')
 
 	use('airblade/vim-gitgutter')
