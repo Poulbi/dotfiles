@@ -24,6 +24,7 @@ wal -i "$wall"
 
 # foot
 . "$walcache/colors.sh"
+rm -f "$HOME/.config/foot/colors"
 cat <<EOF | tr -d '#' > "$HOME/.config/foot/colors"
 [colors]
 foreground = $foreground
