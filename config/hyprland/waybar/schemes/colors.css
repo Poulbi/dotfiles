@@ -1,0 +1,153 @@
+/*
+ ********************************************
+ *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
+ *░░█▀█░█░░░█░█░█▀▀░░░█░█░█░░░▀█▀░█▀▄░█▀█░░*
+ *░░█▀▀░█░░░█░█░▀▀█░░░█░█░█░░░░█░░█▀▄░█▀█░░*
+ *░░▀░░░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░▀▀▀░░▀░░▀░▀░▀░▀░░*
+ *░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░*
+ ********************************************
+ */
+/* https://github.com/jakehamilton/dotfiles */
+/* Amazing I love it :))) */
+
+@import "colors.css";
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 14px;
+	min-height: 24px;
+}
+
+window#waybar {
+	background: transparent;
+}
+
+window#waybar.hidden {
+	opacity: 0.2;
+}
+
+window#waybar.termite #window,
+window#waybar.Firefox #window,
+window#waybar.Navigator #window,
+window#waybar.PCSX2 #window {
+    color: @background;
+	background: @color7;
+}
+
+#mpd, #battery,
+#network, #pulseaudio, #temperature, #cpu, #custom-memory {
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-radius: 26px;
+}
+
+#workspaces, #mpd, #battery,
+#network, #pulseaudio, #temperature, #cpu, #custom-memory, #workspaces, #clock, #tray {
+	margin-top: 4px;
+	margin-bottom: 2px;
+	transition: none;
+}
+
+#battery {
+	color: @color5;
+	background: @color12;
+}
+
+#workspaces {
+	margin-left: 12px;
+	border-radius: 26px;
+	background: @background;
+}
+
+#workspaces button {
+	transition: none;
+	color: @foreground;
+	background: transparent;
+	font-size: 16px;
+}
+
+#workspaces button.active {
+	color: @color12;
+}
+
+#workspaces button:hover {
+	transition: none;
+	color: @color11;
+}
+
+#mpd {
+	color: @background;
+	background: @color6;
+}
+
+#mpd.disconnected,
+#mpd.stopped {
+	color: @foreground;
+	background: @background;
+}
+
+#window {
+	margin-top: 4px;
+	margin-bottom: 2px;
+	margin-left: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-radius: 26px;
+	color: @color6;
+	color: @color4;
+	background: @background;
+}
+
+#network {
+	color: @background;
+	background: @color12;
+}
+
+#pulseaudio {
+	color: @background;
+	background: @color14;
+}
+
+#temperature {
+	color: @background;
+	background: @color7;
+}
+
+#cpu {
+	color: @background;
+	background: @color3;
+}
+
+#custom-memory {
+	color: @background;
+	background: @color2;
+}
+
+#clock {
+	margin-left: 8px;
+	margin-right: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-radius: 26px;
+	color: @foreground;
+	background: @background;
+}
+
+#tray {
+	margin-right: 12px;
+	color: @foreground;
+	background: transparent;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @color1;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
