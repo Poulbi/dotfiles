@@ -3,6 +3,8 @@
 which swaybg wal identify > /dev/null || exit 1
 
 wall="$HOME/pics/wallpaper"
+wdir="$HOME/.cache/wal"
+test -d "$wdir" || exit 1
 wal="$(find $HOME/pics/wallpapers -type f |
 	xargs identify |
 	grep 1920x1080 |
@@ -16,7 +18,7 @@ wal -c
 wal -i "$wall"
 
 # foot
-. "$HOME/.cache/wal/colors.sh"
+. "$wdir/colors.sh"
 cat <<EOF | tr -d '#' > "$HOME/.config/foot/colors"
 [colors]
 foreground = $foreground
@@ -42,6 +44,6 @@ bright7 = $color15
 EOF
 
 # waybar
+ln -sf "$wdir/colors-waybar.css" "$HOME/.config/waybar/colors.css"
 pkill waybar
-ln -sf "$HOME/.cache/wal/colors-waybar.css" "$HOME/.config/waybar/colors.css"
 waybar &
