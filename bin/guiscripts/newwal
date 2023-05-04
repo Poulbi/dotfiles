@@ -4,9 +4,9 @@ which swaybg wal identify > /dev/null || exit 1
 
 wall="$HOME/pics/wallpaper"
 walls="$HOME/pics/wallpapers"
-wdir="$HOME/.cache/wal"
+walcache="$HOME/.cache/wal"
 res="1920x1080"
-test -d "$wdir" || exit 1
+test -d "$walcache" || exit 1
 
 # if no (valid) argument, use random wallpaper
 test -f "${wal:=$(realpath "$1")}" ||
@@ -23,7 +23,7 @@ wal -c
 wal -i "$wall"
 
 # foot
-. "$wdir/colors.sh"
+. "$walcache/colors.sh"
 cat <<EOF | tr -d '#' > "$HOME/.config/foot/colors"
 [colors]
 foreground = $foreground
@@ -49,6 +49,6 @@ bright7 = $color15
 EOF
 
 # waybar
-ln -sf "$wdir/colors-waybar.css" "$HOME/.config/waybar/colors.css"
+ln -sf "$walcache/colors-waybar.css" "$HOME/.config/waybar/colors.css"
 pkill waybar
 waybar &
