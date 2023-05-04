@@ -1,0 +1,25 @@
+### Font
+include=themes/colors
+font = monospace bold
+font-size = 12
+
+prompt-text = ""
+prompt-padding = 0
+placeholder-text = "..."
+
+width = 20%
+height = 20%
+outline-width = 0
+border-width = 2
+corner-radius = 26
+
+padding-top = 0
+padding-bottom = 0
+padding-left = 0
+# padding-left = 7%
+padding-right = 0
+
+matching-algorithm = prefix
+require-match = false
+auto-accept-single = true
+hidden-character = ""

@@ -48,6 +48,23 @@ bright6 = $color14
 bright7 = $color15
 EOF
 
+cat <<EOF > $HOME/.config/tofi/themes/colors
+# tofi
+text-color = $foreground
+prompt-color = $color4
+placeholder-color = $color12
+input-color = $foreground
+default-result-color = $color6
+selection-color = $color8
+selection-match-color = $color7
+
+background-color = ${background}f0
+
+outline-color = $color4
+
+border-color = $color6
+EOF
+
 # waybar
 ln -sf "$walcache/colors-waybar.css" "$HOME/.config/waybar/colors.css"
 pkill waybar
