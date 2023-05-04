@@ -6,7 +6,6 @@ wall="$HOME/pics/wallpaper"
 walls="$HOME/pics/wallpapers"
 walcache="$HOME/.cache/wal"
 res="1920x1080"
-test -d "$walcache" || exit 1
 
 # if no (valid) argument, use random wallpaper
 test -f "${wal:=$(realpath "$1")}" ||
