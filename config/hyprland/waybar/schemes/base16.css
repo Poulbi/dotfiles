@@ -69,11 +69,11 @@ window#waybar.PCSX2 #window {
 	transition: none;
 	background: transparent;
 	font-size: 16px;
-	color: @color1;
+	color: @background;
 }
 
 #workspaces button.active {
-	color: @background;
+	text-shadow: 1px 0px 1px @background;
 }
 
 #workspaces button:hover {
