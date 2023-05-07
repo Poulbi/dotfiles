@@ -8,8 +8,8 @@ fi
 
 if [ "$WAYLAND_DISPLAY" ]
 then
-	alias -g clipp='wl-copy'
-	alias -g clipo='wl-paste'
+	alias -g clipp='wl-copy -n'
+	alias -g clipo='wl-paste -n'
 else
 	if which devour > /dev/null 2>&1  
 	then
