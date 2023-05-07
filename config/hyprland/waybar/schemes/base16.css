@@ -62,23 +62,23 @@ window#waybar.PCSX2 #window {
 #workspaces {
 	margin-left: 12px;
 	border-radius: 26px;
-	background: @color1;
+	background: @color3;
 }
 
 #workspaces button {
 	transition: none;
 	background: transparent;
-	color: @background;
 	font-size: 16px;
+	color: @color1;
 }
 
 #workspaces button.active {
-	color: @color8;
+	color: @background;
 }
 
 #workspaces button:hover {
 	transition: none;
-	color: @color3;
+	color: @color8;
 }
 
 #mpd {
