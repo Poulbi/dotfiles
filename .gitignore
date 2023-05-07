@@ -1,4 +1,5 @@
 bin/common/stowdots
+config/common/btop/
 config/common/mpd/database
 config/common/mpv/playfile.txt
 config/common/mpv/watch_later/*
@@ -12,6 +13,8 @@ config/essentials/zsh/.zcompdump
 config/extra/jftui/settings
 config/extra/mutt/muttrc
 config/hyprland/foot/colors
+config/hyprland/tofi/themes/colors
 config/hyprland/waybar/colors.css
 config/old/vim/plugged/
 config/old/vim/viminfo*
+config/theme/gtk-3.0/bookmarks
