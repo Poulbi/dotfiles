@@ -21,7 +21,7 @@ else
 fi
 
 # Programs
-alias nv='nvim'
+alias vi='nvim'
 alias nb='newsboat'
 alias sr='surfraw'
 alias ccu='calcurse'
@@ -89,8 +89,8 @@ alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 alias scr='nvim +"setlocal buftype=nofile bufhidden=hide noswapfile filetype=txt" scratch'
 alias vimp="vim '+PlugInstall'"
 alias nvimp="nvim '+PackerSync'"
-alias nvg='git status > /dev/null 2>&1 && nv "+Git"'
-alias nvn='nv "+Telekasten panel"'
+alias nvg='git status > /dev/null 2>&1 && nvim "+Git"'
+alias nvn='nvim "+Telekasten panel"'
  
 alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
 alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
