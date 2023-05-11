@@ -212,8 +212,9 @@ alias -s z80="$EDITOR"
 alias -s zip='unzip -l'
 alias -s tar='tar tf'
 
-alias dob='docker build'
-alias doe='docker exec'
+alias dcb='docker build'
+alias dcbt='docker build -t'
+alias dce='docker exec'
 
 alias cfg='git --git-dir=$HOME/src/dotfiles/.git --work-tree=$HOME/src/dotfiles'
 # oh-my-zsh git aliases
