@@ -170,6 +170,7 @@ alias cfd='$EDITOR config.def.h'
 # quick cd
 alias cda='cd $HOME/docs/android/projects'
 alias cds='cd $HOME/src/'
+alias cdsw='cd $HOME/src/WheelAdvisor'
 alias cdw='cd $HOME/src/dwm'
 alias cddm='cd $HOME/src/dmenu'
 alias cdslo='cd $HOME/src/slock'
@@ -213,6 +214,11 @@ alias -s c="$EDITOR"
 alias -s z80="$EDITOR"
 alias -s zip='unzip -l'
 alias -s tar='tar tf'
+
+alias dcb='docker build'
+alias dcbt='docker build -t'
+alias dce='docker exec'
+alias dcet='docker exec -it'
 
 alias cfg='git --git-dir=$HOME/src/dotfiles/.git --work-tree=$HOME/src/dotfiles'
 # oh-my-zsh git aliases
