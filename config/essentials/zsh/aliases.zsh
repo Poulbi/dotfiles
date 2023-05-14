@@ -106,6 +106,7 @@ alias fif='find . -type "f" | grep'
 alias fid='find . -type "d" | grep'
 alias sxt='sxiv -t'
 alias wgsh='wget --quiet --show-progress'
+alias ss4='ss -tln4p | cut -f1 -d,'
 
 # ssh
 alias sha='ssh-add'
