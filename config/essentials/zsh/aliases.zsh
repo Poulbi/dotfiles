@@ -111,6 +111,7 @@ alias ss4='ss -tln4p | cut -f1 -d,'
 # ssh
 alias sha='ssh-add'
 alias ssh-start='eval "$(ssh-agent)" && ssh-add'
+alias keyadd='find ~/.ssh -iname "*.pub" | sed "s,$HOME/.ssh/,," | cut -f1 -d. | fzf | tee /dev/stderr | read key && ssh-add ~/.ssh/$key'
 
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl -s "ifconfig.co"'
