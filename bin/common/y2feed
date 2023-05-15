@@ -1,8 +1,9 @@
-#!/usr/bin/env sh
+#!/bin/sh
+ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36"
 
-test -z "${url:=$1}" \
-	&& url="$(cat /dev/stdin)"
+test -z "${url:=$1}" &&
+	url="$(cat /dev/stdin)"
 
-echo "url: ${url}" 1>&2
-
-curl -s "$url" | pup 'link attr{href}' | grep 'feeds'
+echo "url: $url" >&2
+curl -s -H "$ua" "$url"| 
+	pup 'link[title=RSS] attr{href}'
