@@ -33,6 +33,7 @@ die "key: $key"
 test ! -f "$SSHFOLDER/$key" && exit 1
 
 HOST=$(hostnamectl hostname | sed 's/forlure/fl/;s/montecristo/mc/')
+die "HOST: $HOST"
 
 if [ "$1" = "-d" ]
 then
@@ -41,7 +42,7 @@ then
 		notify-send "$0" "could not delete."
 elif ! ssh-add -l | grep -q "$(ssh-keygen -lf "$SSHFOLDER"/$key)"
 then
-	export PASSWORD="keys/fl/ssh/$key"
+	export PASSWORD="keys/$HOST/ssh/$key"
 	export SSH_ASKPASS="$0"
 	ssh-add - < "$SSHFOLDER"/$key &&
 		notify-send "$0" "added <b>$key</b>"
