@@ -148,6 +148,7 @@ alias rh='rehash'
 alias wf='doas wipefs -a'
 alias dmci="doas make clean install"
 alias rmd='rm -f *.{orig,rej}'
+alias mdbw='mariadb -h 0.0.0.0 -P 4033 -u padmin -pbulbizarre padmindb'
 
 alias vbm='vboxmanage'
 alias vbls='vbm list vms'
