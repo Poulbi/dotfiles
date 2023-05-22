@@ -107,6 +107,7 @@ alias fid='find . -type "d" | grep'
 alias sxt='sxiv -t'
 alias wgsh='wget --quiet --show-progress'
 alias ss4='ss -tln4p | cut -f1 -d,'
+alias mdbw='mariadb -h 0.0.0.0 -P 4033 -u padmin -pbulbizarre padmindb'
 
 # ssh
 alias sha='ssh-add'
