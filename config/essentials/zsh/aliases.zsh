@@ -126,6 +126,7 @@ fzf |
 tee /dev/stderr |
 xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc'
 alias fusephone='sshfs myphone: /media/phone'
+alias ttyper='ttyper -l english1000 -w 100'
 
 # Python
 alias penv='python3 -m venv env'
