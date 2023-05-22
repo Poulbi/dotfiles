@@ -41,7 +41,9 @@ require('telekasten').setup({
 	follow_url_fallback = nil,
 	vaults = {
 		businessIT = {
-			home = home .. "/" .. "businessIT"
+			home = home .. "/" .. "businessIT",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
 		}
 	}
 })
