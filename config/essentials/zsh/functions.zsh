@@ -110,10 +110,10 @@ esc () {
 }
 
 delfile () {
-	curl ${2:-"https://up.kallipso.be/delete/$1"}
+	curl "${2:-https://up.kallipso.be/delete/$1}"
 }
 upfile () {
-	curl -F "file=@\"$1\"" ${2:-"https://up.kallipso.be"}
+	curl -F "file=@\"$1\"" ${2:-http://0x0.st}
 }
 
 sgd () {
