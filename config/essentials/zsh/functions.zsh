@@ -249,3 +249,11 @@ addedkeys () {
 		fi
 	done | sed "s,$HOME/.ssh/,,"
 }
+
+fpass () {
+	find $HOME/.password-store -type f -not -path ".git" |
+		grep "\.gpg$" |
+		sed "s,$HOME/.password-store/,,;s,\.gpg$,," |
+		fzf |
+		xargs pass show -c
+}
