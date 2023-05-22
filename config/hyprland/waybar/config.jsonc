@@ -45,7 +45,7 @@
 		},
 	},
 	"network": {
-		"format-wifi": "",
+		"format-wifi": " ",
 		"tooltip-format-wifi": "{ifname} {essid}",
 		"format-ethernet": "",
 		"tooltip-format-ethernet": "{ifname} {ipaddr}",
