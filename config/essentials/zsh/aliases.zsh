@@ -107,7 +107,7 @@ alias fid='find . -type "d" | grep'
 alias sxt='sxiv -t'
 alias wgsh='wget --quiet --show-progress'
 alias ss4='ss -tln4p | cut -f1 -d,'
-alias mdbw='mariadb -h 0.0.0.0 -P 4033 -u padmin -pbulbizarre padmindb'
+alias mdbw='mariadb -h 0.0.0.0 -u padmin -pbulbizarre padmindb'
 alias mdbwa='mariadb -h 10.3.50.5 -u padmin -pbulbizarre padmindb'
 
 # ssh
@@ -154,7 +154,7 @@ alias rh='rehash'
 alias wf='doas wipefs -a'
 alias dmci="doas make clean install"
 alias rmd='rm -f *.{orig,rej}'
-alias mdbw='mariadb -h 0.0.0.0 -P 4033 -u padmin -pbulbizarre padmindb'
+alias cdzot='mkdir -p /tmp/zottesite && cd /tmp/zottesite'
 
 alias vbm='vboxmanage'
 alias vbls='vbm list vms'
