@@ -164,6 +164,17 @@ ls.add_snippets("javascript", {
 	-- print
 	s("pt", fmt("console.log({});{}", { i(1, "\"Hello World!\"") , i(0) })),
 	s("rq", fmt("const {} = require('{}');", { i(1), rep(1) })),
+	s("dbconn", fmt(
+	[[
+		let conn = null;
+		try {{
+			conn = await dbConnect();{}
+			conn.end()
+		}} catch(err) {{
+			console.error('Error:', err);
+		}}
+	]],
+	{ i(0) })),
 	s("apr", fmt(
 	[[
 	app.get('{}', (req, res) => {{
