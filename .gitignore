@@ -6,10 +6,11 @@ config/common/mpv/watch_later/*
 config/common/newsboat/nb_urls
 config/common/newsboat/urls
 config/essentials/gnupg/*
+config/essentials/nvim/lua/.luarc.json
 config/essentials/nvim/plugin/
 config/essentials/nvim/spell/
-config/essentials/zsh/histfile
 config/essentials/zsh/.zcompdump
+config/essentials/zsh/histfile
 config/extra/jftui/settings
 config/extra/mutt/muttrc
 config/extra/pikaur.conf
