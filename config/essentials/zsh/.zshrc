@@ -79,6 +79,21 @@ bindkey "^Xe" edit-command-line
 bindkey "^[." insert-last-word
 bindkey "^['" quote-line
 
+isTextFile()
+{
+	if [ ! -f "$1" ]
+	then
+		return 1
+	fi
+
+	file_type=$(file -b --mime-type "$1")
+	if [[ "$file_type" == text/* ]]
+	then
+		return
+	fi
+	return 1
+}
+
 # rehash hook
 zshcache_time="$(date +%s%N)"
 autoload -Uz add-zsh-hook
@@ -117,8 +132,10 @@ command_not_found_handler () {
 }
 # open file with file name
 open_file() {
-	isTextFile "$1" && 
+	if [ ${1:0:2} != "./" ] && isTextFile "$1"
+	then
 		"$EDITOR" "$1"
+	fi
 }
 add-zsh-hook -Uz preexec open_file
 
