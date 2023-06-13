@@ -15,20 +15,6 @@ then
 	exit
 fi
 
-isTextFile()
-{
-	if [ -n "$1" ]
-	then
-		local file_type=$(file -b --mime-type "$1")
-		if [[ $file_type == text/* ]]
-		then
-			return
-		else
-			return 1
-		fi
-	fi
-}
-
 autoload -U select-word-style
 autoload -z edit-command-line
 zle -N edit-command-line
