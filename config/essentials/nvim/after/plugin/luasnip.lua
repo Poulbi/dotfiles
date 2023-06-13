@@ -188,6 +188,11 @@ ls.add_snippets("javascript", {
 	]],
 	{ i(1), i(2, "res.send(\"Hello world!\")"), i(0) })),
 	s("cerr", t "console.error('Error:', err);"),
+	s("gel", fmt(
+	[[
+	let {} = document.getElementById('{}');{}
+	]],
+	{ i(1), rep(1), i(0) })),
 })
 
 ls.add_snippets("telekasten", {
