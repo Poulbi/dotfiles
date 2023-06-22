@@ -1,7 +1,7 @@
 #!/bin/zsh
 # s/alias \([^-]\)/alias -g \1
 
-if grep -qi "debian\|ubuntu" /etc/os-release
+if grep -qi "debian\|ubuntu" /etc/os-release 2> /dev/null
 then
 	alias aptup='apt update && apt upgrade -y'
 fi
@@ -54,7 +54,7 @@ alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which exa >/dev/null 2>&1 &&
 	alias ls='exa --sort extension --group-directories-first' ||
-	alias ls='ls --color --group-directories-fist --sort=extension'
+	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases
 alias pac='pacman'
