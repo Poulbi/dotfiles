@@ -131,6 +131,9 @@ xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc'
 alias fusephone='sshfs myphone: /media/phone'
 alias ttyper='ttyper -l english1000 -w 100'
 
+alias wgup='doas wg-quick up wg0'
+alias wgdown='doas wg-quick down wg0'
+
 # NPM
 alias npi="npm init --yes"
 
