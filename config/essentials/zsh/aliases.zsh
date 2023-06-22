@@ -19,6 +19,7 @@ else
 	alias -g clipp='xclip -selection clipboard -r'
 	alias -g clipo='xclip -o -selection clipboard -r'
 fi
+alias clipic='clipo > /tmp/pic.png'
 
 # Programs
 alias vi='nvim'
