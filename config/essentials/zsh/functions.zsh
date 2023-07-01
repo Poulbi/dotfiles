@@ -255,3 +255,8 @@ oclip ()
 {
 	printf "\033]52;c;$(echo -n "$@" | base64)\a"
 }
+
+sms ()
+{
+	ssh phone sendmsg "$1" "'$2'"
+}
