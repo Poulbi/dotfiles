@@ -72,6 +72,11 @@ ls.add_snippets("html", {
 	</html>
 	]],
 	{i(1, "title"), i(2), i(3, "Header"), i(0)})),
+	s("sty", fmt(
+	[[
+	<link rel="stylesheet" type="text/css" href="{}">{}
+	]],
+	{ i(1), i(0) })),
 })
 
 ls.add_snippets("java", {
@@ -183,6 +188,11 @@ ls.add_snippets("javascript", {
 	]],
 	{ i(1), i(2, "res.send(\"Hello world!\")"), i(0) })),
 	s("cerr", t "console.error('Error:', err);"),
+	s("gel", fmt(
+	[[
+	let {} = document.getElementById('{}');{}
+	]],
+	{ i(1), rep(1), i(0) })),
 })
 
 ls.add_snippets("telekasten", {

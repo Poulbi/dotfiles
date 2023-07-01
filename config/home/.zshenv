@@ -42,6 +42,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
+export PASSWORD_STORE_DIR="$HOME/src/password-store"
 export PASSWORD_STORE_CLIP_TIME=5
 
 # old

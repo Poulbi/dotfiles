@@ -29,7 +29,7 @@ nvf() {
 	fi
 	if test -f "$match"
 	then
-		vim "$match" && return
+		$EDITOR "$match" && return
 	else
 		die "no match." && return 1
 	fi
@@ -103,10 +103,10 @@ esc () {
 }
 
 delfile () {
-	curl "${2:-https://up.kallipso.be/delete/$1}"
+	curl "${2:-https://upfast.cronyakatsuki.xyz/delete/$1}"
 }
 upfile () {
-	curl -F "file=@\"$1\"" ${2:-http://0x0.st}
+	curl -F "file=@\"$1\"" ${2:-https://upfast.cronyakatsuki.xyz}
 }
 
 sgd () {
@@ -249,4 +249,14 @@ fpass () {
 		sed "s,$HOME/.password-store/,,;s,\.gpg$,," |
 		fzf |
 		xargs pass show -c
+}
+
+oclip ()
+{
+	printf "\033]52;c;$(echo -n "$@" | base64)\a"
+}
+
+sms ()
+{
+	ssh phone sendmsg "$1" "'$2'"
 }

@@ -1,6 +1,6 @@
 set from = "raymaekers.luca@gmail.com"
 set realname = "Raymaekers Luca"
-set my_pass = "`pass tokens/raymaekers.luca@gmail.com`"
+set my_pass = "`pass keys/tokens/gmail/raymaekers.luca@gmail.com`"
 
 # IMAP settings
 set imap_user = "raymaekers.luca@gmail.com"

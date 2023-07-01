@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
 
+tmpfile="/tmp/dmvids"
+
 dirs="${1:-$HOME/vids $HOME/dl}"
 find -L $dirs 2> /dev/null |
 	grep ".\+\.\(webm\|mp4\|mpeg\|mkv\)$" |
-	sort > /tmp/dmvids
-cat /tmp/dmvids
+	sort > "$tmpfile"
 
 if [ "$MENUCMD" = "tofi" ]
 then
@@ -16,11 +17,11 @@ else
 	menucmd="fzf"
 fi
 
-choice="$(sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' /tmp/dmvids | 
+choice="$(sed "s|^$HOME|\~| ; s|\([^/]\)[^/]*/|\1/|g" "$tmpfile" | 
 	awk '{printf "%s %s\n", NR ":", $0}' | 
 	$menucmd | 
 	cut -f 1 -d ':')"
 test -z "$choice" &&
 	exit 1
 
-mpv "$(sed -n "${choice}p" /tmp/dmvids)"
+mpv "$(sed -n "${choice}p" "$tmpfile")"

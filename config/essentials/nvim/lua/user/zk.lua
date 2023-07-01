@@ -45,6 +45,11 @@ require('telekasten').setup({
 			template_new_note = home .. "/" .. "templates/new_note.md",
 			new_note_filename = "title",
 		},
+		SoftwareDesign = {
+			home = home .. "/" .. "SoftwareDesign",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
 		businessIT = {
 			home = home .. "/" .. "businessIT",
 			template_new_note = home .. "/" .. "templates/new_note.md",

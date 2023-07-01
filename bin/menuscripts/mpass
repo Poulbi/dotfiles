@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-store="$HOME/.password-store"
+store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
 lscmd="ls --group-directories-first"
 if [ "$MENUCMD" = "tofi" ]
 then

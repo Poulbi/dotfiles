@@ -1,7 +1,7 @@
 #!/bin/zsh
 # s/alias \([^-]\)/alias -g \1
 
-if grep -qi "debian\|ubuntu" /etc/os-release
+if grep -qi "debian\|ubuntu" /etc/os-release 2> /dev/null
 then
 	alias aptup='apt update && apt upgrade -y'
 fi
@@ -19,6 +19,7 @@ else
 	alias -g clipp='xclip -selection clipboard -r'
 	alias -g clipo='xclip -o -selection clipboard -r'
 fi
+alias clipic='clipo > /tmp/pic.png'
 
 # Programs
 alias vi='nvim'
@@ -53,7 +54,7 @@ alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which exa >/dev/null 2>&1 &&
 	alias ls='exa --sort extension --group-directories-first' ||
-	alias ls='ls --color --group-directories-fist --sort=extension'
+	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases
 alias pac='pacman'
@@ -118,6 +119,7 @@ alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl -s "ifconfig.co"'
 alias icognito='unset HISTFILE'
 alias webcam='v4l2-ctl --set-fmt-video=width=1280,height=720; mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0 --profile=low-latency --untimed --no-resume-playback'
+alias capture='echo "Y" | wf-recorder -o "$(hyprctl -j monitors | jq -r '\''.[].name'\'' | fzf)" --codec=vp8_vaapi --device=/dev/dri/renderD128 -f output.webm -D'
 alias qrclipo='qrencode -s 16 "$(clipo)" -o - | imv -w "imv - $(clipo)" -'
 alias airpods='bluetoothctl connect 60:93:16:24:00:10'
 alias hotpsot='nmcli dev wifi hotspot ifname wlan0 ssid wiefie password "peepeepoopoo"'
@@ -130,23 +132,27 @@ xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc'
 alias fusephone='sshfs myphone: /media/phone'
 alias ttyper='ttyper -l english1000 -w 100'
 
+alias wgup='doas wg-quick up wg0'
+alias wgdown='doas wg-quick down wg0'
+
 # NPM
 alias npi="npm init --yes"
 
 # Python
 alias penv='python3 -m venv env'
+alias phttp='python3 -m http.server'
 alias pipreq='pip install -r requirements.txt'
 
 alias -g '...'='../..'
 alias -g '....'='../../..'
 alias -g bg='&; disown'
-alias -g cx='chmod +x'
-alias -g ch='chown ${USER}:${USER} -R'
+alias cx='chmod +x'
+alias ch='chown ${USER}:${USER} -R'
 alias -g hl='--help |& less -r'
 alias kll='killall'
 alias pi='ping archlinux.org -c4'
-alias -g sba='source env/bin/activate || source bin/activate'
-alias -g smc='systemctl'
+alias sba='source env/bin/activate || source bin/activate'
+alias smc='systemctl'
 alias ssc='doas smc'
 alias smcu='smc --user'
 alias zsr='source ${ZDOTDIR:-$HOME}/.zshrc && rehash'
@@ -197,6 +203,7 @@ alias cdd='cd $HOME/dl'
 alias cdp='cd $HOME/pics'
 alias cdrs='cd /srv/'
 alias cdng='cd /etc/nginx'
+alias czo='cd $HOME/zot/'
 
 # googoo aliases
 alias o.='o .'
@@ -218,10 +225,6 @@ alias fzps='ps aux | tail +2 | fzf --bind \
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
 
-alias -s conf="$EDITOR"
-alias -s txt="$EDITOR"
-alias -s c="$EDITOR"
-alias -s z80="$EDITOR"
 alias -s zip='unzip -l'
 alias -s tar='tar tf'
 
@@ -229,6 +232,7 @@ alias dcb='docker build'
 alias dcbt='docker build -t'
 alias dce='docker exec'
 alias dcet='docker exec -it'
+alias dcmp='docker compose up -d'
 
 alias cfg='git --git-dir=$HOME/src/dotfiles/.git --work-tree=$HOME/src/dotfiles'
 # oh-my-zsh git aliases

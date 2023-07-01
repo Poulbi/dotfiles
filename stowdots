@@ -1,20 +1,28 @@
 #!/bin/sh
 
-trap "echo -ne '\nbye'; exit 1" EXIT
+trap "echo -e '\nbye'; exit 1" EXIT
+
+die () {
+	echo "$@" 1>&2
+}
 
 if ! stow --version > /dev/null 2>&1
 then
-	echo "E: stow not installed or not found" 1>&2
-	exit 1
+	die "stow not installed or not found."
+	die "install stow?"
+	die -n ">"
+	test "y" = "$(head -n 1)" &&
+		doas pacman -Sy stow ||
+		exit 1
 fi
 if [ -n "${MACH:=$1}" ]
 then
-	echo "I: stowing for $MACH"
+	die "I: stowing for $MACH"
 else
-	echo "E: MACH not set" 1>&2
-	echo "Enter valid value for 'MACH'"
-	echo "d(esktop) | s(erver) | l(aptop)"
-	echo -n ">"
+	die "E: MACH not set" >&2
+	die "Enter valid value for 'MACH'"
+	die "d(esktop) | s(erver) | l(aptop)"
+	echo -n ">" >&2
 	read MACH
 fi
 
@@ -34,6 +42,6 @@ case "$MACH" in
 		stow -d config/ -t "$HOME/" -R home
 		;;
 	*)
-		echo "E: invalid value for 'MACH'" 1>&2
+		die "E: invalid value for 'MACH'"
 		break
 esac

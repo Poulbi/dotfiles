@@ -12,14 +12,11 @@ fi
 
 tmp="/tmp/dmpdf"
 find ${1:-$HOME/docs $HOME/dl} 2> /dev/null | grep -E ".+\.pdf" | sort > "$tmp"
-choice="$(\
-        sed 's|^/home/aluc|\~| ; s|\([^/]\)[^/]*/|\1/|g' "$tmp" | 
+choice="$(sed "s|^$HOME|\~| ; s|\([^/]\)[^/]*/|\1/|g" "$tmp" | 
 		awk '{printf "%s %s\n", NR ":", $0}' | 
 		$menucmd |
-		grep -oE "^[0-9]+:" |
-		cut -f1 -d:)"
-if [ -z "$choice" ]; then
-	exit
-fi
+		grep -o "^[0-9]\+:" |
+		cut -f 1 -d :)"
+test -z "$choice" && exit 1
 file="$(sed -n "${choice}p" "$tmp")"
 zathura "$file" &
