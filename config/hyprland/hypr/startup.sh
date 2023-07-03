@@ -3,3 +3,4 @@ swaybg -i ~/pics/wallpaper &
 waybar &
 gammastep &
 wl-paste --watch cliphist store &
+keyadd id_rsa &
