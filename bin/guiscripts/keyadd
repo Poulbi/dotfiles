@@ -24,10 +24,13 @@ die ()
 
 SSHFOLDER="$HOME/.ssh"
 
-key="$(find "$SSHFOLDER" -iname "*.pub" |
-	sed "s,$SSHFOLDER/,," | # Clean
-	sed 's/\.pub$//' |
+if test -z "${key:=$1}"
+then
+	key="$(find "$SSHFOLDER" -iname "*.pub" |
+		sed "s,$SSHFOLDER/,," | # Clean
+		sed 's/\.pub$//' |
 	$menucmd)"
+fi
 die "key: $key"
 
 test ! -f "$SSHFOLDER/$key" && exit 1
