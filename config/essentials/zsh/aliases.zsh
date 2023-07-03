@@ -223,6 +223,7 @@ alias fzps='ps aux | tail +2 | fzf --bind \
 5:execute(echo -n {} | tr -s '\'' '\'' | cut -f 11- -d '\'' '\'' | xclip -sel c -r)"'
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
+alias pff='find ${PASSWORD_STORE_DIR:=$HOME/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
 
 alias -s zip='unzip -l'
 alias -s tar='tar tf'
