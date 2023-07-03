@@ -215,12 +215,7 @@ alias go/s='go /srv'
 alias ogo/='ogo /'
 alias ogo/s='ogo /srv'
 
-alias fzps='ps aux | tail +2 | fzf --bind \
-"1:execute(echo -n {} | awk '\''{print \$1}'\'' | xclip -sel c -r),\
-2:execute(echo -n {} | awk '\''{print \$2}'\'' | xclip -sel c -r),\
-3:execute(echo -n {} | awk '\''{print \$7}'\'' | xclip -sel c -r),\
-4:execute(echo -n {} | awk '\''{print \$9}'\'' | xclip -sel c -r),\
-5:execute(echo -n {} | tr -s '\'' '\'' | cut -f 11- -d '\'' '\'' | xclip -sel c -r)"'
+alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
 alias pff='find ${PASSWORD_STORE_DIR:=$HOME/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
