@@ -10,7 +10,7 @@ input ()
 	then
 		inp="$(dmenu -p "$1" < /dev/null)"
 	else
-		echo -n "$1:" >&2
+		echo -n "$1" >&2
 		read inp
 	fi
 	echo $inp

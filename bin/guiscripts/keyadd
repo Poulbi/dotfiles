@@ -30,6 +30,8 @@ then
 		sed "s,$SSHFOLDER/,," | # Clean
 		sed 's/\.pub$//' |
 	$menucmd)"
+else
+	shift
 fi
 die "key: $key"
 
@@ -45,6 +47,7 @@ then
 		notify-send "$0" "could not delete."
 elif ! ssh-add -l | grep -q "$(ssh-keygen -lf "$SSHFOLDER"/$key)"
 then
+	die "adding: $key"
 	export PASSWORD="keys/$HOST/ssh/$key"
 	export SSH_ASKPASS="$0"
 	ssh-add - < "$SSHFOLDER"/$key &&
