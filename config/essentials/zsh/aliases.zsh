@@ -230,6 +230,13 @@ alias dce='docker exec'
 alias dcet='docker exec -it'
 alias dcmp='docker compose up -d'
 
+# debuc aliases
+alias dbadd='ssh db dladd "'\''$(clipo)'\''"'
+alias dbcons='ssh -t db dlcons'
+alias dbinf='ssh db dlinfo'
+alias sshdb='ssh -t db tmux a'
+alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
+
 alias cfg='git --git-dir=$HOME/src/dotfiles/.git --work-tree=$HOME/src/dotfiles'
 # oh-my-zsh git aliases
 alias g='git'
