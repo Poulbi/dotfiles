@@ -260,3 +260,8 @@ sms ()
 {
 	ssh phone sendmsg "$1" "'$2'"
 }
+
+trcp ()
+{
+	scp "$1" db:/media/basilisk/downloads/transmission/torrents/
+}
