@@ -26,7 +26,9 @@ dev="$(grep "^$choice\." "$tmp" | cut -f 2- -d ' ')"
 if test -n "$dev"
 then
 	die "mounting /dev/$dev on /media/$dev"
-	sudo mount --mkdir /dev/$dev /media/$dev > /dev/null 2>&1 &&
+	test "$(id -u)" != "0" && sudo="sudo"
+	mkdir -p /media/$dev
+	$sudo mount /dev/$dev /media/$dev > /dev/null 2>&1 &&
 		die 'Mounted succesfully.' ||
 		die 'Failed to mount.'
 	die 'Press [Enter] to continue.'
