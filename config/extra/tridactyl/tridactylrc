@@ -52,10 +52,11 @@ bind gwc winopen https://chat.openai.com/chat
 bind gnp tabopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
 bind gop open https://github.com/Siilwyn/awesome-pixel-art#tutorials
 bind gwp winopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
-" deluge
-bind gnd tabopen http://192.168.178.52:8112/
-bind god open http://192.168.178.52:8112/
-bind gwd winopen http://192.168.178.52:8112/
+" transmission
+bind godb open http://debuc.com/
+bind godt open http://debuc.com:9091
+bind gods open http://debuc.com:5030
+bind godj open http://debuc.com:8096
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 " vim: set filetype=tridactyl
