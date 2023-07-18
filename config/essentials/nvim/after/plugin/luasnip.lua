@@ -159,7 +159,7 @@ ls.add_snippets("sh", {
 	[[
 	die ()
 	{
-		echo "\$1" >&2
+		echo "\$@" >&2
 	}
 	]], {}),
 	s("die", fmt(
