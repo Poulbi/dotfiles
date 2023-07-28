@@ -64,17 +64,14 @@ bindkey "^['" quote-line
 
 isTextFile()
 {
-	if [ ! -f "$1" ]
-	then
+	[ -f "$1" ] &&
+		# will execute the file, I'd rather not have an error message
+		[ ${1::2} != "./" ] &&
+		[ ${1::1} != "/" ] &&
+		! type "$1" > /dev/null &&
+		# is text file?
+		file -b --mime-type "$1" | grep -q "^text/" ||
 		return 1
-	fi
-
-	file_type=$(file -b --mime-type "$1")
-	if [[ "$file_type" == text/* ]]
-	then
-		return
-	fi
-	return 1
 }
 
 # rehash hook
@@ -110,17 +107,13 @@ function osc7 {
 }
 add-zsh-hook -Uz chpwd osc7
 command_not_found_handler () {
-	isTextFile "$1" || 
-		echo "zsh: command not found: $1" >&2
-}
-# open file with file name
-open_file() {
-	if [ ${1:0:2} != "./" ] && isTextFile "$1"
+	if [[ -o interactive ]] && isTextFile "$1"
 	then
 		"$EDITOR" "$1"
+	else
+		echo "zsh: command not found: $1" >&2
 	fi
 }
-add-zsh-hook -Uz preexec open_file
 
 # prompt
 PS1=' %B%(#.%F{1}.%F{13})[%n%b%f@%B%F{6}%m]%b%f %3~ '
