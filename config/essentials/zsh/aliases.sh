@@ -202,8 +202,7 @@ alias esl='$EDITOR ~/proj/suckless/slock/config.def.h'
 alias esls='$EDITOR ~/proj/suckless/slstatus/config.def.h'
 alias ehy='$EDITOR ~/.config/hypr/hyprland.conf'
 alias cfd='$EDITOR config.def.h'
-# quick cd
-# !sort -t "'" -k 2
+# /# quick cdjV}k:!sort -t "'" -k 2
 alias cdl='cd $HOME/dl'
 alias cdoc='cd $HOME/docs'
 alias cda='cd $HOME/docs/android/projects'
@@ -212,6 +211,7 @@ alias cdp='cd $HOME/pics'
 alias cdpa='cd $HOME/pics/ai-outputs/'
 alias cdpp='cd $HOME/proj/personal/'
 alias chom='cd $HOME/proj/personal/homepage'
+alias lov='cd $HOME/proj/personal/lola'
 alias cdsw='cd $HOME/proj/personal/WheelAdvisor'
 alias cddm='cd $HOME/proj/suckless/dmenu'
 alias cdw='cd $HOME/proj/suckless/dwm'
