@@ -26,23 +26,36 @@ set searchurls.tw https://tweakers.net/zoeken/?keyword=%s
 set searchurls.wi https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s
 set searchurls.y https://www.youtube.com/results?search_query=%s
 " Binds
+
 " vim macro:
-" Ibind gnp tabopen yy2pwwdtojRwinbblrwkro
+" yy2pwlrnjrpwitabbkiwin2j0
 bind J tabnext
 bind K tabprev
-" chat gpt
-bind gnc tabopen https://chat.openai.com/chat
+
 bind goc open https://chat.openai.com/chat
-bind gwc winopen https://chat.openai.com/chat
-" awesome pixel tutorials
-bind gnp tabopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
+bind gnc winopen https://chat.openai.com/chat
+bind gpc tabopen https://chat.openai.com/chat
 bind gop open https://github.com/Siilwyn/awesome-pixel-art#tutorials
-bind gwp winopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
-" transmission
-bind godb open http://debuc.com/
-bind godt open http://debuc.com:9091
-bind gods open http://debuc.com:5030
+bind gnp winopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
+bind gpp tabopen https://github.com/Siilwyn/awesome-pixel-art#tutorials
+bind godb open http://debuc.com:32095
+bind gndb winopen http://debuc.com:32095
+bind gpdb tabopen http://debuc.com:32095
+bind godc open http://debuc.com:8384
+bind gndc winopen http://debuc.com:8384
+bind gpdc tabopen http://debuc.com:8384
 bind godj open http://debuc.com:8096
+bind gndj winopen http://debuc.com:8096
+bind gpdj tabopen http://debuc.com:8096
+bind gods open http://debuc.com:5030
+bind gnds winopen http://debuc.com:5030
+bind gpds tabopen http://debuc.com:5030
+bind godt open http://debuc.com:9091
+bind gndt winopen http://debuc.com:9091
+bind gpdt tabopen http://debuc.com:9091
+bind gody open http://debuc.com:9010
+bind gndy winopen http://debuc.com:9010
+bind gpdy tabopen http://debuc.com:9010
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 " vim: set filetype=tridactyl
