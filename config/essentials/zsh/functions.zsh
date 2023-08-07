@@ -39,9 +39,9 @@ nnn() { test -z "$NNNLVL" && /usr/bin/nnn "$@" || exit }
 ranger() { test -z "$RANGER_LEVEL" && /usr/bin/ranger "$@" || exit }
 
 # googoo aliases
-ff () { goo f "$1" | fzf }
-fd () { goo d "$1" | fzf }
-fdf () { goo f "$1" | fzf | xargs -I {} dirname "{}" }
+ff () { goo f "$1" }
+fd () { goo d "$1" }
+fdf () { goo f "$1" | xargs -I {} dirname "{}" }
 o ()
 {
 	f="$(ff $1)"
