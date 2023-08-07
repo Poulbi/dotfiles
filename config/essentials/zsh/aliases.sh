@@ -181,7 +181,7 @@ alias wf='doas wipefs -a'
 alias dmci="doas make clean install"
 alias rmd='rm -f *.{orig,rej}'
 alias cdzot='mkdir -p /tmp/zottesite && cd /tmp/zottesite'
-alias gdate="date +%y%m%d_%H%M%S"
+alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
 
 alias vbm='vboxmanage'
