@@ -16,12 +16,12 @@ do
 	[ "$choice" ] || break
 	file="$file/$choice"
 done
-
 test -z "$file" && exit 1
-pass show -c "$file" &&
-	if [ -n "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null
-	then
-		cliphist list | head -n 1 | cliphist delete
-	fi ||
-		exit 1
-notify-send "mpass" "copied <b>$choice</b>"
+
+pass show -c "$file"
+test $? -gt 0 && exit 1
+
+[ "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null && # on wayland and cliphist is running
+	cliphist list | head -n 1 | cliphist delete
+
+notify-send -t 1000 "mpass" "copied <b>$choice</b>"
