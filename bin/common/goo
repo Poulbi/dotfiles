@@ -15,14 +15,9 @@ VisualParadigm
 intellij
 arduino15"
 
-if [ -n "$2" ]
-then
-	[ -d "$2" ] && dest="$2" || opt="-q $2"
-fi
-
 for dir in $exclude; do
     dirs="$dirs -name \"$dir\" -o "
 done
 cmd="find ${dest:-$HOME} \(${dirs} -false \) -prune -o -type ${1:-f} -mindepth 1 -print"
 
-eval "$cmd" 2>/dev/null | fzf $opt
+eval "$cmd" 2>/dev/null
