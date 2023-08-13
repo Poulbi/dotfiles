@@ -128,6 +128,7 @@ alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HD
 alias d='du -d 0 -h'
 alias dud='du .* * -d 0 -h 2>/dev/null | sort -h'
 alias df='df -h'
+alias diff='diff -u --color'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,fsavail,size,fstype,label,mountpoint'
 alias floc='doas find / -type "f" 2> /dev/null | grep'
