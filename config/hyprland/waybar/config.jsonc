@@ -7,8 +7,8 @@
 		"tooltip": false,
 		"format": "{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
 		"artist-len": 24,
-		"format-disconnected": "",
-		"format-stopped": "",
+		"format-disconnected": "s",
+		"format-stopped": "s",
 		"state-icons": {
 			"playing": "",
 			"paused": "",
