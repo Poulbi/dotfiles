@@ -18,10 +18,8 @@ do
 done
 test -z "$file" && exit 1
 
-pass show -c "$file"
-test $? -gt 0 && exit 1
+pass show -c "$file" || exit 1
+notify-send -t 1000 "mpass" "copied <b>$choice</b>"
 
 [ "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null && # on wayland and cliphist is running
 	cliphist list | head -n 1 | cliphist delete
-
-notify-send -t 1000 "mpass" "copied <b>$choice</b>"
