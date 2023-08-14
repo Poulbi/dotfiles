@@ -49,7 +49,7 @@ _googoo_fzf_opt ()
 o ()
 {
 	_googoo_fzf_opt "$1"
-	f="$(goo f "dest" | fzf $opt)"
+	f="$(goo f "$dest" | fzf $opt)"
 	test "$1" && shift
 	test -f "$f" && $EDITOR $@ "$f"
 }
