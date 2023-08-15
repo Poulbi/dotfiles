@@ -138,16 +138,24 @@ sgd () {
 	unset d
 }
 
-# Git functions
+ginit()
+{
+	[ "$1" ] || return 1
+	ssh db /var/git/initdir.sh "$1"
+	git remote add origin git@db:"$1.git"
+	git push --set-upstream origin $(git_current_branch)
+}
+
 # Returns current branch
-function git_current_branch()
+git_current_branch()
 {
 	command git rev-parse --git-dir &>/dev/null || return
 	git branch --show-current
 }
 
 # Check if main exists and use instead of master
-function git_main_branch() {
+git_main_branch()
+{
   command git rev-parse --git-dir &>/dev/null || return
   local ref
   for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default}; do
