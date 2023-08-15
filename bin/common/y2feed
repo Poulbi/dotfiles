@@ -1,5 +1,18 @@
 #!/bin/sh
-echo "url: $1" >&2
-curl -L -s "$1" |
-	pup 'link[title=RSS] attr{href}' |
-	tee /dev/stderr
+
+get_feed()
+{
+	link="$(curl -L -s "$1" | pup 'link[title=RSS] attr{href}' 2>/dev/null)"
+	[ "$link" ] && printf "%s\n" "$link" | tee /dev/stderr && exit
+}
+
+[ "$1" ] || exit 1
+
+# url is channel
+get_feed "$1"
+
+part="$(echo "$1" | awk -F '/' '{print $NF}')"
+# last part is channel id
+get_feed "https://www.youtube.com/channel/$part"
+# last part is channel tag
+get_feed "https://www.youtube.com/$part"
