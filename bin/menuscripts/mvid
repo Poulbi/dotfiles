@@ -1,27 +1,16 @@
 #!/usr/bin/env sh
 
-tmpfile="/tmp/dmvids"
+tmp="/tmp/dmvids"
 
 dirs="${1:-$HOME/vids $HOME/dl}"
-find -L $dirs 2> /dev/null |
-	grep ".\+\.\(webm\|mp4\|mpeg\|mkv\)$" |
-	sort > "$tmpfile"
 
-if [ "$MENUCMD" = "tofi" ]
-then
-	menucmd="tofi --width 30% --height 30% --matching-algorithm normal"
-elif [ "$MENUCMD" = "dmenu" ]
-then
-	menucmd="dmenu -l 10 -g 1 -x -i" 
-else
-	menucmd="fzf"
-fi
+choice="$(find -L $dirs 2> /dev/null |
+	grep '^.\+\.\(webm\|mp4\|mpeg\|mkv\)$' |
+	sort | tee "$tmp" |
+	sed "s#^$HOME#\~#;s#\([^/]\)[^/]*/#\1/#g" |
+	commander -n -x)"
 
-choice="$(sed "s|^$HOME|\~| ; s|\([^/]\)[^/]*/|\1/|g" "$tmpfile" | 
-	awk '{printf "%s %s\n", NR ":", $0}' | 
-	$menucmd | 
-	cut -f 1 -d ':')"
-test -z "$choice" &&
-	exit 1
+file="$(sed -n "${choice}p" "$tmp")"
+[ -r "$file" ] || exit 1
 
-mpv "$(sed -n "${choice}p" "$tmpfile")"
+mpv "$file"
