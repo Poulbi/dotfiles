@@ -155,18 +155,14 @@ ls.add_snippets("sh", {
 		stty \$old_stty_cfg
 	}
 	]], {}),
-	parse("fdie",
+	parse("flogn",
 	[[
-	die ()
-	{
-		echo "\$@" >&2
-	}
+	logn () { >&2 printf '%s\n' "\$@"; }
 	]], {}),
-	s("die", fmt(
+	parse("flog",
 	[[
-	die "{}: {}"{}
-	]],
-	{ c(1, {t "I", t "E", t "W"}), i(2), i(0) })),
+	log () { >&2 printf '%s' "\$@"; }
+	]], {}),
 	s("inp", fmt(
 	[[
 	test -z "${{{}:=$1}}" && 

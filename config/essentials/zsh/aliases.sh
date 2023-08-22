@@ -5,15 +5,14 @@
 if [ $SHELL = "/bin/zsh" ]
 then
 	# googoo aliases
-	alias o.='o .'
-	alias go.='go .'
-	alias ogo.='ogo .'
 	alias o/='o /'
 	alias o/s='o /srv'
 	alias go/='go /'
 	alias go/s='go /srv'
 	alias ogo/='ogo /'
 	alias ogo/s='ogo /srv'
+
+	alias calc='bc <<<'
 
 	if [ "$WAYLAND_DISPLAY" ]
 	then
@@ -131,10 +130,6 @@ alias df='df -h'
 alias diff='diff -u --color'
 alias shred='shred -uz'
 alias lsblk='lsblk -o name,type,fsused,fsavail,size,fstype,label,mountpoint'
-alias floc='doas find / -type "f" 2> /dev/null | grep'
-alias dloc='doas find / -type "d" 2> /dev/null | grep'
-alias fif='find . -type "f" | grep'
-alias fid='find . -type "d" | grep'
 alias sxt='sxiv -t'
 alias wgsh='wget --quiet --show-progress'
 alias wgc='wgsh "$(clipo)"'
@@ -145,7 +140,6 @@ alias mdbwa='mariadb -h 10.3.50.5 -u padmin -pbulbizarre padmindb'
 # ssh
 alias sha='ssh-add'
 alias sshs='eval "$(ssh-agent)" && ssh-add'
-
 alias vidlen='ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i'
 alias whatsmyip='curl -s "ifconfig.co"'
 alias icognito='unset HISTFILE'
@@ -184,6 +178,7 @@ alias rmd='rm -f *.{orig,rej}'
 alias cdzot='mkdir -p /tmp/zottesite && cd /tmp/zottesite'
 alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
+alias pwdcp='pwd | clipp'
 
 alias vbm='vboxmanage'
 alias vbls='vbm list vms'
@@ -216,6 +211,7 @@ alias cdpa='cd ~/pics/ai-outputs/'
 alias cdpp='cd ~/proj/personal/'
 alias chom='cd ~/proj/personal/homepage'
 alias lov='cd ~/proj/personal/lola'
+alias cdsh='~/proj/personal/scheduler'
 alias cdsw='cd ~/proj/personal/WheelAdvisor'
 alias cddm='cd ~/proj/suckless/dmenu'
 alias cdw='cd ~/proj/suckless/dwm'
@@ -237,6 +233,8 @@ alias cdng='cd /etc/nginx'
 alias cdrs='cd /srv/'
 
 # fzf aliases
+alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n"| fzf)"'
+alias cfg='find -L ~/src/dotfiles -type f | fzf | xargs -r $EDITOR'
 alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
@@ -257,7 +255,6 @@ alias dbinf='ssh db dlinfo'
 alias sshdb='ssh -t db tmux a'
 alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
 
-alias cfg='git --git-dir=~/src/dotfiles/.git --work-tree=~/src/dotfiles'
 # oh-my-zsh git aliases
 alias g='git'
 alias ga='git add'
