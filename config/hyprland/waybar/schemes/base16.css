@@ -92,6 +92,7 @@ window#waybar.PCSX2 #window {
 
 #mpd {
 	color: @background;
+	padding: 0 16px;
 	background: @color6;
 }
 
