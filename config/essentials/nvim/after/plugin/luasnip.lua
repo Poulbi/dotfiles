@@ -157,17 +157,11 @@ ls.add_snippets("sh", {
 	]], {}),
 	parse("flogn",
 	[[
-	logn ()
-	{
-		>&2 printf '%s\n' "\$@"
-	}
+	logn () { >&2 printf '%s\n' "\$@"; }
 	]], {}),
 	parse("flog",
 	[[
-	log ()
-	{
-		>&2 printf '%s' "\$@"
-	}
+	log () { >&2 printf '%s' "\$@"; }
 	]], {}),
 	s("inp", fmt(
 	[[
