@@ -59,7 +59,7 @@ go()
 ogo()
 {
 	_googoo_fzf_opt "$1"
-	cd "$(dirname "$(goo f "$dest")" | fzf $opt)"
+	cd "$(dirname "$(goo f "$dest" | fzf $opt)")"
 }
 dgo()
 {
