@@ -18,12 +18,6 @@ vim.keymap.set("n", "<Leader>Q", "<cmd>qa!<cr>", { noremap = true })
 -- close all except focused buffer
 vim.keymap.set("n", "<leader>1", "<cmd>%bd|e#<cr>", { noremap = true })
 
--- Windows
-vim.keymap.set("n", "<A-h>", "<C-W>h", { noremap = true })
-vim.keymap.set("n", "<A-j>", "<C-W>j", { noremap = true })
-vim.keymap.set("n", "<A-k>", "<C-W>k", { noremap = true })
-vim.keymap.set("n", "<A-l>", "<C-W>l", { noremap = true })
-vim.keymap.set("n", "<A-o>", "<C-W>o", { noremap = true })
 -- command line
 vim.keymap.set("c", "<M-b>", "<C-Left>", { noremap = true })
 vim.keymap.set("c", "<M-f>", "<C-Right>", { noremap = true })
