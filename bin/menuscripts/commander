@@ -21,7 +21,12 @@ numbered
 prefix'
 
 cleanup() { rm -f "$tmp"; }
-logn() { >&2 printf '%s\n' "$@"; }
+
+logn()
+{
+	[ "${log_on:=0}" -eq 0 ] && return
+	>&2 printf '%s\n' "$@"
+}
 
 run() {
 	IFS=:
@@ -240,7 +245,7 @@ main()
 	do eval "$option=0"
 	done
 
-	while getopts ":cdhilop:nrsx" opt
+	while getopts ":cdhilop:nrsxv" opt
 	do
 		# shellcheck disable=SC2034
 		case $opt in
@@ -266,6 +271,7 @@ main()
 			s) instant=1 ;;
 			# invert prefix matching
 			x) prefix=1 ;;
+			v) log_on=1 ;;
 
 			:)
 				logn "Option '-$OPTARG' requires an argument"
@@ -300,11 +306,11 @@ main()
 	if command -v pre_cmd > /dev/null
 	then
 		pre_cmd > "$tmp"
-		>&2 printf "menuopts: %s\n" "$menuopts"
+		logn "menuopts: $menuopts"
 		# shellcheck disable=SC2086
 		pre_filter < "$tmp" | menucmd $menuopts | post_filter
 	else
-		>&2 printf "menuopts: %s\n" "$menuopts"
+		logn "menuopts: $menuopts"
 		# shellcheck disable=SC2086
 		pre_filter | menucmd $menuopts | post_filter
 	fi
