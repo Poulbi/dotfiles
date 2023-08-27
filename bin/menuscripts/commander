@@ -227,6 +227,8 @@ main()
 				add_option '--print-query'
 			}
 
+			instant() { :; }
+
 			prefix() { :; }
 
 			prompt() { add_option "--prompt" "$prompt_arg"; }
