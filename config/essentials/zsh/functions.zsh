@@ -1,28 +1,19 @@
 #!/bin/zsh
 
-die ()
-{
-	echo "$@" >&2
-}
-
-awnk() {
-	awk "{print \$$1}"
-}
+log() { >&2 printf '%s' "$@"; }
+logn() { >&2 printf '%s\n' "$@"; }
 
 vmp() {
     col -b | \
     vim -MR \
     -c 'set ft=man nolist nonu nornu'
 }
-vimh() {
-	vim -c "help $1" -c 'call feedkeys("\<c-w>o")'
-}
 nvf() {
 	local cache="$HOME/.cache/nvf"
 	local match="$(grep -m1 "$1$" "$cache" 2> /dev/null)"
 	if test ! -f "$match"
 	then
-		die "resetting cache..."
+		logn "resetting cache..."
 		match="$(goo | tee "$cache" | grep -m 1 "$1$" 2> /dev/null)"
 		# # Alternative:
 		# match="$(goo | grep -m 1 "$1" 2> /dev/null | tee -a | "$cache")"
@@ -31,7 +22,7 @@ nvf() {
 	then
 		$EDITOR "$match" && return
 	else
-		die "no match." && return 1
+		logn "no match." && return 1
 	fi
 }
 
@@ -39,27 +30,43 @@ nnn() { test -z "$NNNLVL" && /usr/bin/nnn "$@" || exit }
 ranger() { test -z "$RANGER_LEVEL" && /usr/bin/ranger "$@" || exit }
 
 # googoo aliases
-ff () { goo f "$1" | fzf }
-fd () { goo d "$1" | fzf }
-fdf () { goo f "$1" | fzf | xargs -I {} dirname "{}" }
-o ()
+_googoo_fzf_opt()
 {
-	f="$(ff $1)"
+	if [ "$1" ]
+	then
+		[ -d "$1" ] && dest="$1" || opt="-q $1"
+	fi
+}
+o()
+{
+	_googoo_fzf_opt "$1"
+	f="$(goo f "$dest" | fzf $opt)"
 	test "$1" && shift
-	test -n "$f" && $EDITOR $@ "$f"
+	test -f "$f" && $EDITOR $@ "$f"
 }
-go ()
+go()
 {
-	d="$(fd $1)"
-	test -d "$d" && cd "$d"
+	_googoo_fzf_opt "$1"
+	cd "$(goo d "$dest" | fzf $opt)"
 }
-ogo ()
+ogo()
 {
-	d="$(fdf $1)"
-	test -d "$d" && cd "$d"
+	_googoo_fzf_opt "$1"
+	cd "$(dirname "$(goo f "$dest" | fzf $opt)")"
 }
 
-ipc () 
+# Onelineres
+awnk() { awk "{print \$$1}"; }
+vimh() { vi -c "help $1" -c 'call feedkeys("\<c-w>o")'; }
+dgo() { cd "$(goo d ~ | fzf --filter "$@" | head -n 1)"; }
+open() { $EDITOR "$(goo f ~ | fzf --filter "$@" | head -n 1)"; }
+pkbs() { pkgfile -b "$1" | tee /dev/stderr | doas pacman -S -; }
+oclip() { printf "\033]52;c;$(echo -n "$@" | base64)\a"; }
+sms() { ssh phone sendmsg "$1" "'$2'"; }
+trcp() { scp "$1" db:/media/basilisk/downloads/transmission/torrents/; }
+rln() { ln -s "$(readlink -f "$1")" "$2"; }
+
+ipc() 
 {
    if [[ "$(ip link show eno1 | awk -F, 'NR=1 {print $3}')" == "UP" ]]
    then
@@ -69,16 +76,20 @@ ipc ()
    fi
 }
 
-calc () { echo "$@" | bc -l }
+psgrep()
+{
+	[ $# -eq 0 ] && return 1
+	pgrep "$@" | xargs ps
+}
 
-unique () {
+unique() {
 	local f
 	f="$(mktemp)"
 	awk '!x[$0]++' "$1" > "$f"
 	mv "$f" "$1"
 }
 
-clip () { 
+clip() { 
 	if [ "$WAYLAND_DISPLAY" ]
 	then
 		echo -n "$@" | wl-copy
@@ -87,7 +98,7 @@ clip () {
 	fi
 }
 
-unzipp () {
+unzipp() {
     file=$1
     shift
     unzip $file $@ || exit 1
@@ -95,22 +106,23 @@ unzipp () {
 }
 
 # fix long waiting time
-__git_files () { 
+__git_files() { 
     _wanted files expl 'local files' _files     
 }
 
-esc () {
+esc() {
 	$EDITOR "$(which $1)"
 }
 
-delfile () {
+delfile() {
 	curl "${2:-https://upfast.cronyakatsuki.xyz/delete/$1}"
 }
-upfile () {
+upfile() {
 	curl -F "file=@\"$1\"" ${2:-https://upfast.cronyakatsuki.xyz}
 }
 
-sgd () {
+# git
+sgd() {
 	d="$PWD"
 	find $HOME/src -maxdepth 1 -mindepth 1 -type d |
 		while read -r dir
@@ -129,16 +141,24 @@ sgd () {
 	unset d
 }
 
-# Git functions
+ginit()
+{
+	[ "$1" ] || return 1
+	ssh db /var/git/initdir.sh "$1"
+	git remote add origin git@db:"$1.git"
+	git push --set-upstream origin $(git_current_branch)
+}
+
 # Returns current branch
-function git_current_branch()
+git_current_branch()
 {
 	command git rev-parse --git-dir &>/dev/null || return
 	git branch --show-current
 }
 
 # Check if main exists and use instead of master
-function git_main_branch() {
+git_main_branch()
+{
   command git rev-parse --git-dir &>/dev/null || return
   local ref
   for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default}; do
@@ -164,7 +184,7 @@ function git_develop_branch() {
 }
 
 # gpg backup
-gpg_backup ()
+gpg_backup()
 {
 	gpg --export-secret-keys --armor > private.asc
 	gpg --export --armor > public.asc
@@ -173,7 +193,7 @@ gpg_backup ()
 	shred -uz {public,private,trust}.asc
 }
 
-gpg_import ()
+gpg_import()
 {
 	tar xf $1
 	shred -uz $1
@@ -183,29 +203,29 @@ gpg_import ()
 	shred -uz {public,private,trust}.asc
 }
 
-ngenable ()
+ngenable()
 {
 	ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
 }
 
-vbsr ()
+vbsr()
 {
 	vboxmanage snapshot "$1" restore "$2" &&
 		vboxmanage startvm "$1" ||
 		vboxmanage controlvm "$1" poweroff
 }
-vbsrr ()
+vbsrr()
 {
 	vbsr "$1" "$2"
 	sleep 3
 	vbsr "$1" "$2"
 }
-vbst ()
+vbst()
 {
 	vboxmanage snapshot "$1" take "$2"
 }
 
-pacsize ()
+pacsize()
 {
 	if test -n "$1"; then
 		packages="$@"
@@ -219,22 +239,18 @@ pacsize ()
 		expac '%m %n' - |
 		numfmt --to=iec-i --suffix=B --format="%.2f"
 }
-pkbs ()
-{
-	pkgfile -b "$1" | tee /dev/stderr | doas pacman -S -
-}
 
 mime-default ()
 {
-	die "Setting '$1' as default for its mimetypes"
+	logn "Setting '$1' as default for its mimetypes"
 	grep "MimeType=" /usr/share/applications/"$1" |
 		cut -d '=' -f 2- |
 		tr ';' '\n' |
 		xargs -I {} xdg-mime default "$1" "{}"
-	die "Done."
+	logn "Done."
 }
 
-addedkeys () {
+addedkeys() {
 	find ~/.ssh -iname "*.pub" | while read key
 	do 
 		local fingerprint="$(ssh-keygen -lf "$key" 2>/dev/null)" 
@@ -245,7 +261,7 @@ addedkeys () {
 	done | sed "s,$HOME/.ssh/,,"
 }
 
-fpass () {
+fpass() {
 	find $HOME/.password-store -type f -not -path ".git" |
 		grep "\.gpg$" |
 		sed "s,$HOME/.password-store/,,;s,\.gpg$,," |
@@ -253,33 +269,18 @@ fpass () {
 		xargs pass show -c
 }
 
-oclip ()
+muttmail()
 {
-	printf "\033]52;c;$(echo -n "$@" | base64)\a"
-}
-
-sms ()
-{
-	ssh phone sendmsg "$1" "'$2'"
-}
-
-trcp ()
-{
-	scp "$1" db:/media/basilisk/downloads/transmission/torrents/
-}
-
-muttmail ()
-{
-	die -n "email set: "
+	log "email set: "
 	ls $HOME/.config/mutt/configs |
 		fzf |
 		tee /dev/stderr |
 		xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc
-	die -n 'Press [Enter to login]'
+	log 'Press [Enter to login]'
 	read && mutt
 }
 
-resize ()
+resize()
 {
 	test $# -lt 2 &&
 		printf "usage: %s <format> <file> [out]\n" "$0" >&2 &&

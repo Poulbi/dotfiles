@@ -3,9 +3,18 @@
 # Simple Ass Fetch by futxlii
 
 red="$(printf '\033[31m')"
-green="$(printf '\033[32m')"
 blue="$(printf '\033[34m')"
 reset="$(printf '\033[0m')"
+
+load ()
+{
+	# take everything after 'load average: ' then remove '0.' or '.' or ','
+	# from output, this multiplies by hundred, so we can divide an integer
+	# instead of a fraction (which dash can't do)
+	for time in $(uptime | sed -e 's/^.*load average://' -e 's/0\?\.\|,//g')
+	do printf "%s%%\n" "$((time/$(nproc)))"
+	done | xargs
+}
 
 for file in /etc/os-release /usr/lib/os-release
 do
@@ -19,6 +28,6 @@ SHELL="$(basename "$SHELL")"
 cat <<EOF
 	${red}- ${blue}${ID:-"unknown"}
 	${red}- ${blue}$KERNEL
-	${red}- ${blue}$UPTIME
+	${red}- ${blue}$UPTIME ($(load))
 	${red}- ${blue}$SHELL${reset}
 EOF
