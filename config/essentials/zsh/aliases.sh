@@ -50,7 +50,8 @@ alias pf='profanity'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
-if [ -x /usr/bin/dircolors ]; then
+if [ -x /usr/bin/dircolors ] || [ -x $HOME/../usr/bin/dircolors ]
+then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     # alias ls='ls -h --color --group-directories-first'
     #alias dir='dir --color=auto'
