@@ -50,6 +50,11 @@ require('telekasten').setup({
 			template_new_note = home .. "/" .. "templates/new_note.md",
 			new_note_filename = "title",
 		},
+		DataEssentials = {
+			home = home .. "/" .. "DataEssentials",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
 		NetworkEssentials = {
 			home = home .. "/" .. "NetworkEssentials",
 			template_new_note = home .. "/" .. "templates/new_note.md",
@@ -69,6 +74,7 @@ require('telekasten').setup({
 })
 
 vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<cr>")
+vim.keymap.set("n", "<leader>zb", "<cmd>Telekasten show_backlinks<cr>")
 vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<cr>")
 vim.keymap.set("n", "<leader>zN", "<cmd>Telekasten new_templated_note<cr>")
 vim.keymap.set("n", "<leader>zT", "<cmd>Telekasten goto_today<cr>")
@@ -79,7 +85,9 @@ vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<cr>")
 vim.keymap.set("n", "<leader>zm", "<cmd>Telekasten browse_media<cr>")
 vim.keymap.set("n", "<leader>zn", "<cmd>Telekasten new_note<cr>")
 vim.keymap.set("n", "<leader>zp", "<cmd>Telekasten preview_img<cr>")
+vim.keymap.set("n", "<leader>zr", "<cmd>Telekasten rename_note<cr>")
 vim.keymap.set("n", "<leader>zs", "<cmd>Telekasten switch_vault<cr>")
+vim.keymap.set("n", "<leader>zS", "<cmd>Telekasten search_notes<cr>")
 vim.keymap.set("n", "<leader>zt", "<cmd>Telekasten panel<cr>")
 vim.keymap.set("n", "<leader>zw", "<cmd>Telekasten find_weekly_notes<cr>")
-vim.keymap.set("n", "<leader>#", "<cmd>Telekasten show_tags<cr>")
+vim.keymap.set("n", "<leader>z#", "<cmd>Telekasten show_tags<cr>")
