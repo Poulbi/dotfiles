@@ -1,0 +1,22 @@
+#!/bin/sh
+
+print_dir () { printf '%s: ' "$1" | sed "s#$HOME#~#" >&2; }
+
+check ()
+{
+	for dir in $1
+	do
+		print_dir "$2/$dir"
+		cd "$2/$dir" || continue
+		git pull 2> /dev/null | tr -d '\n'
+		echo
+	done
+}
+
+dirs="installdrier dotfiles password-store"
+prefix="$HOME/src"
+check "$dirs" "$prefix"
+
+# dirs="$(ls -1 "$HOME/proj/personal")"
+# prefix="$HOME/proj/personal"
+# check "$dirs" "$prefix"
