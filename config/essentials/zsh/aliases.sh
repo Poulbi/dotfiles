@@ -240,6 +240,7 @@ alias cdrs='cd /srv/'
 
 # fzf aliases
 alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n"| fzf)"'
+alias fil='$EDITOR ~/docs/filios/"$(find ~/docs/filios -type f -printf "%f\n" | fzf)"'
 alias cfg='find -L ~/src/dotfiles -type f | fzf | xargs -r $EDITOR'
 alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
 alias asf='alias | fzf'
@@ -258,7 +259,7 @@ alias dcmp='docker compose up -d'
 alias dbadd='ssh db dladd "'\''$(clipo)'\''"'
 alias dbcons='ssh -t db dlcons'
 alias dbinf='ssh db dlinfo'
-alias sshdb='ssh -t db tmux a'
+alias sshdb='ssh -t db "tmux a || tmux"'
 alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # oh-my-zsh git aliases
