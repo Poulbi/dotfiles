@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+tmp="/tmp/mmedia"
+
+dirs="$HOME/dl"
+
+case "$1" in 
+	"video") 
+		regex='^.\+\.\(webm\|mp4\|mpeg\|mkv\)$' 
+		dirs="$dirs $HOME/vids"
+		viewer() { mpv "$1"; } ;;
+	"pdf") 
+		regex='^.\+\.\(pdf\)$' 
+		dirs="$dirs $HOME/docs"
+		viewer() { zathura "$1"; } ;;
+	*) 
+		choice="$(cat <<-EOF | commander -d -c
+		video
+		pdf
+		EOF
+		)"
+		[ "$choice" ] || exit 1
+		"$0" "$choice"
+		exit 1 ;;
+esac
+
+choice="$(find -L $dirs 2> /dev/null |
+	grep "$regex" |
+	sort | tee "$tmp" |
+	sed "s#^$HOME#\~#;s#\([^/]\)[^/]*/#\1/#g" |
+	commander -c -d -n -x)"
+
+file="$(sed -n "${choice}p" "$tmp")"
+[ -r "$file" ] || exit 1
+
+viewer "$file"
