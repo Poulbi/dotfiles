@@ -239,7 +239,7 @@ main()
 				post_filter() { awk '{print $1}'; }
 			}
 
-			menucmd() { fzf "$@"; }
+			menucmd() { fzf -0 -1 "$@"; }
 			;;
 	esac
 
