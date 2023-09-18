@@ -4,6 +4,8 @@ tmp="/tmp/mmedia"
 
 dirs="$HOME/dl"
 
+concat_path() { sed "s#^$HOME#\~#;s#\([^/]\)[^/]*/#\1/#g"; }
+
 case "$1" in 
 	"video") 
 		regex='^.\+\.\(webm\|mp4\|mpeg\|mkv\)$' 
@@ -17,16 +19,22 @@ case "$1" in
 		regex='^.\+\.\(png\|avif\|jpg\)$' 
 		dirs="$dirs $HOME/pics"
 		viewer() { imv "$1"; } ;;
+	"cursus")
+		regex='^.*/[cC]ursus/index.html$'
+		dirs="$HOME/docs/school"
+		concat_path() { cat; }
+		viewer() { $BROWSER "$1"; } ;;
 	*) 
 		choice="$(cat <<-EOF | commander -d -c
 		video
 		pdf
 		images
+		cursus
 		EOF
 		)"
 		[ "$choice" ] || exit 1
 		"$0" "$choice"
-		exit 1 ;;
+		exit ;;
 esac
 
 shift
@@ -35,7 +43,7 @@ shift
 choice="$(find -L $dirs 2> /dev/null |
 	grep "$regex" |
 	sort | tee "$tmp" |
-	sed "s#^$HOME#\~#;s#\([^/]\)[^/]*/#\1/#g" |
+	concat_path |
 	commander -c -d -n -x)"
 
 file="$(sed -n "${choice}p" "$tmp")"

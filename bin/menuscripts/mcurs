@@ -1,8 +1,0 @@
-#!/bin/sh
-
-choice="$(find "${1:-"$HOME"/docs/school}" \
-	-type f -path "*/?ursus/index.html" 2> /dev/null |
-	sed "s;$HOME;~;" | commander -x -d -c)"
-[ "$choice" ] || exit 1
-
-firefox --new-window "$choice"
