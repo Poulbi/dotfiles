@@ -29,6 +29,9 @@ case "$1" in
 		exit 1 ;;
 esac
 
+shift
+[ "$1" ] && dirs="$1"
+
 choice="$(find -L $dirs 2> /dev/null |
 	grep "$regex" |
 	sort | tee "$tmp" |
