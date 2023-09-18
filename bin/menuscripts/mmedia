@@ -13,10 +13,15 @@ case "$1" in
 		regex='^.\+\.\(pdf\)$' 
 		dirs="$dirs $HOME/docs"
 		viewer() { zathura "$1"; } ;;
+	"images")
+		regex='^.\+\.\(png\|avif\|jpg\)$' 
+		dirs="$dirs $HOME/pics"
+		viewer() { imv "$1"; } ;;
 	*) 
 		choice="$(cat <<-EOF | commander -d -c
 		video
 		pdf
+		images
 		EOF
 		)"
 		[ "$choice" ] || exit 1
