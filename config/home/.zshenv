@@ -1,9 +1,4 @@
 #!/bin/zsh
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$PATH:./node_modules/.bin"
-
 export EDITOR="nvim"
 export VISUAL="nvim"
 
@@ -65,3 +60,10 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
     --color=fg+:#81a1c1,hl+:#ebcb8b
     --color=info:#b48ead,prompt:#bf6069,pointer:#b48dac
     --color=marker:#a3be8b,spinner:#ebcb8b,header:#a3be8b'
+
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$XDG_CONFIG_HOME/cargo/bin:$PATH"
+export PATH="$PATH:./node_modules/.bin"
