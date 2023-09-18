@@ -4,11 +4,12 @@ tmp="$(mktemp)"
 test "$(id -u)" != "0" && sudo="sudo"
 
 logn () { >&2 printf "%s\n" "$@"; }
+log () { >&2 printf '%s' "$@"; }
 
 # Read one character
 read_char ()
 {
-	logn -n ">"
+	log ">"
 	old_stty_cfg=$(stty -g)
 	stty raw
 	dd ibs=1 count=1 2> /dev/null
