@@ -21,8 +21,8 @@ case "$1" in
 		viewer() { imv "$1"; } ;;
 	"cursus")
 		regex='^.*/[cC]ursus/index.html$'
-		dirs="$HOME/docs/school"
-		concat_path() { cat; }
+		dirs="$HOME/docs/school/Vakken"
+		concat_path() { sed "s#$dirs/##;s#/[cC]ursus/index.html##"; }
 		viewer() { $BROWSER "$1"; } ;;
 	*) 
 		choice="$(cat <<-EOF | commander -d -c
