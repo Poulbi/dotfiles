@@ -1,0 +1,22 @@
+# fullscreen mappings
+map   [fullscreen]              r            reload
+map   [fullscreen]              R            rotate
+map   [fullscreen]              +            zoom in
+map   [fullscreen]              -            zoom out
+map   [fullscreen]              i            recolor
+
+# normal mappings
+map   r                         reload
+map   R                         rotate
+map   +                         zoom in
+map   -                         zoom out
+map   i                         recolor
+
+set   font                      "monospace bold 11"
+set   adjust-open               "best-fit"
+set   pages-per-row             1
+set   scroll-page-aware         "true"
+set   scroll-full-overlap       0.01
+set   scroll-step               100
+
+set   guioptions                " "
