@@ -45,16 +45,46 @@ require('telekasten').setup({
 			template_new_note = home .. "/" .. "templates/new_note.md",
 			new_note_filename = "title",
 		},
+		BusinessEnglish = {
+			home = home .. "/" .. "BusinessEnglish",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		DataEssentials = {
+			home = home .. "/" .. "DataEssentials",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		BusinessCommunication = {
+			home = home .. "/" .. "BusinessCommunication",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		AIEssentials = {
+			home = home .. "/" .. "AIEssentials",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		dotNetEssentials = {
+			home = home .. "/" .. "dotNetEssentials",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		iTalent = {
+			home = home .. "/" .. "iTalent",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
+		SoftwareDesign2 = {
+			home = home .. "/" .. "SoftwareDesign2",
+			template_new_note = home .. "/" .. "templates/new_note.md",
+			new_note_filename = "title",
+		},
 		C = {
 			home = home .. "/" .. "C",
 			template_new_note = home .. "/" .. "templates/new_note.md",
 			new_note_filename = "title",
 		},
-		businessIT = {
-			home = home .. "/" .. "businessIT",
-			template_new_note = home .. "/" .. "templates/new_note.md",
-			new_note_filename = "title",
-		}
 	}
 })
 
