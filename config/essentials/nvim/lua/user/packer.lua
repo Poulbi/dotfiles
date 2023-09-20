@@ -18,8 +18,6 @@ return require('packer').startup(function(use)
 	use { 'uZer/pywal16.nvim', as = 'pywal16' }
 	use('norcalli/nvim-colorizer.lua')
 
-	use('airblade/vim-gitgutter')
-
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 	use('theRealCarneiro/hyprland-vim-syntax')
@@ -30,6 +28,7 @@ return require('packer').startup(function(use)
 	use('tpope/vim-commentary')
 	-- use('tpope/vim-endwise')
 	use('tpope/vim-fugitive')
+	use('lewis6991/gitsigns.nvim')
 	use('tpope/vim-repeat')
 	use('tpope/vim-surround')
 	use('tpope/vim-vinegar')
