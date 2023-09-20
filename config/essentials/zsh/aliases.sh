@@ -51,6 +51,8 @@ alias sr='surfraw'
 alias ccu='calcurse'
 alias pf='profanity'
 
+alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
+
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
 if [ -x /usr/bin/dircolors ] || [ -x $HOME/../usr/bin/dircolors ]
