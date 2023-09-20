@@ -19,6 +19,7 @@
 	},
 	"battery": {
 		"format-charging": " {capacity}%",
+		"on-click": "mpower",
 		"interval": 10,
 	},
 	"hyprland/window": {
