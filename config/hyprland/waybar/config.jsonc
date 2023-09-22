@@ -19,6 +19,7 @@
 	},
 	"battery": {
 		"format-charging": " {capacity}%",
+		"on-click": "mpower",
 		"interval": 10,
 	},
 	"hyprland/window": {
@@ -26,7 +27,7 @@
 		"separate-outputs": true,
 	},
 	"pulseaudio": {
-		"scroll-step": 5,
+		"scroll-step": 1,
 		"format": "{icon} {volume:3}%",
 		"format-icons": {
 			"default": ["", "", ""]
