@@ -1,9 +1,6 @@
 #!/bin/sh
 
-die ()
-{
-	echo "$@" >&2
-}
+logn() { printf "%s\n" "$@"; }
 
 if [ "$1" = "-k" ]
 then
@@ -13,7 +10,7 @@ then
 fi
 
 # For when script calls itself
-if [ -n "$PASSWORD" ]
+if [ "$PASSWORD" ]
 then
 	pass show "$PASSWORD" &&
 		exit
@@ -26,8 +23,8 @@ export SSH_ASKPASS="$0"
 export SSH_ASKPASS_REQUIRE="prefer"
 export PASSWORD=aluc
 
-die "I: Activating vpn"
-ssh mc-wd rasdial "vpn.student.ehb.be"
+logn "I: Activating vpn"
+# ssh mc-wd "rasdial \"vpn.student.ehb.be\" \"luca.raymaekers@student.ehb.be\" \"$(pass school/login.ehb.be)\""
 ssh -f -N \
 	-L 2222:10.2.160.41:22 \
 	mc-wd
@@ -36,4 +33,4 @@ ssh -t \
 	-L 8188:localhost:8188 \
 	mc-wd \
 	ssh -N -L 8188:localhost:8188 luca@10.2.160.41
-die "[8188], [2222]"
+logn "[8188], [2222]"
