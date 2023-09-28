@@ -243,10 +243,9 @@ pacsize()
 mime-default ()
 {
 	logn "Setting '$1' as default for its mimetypes"
-	grep "MimeType=" /usr/share/applications/"$1" |
-		cut -d '=' -f 2- |
-		tr ';' '\n' |
-		xargs -I {} xdg-mime default "$1" "{}"
+	grep "MimeType=" /usr/share/applications/"$1".desktop |
+		cut -d '=' -f 2- | tr ';' '\0' |
+		xargs -0I{} xdg-mime default "$1".desktop "{}"
 	logn "Done."
 }
 
