@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
 	use('ojroques/vim-oscyank', {branch = "main"})
 	use("potamides/pantran.nvim")
 	use('alx741/vinfo')
-	use('github/copilot.vim')
+	-- use('github/copilot.vim')
 
 	-- objects
 	use('michaeljsmith/vim-indent-object')
