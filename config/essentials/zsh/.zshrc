@@ -122,6 +122,23 @@ parse_git_status() {
 	git status --short 2> /dev/null | head -n1 | awk '{print $1 " "}'
 }
 
+# Completion
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  # If the completion list is empty, just continue with filename selection
+  if [ -z "$completions" ]
+  then
+    _arguments '*::arguments: _normal'
+    return
+  fi
+
+  # This is not a variable assignment, don't remove spaces!
+  _values = "${(ps:\n:)completions}"
+}
+compdef _dotnet_zsh_complete dotnet
+
 export REPORTTIME=2
 export TIMEFMT="-> %*E"
 # override built-in time command
