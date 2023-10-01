@@ -1,0 +1,11 @@
+#!/bin/sh
+
+die () { >&2 printf '%s\n' "$@"; exit 1; }
+
+[ "$1" ] || die "usage: dbnewg <dir>"
+proj="$(basename "$(readlink -f "$1")")"
+
+ssh git@db '$HOME/initdir.sh' "$proj"
+cd "$1" || exit 1
+git remote add origin git@db:"$proj"
+git push --set-upstream origin main
