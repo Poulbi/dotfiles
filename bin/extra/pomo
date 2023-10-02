@@ -1,0 +1,8 @@
+#!/bin/sh
+while true
+do
+	date +%R
+	sleep 20m
+	notify-send -u critical -t 5000 "pomodoro" "BREAK TIME"
+	sleep 5m
+done
