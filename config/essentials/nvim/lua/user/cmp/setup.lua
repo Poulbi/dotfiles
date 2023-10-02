@@ -48,6 +48,7 @@ local function nnoremap(rhs, lhs, bufopts, desc)
   vim.keymap.set("n", rhs, lhs, bufopts)
 end
 
+vim.keymap.set('c', '<tab>', '<C-z>', { silent = false }) -- to fix cmp
 -- Regular Neovim LSP client keymappings
 local bufopts = { noremap=true, silent=true }
 nnoremap('gD', vim.lsp.buf.declaration, bufopts, "Go to declaration")
