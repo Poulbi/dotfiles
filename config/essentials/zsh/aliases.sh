@@ -173,7 +173,7 @@ alias pipreq='pip install -r requirements.txt'
 
 alias ch='chown ${USER}:${USER} -R'
 alias kll='killall'
-alias pi='ping archlinux.org -c4'
+alias pi='ping 9.9.9.9 -c4'
 alias sba='source env/bin/activate || source bin/activate'
 alias smc='systemctl'
 alias dsmc='doas systemctl'
