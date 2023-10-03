@@ -48,17 +48,18 @@ steam()
 {
 	choice="$(
 	cat <<-EOF | column -t -l 2 | commander -d -x -c | awk '{printf $1}'
-	274190 broforc3
+	274190 broforce
 	291550 brawlhalla
 	1712840 tiny tina
-	EOF
+	105600 terraria
+EOF
 	)"
 	[ "$choice" ] && setsid steam steam://rungameid/"$choice"
 	exit
 }
 
 eval "$(
-	cat <<-EOF | commander -c
+	cat <<-EOF | commander -c -w 9 -y 2
 	minecraft
 	steam
 	EOF
