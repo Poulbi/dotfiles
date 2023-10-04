@@ -25,6 +25,7 @@ local bufopts = { noremap=true, silent=true }
 
 
 nnoremap('<F5>' , dap.continue, bufopts, "Continue")
+nnoremap('<F6>' , dap.disconnect, bufopts, "Continue")
 nnoremap('<F10>' , dap.step_over, bufopts, "Step over")
 nnoremap('<F11>' , dap.step_into, bufopts, "Step into")
 nnoremap('<F12>' , dap.step_out, bufopts, "Step out")
