@@ -155,6 +155,10 @@ ls.add_snippets("sh", {
 		stty \$old_stty_cfg
 	}
 	]], {}),
+	parse("fdie",
+	[[
+	die () { >&2 printf '%s\n' "\$@"; exit 1; }
+	]], {}),
 	parse("flogn",
 	[[
 	logn () { >&2 printf '%s\n' "\$@"; }
