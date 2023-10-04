@@ -1,6 +1,6 @@
 #!/bin/sh
 choice="$(
-cat <<EOF | commander -c
+cat <<EOF | commander -c -w 9 -y 4
 poweroff
 suspend
 hibernate
