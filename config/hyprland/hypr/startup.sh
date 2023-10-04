@@ -5,4 +5,4 @@ gammastep &
 wl-paste --watch cliphist store &
 keyadd id_rsa &
 swayidle 300 locker &
-$TERMINAL -e tmux a || tmux &
+$TERMINAL -e tmux a || $TERMINAL tmux &
