@@ -5,12 +5,21 @@ for msg in "three" "two" "one"
 do notif "$msg"
 done
 
+i="${1-0}"
 while true
 
 do 
 	notif "<b>START</b>"
 	date +%R
 	sleep 20m
-	notify-send -u critical -t 5000 "pomodoro" "BREAK TIME"
-	sleep 5m
+	if [ "$i" -eq 3 ]
+	then
+		i=-1
+		notify-send -u critical -t 20000 "pomodoro" "GIGA BREAK TIME"
+		sleep 20m
+	else
+		notify-send -u critical -t 5000 "pomodoro" "BREAK TIME"
+		sleep 5m
+	fi
+	i=$((i+1))
 done
