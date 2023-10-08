@@ -1,9 +1,13 @@
 #!/usr/bin/env sh
-echo "$1" | sed 's/-H/\\\n\t&/g' | sed '/gzip/d' > /tmp/curlcommand.sh 
-sh /tmp/curlcommand.sh > /tmp/ehbso.html
-vids="$(grep -oE "youtube\.com/embed/.{11}" /tmp/ehbso.html | cut -d'/' -f 3 | tr '\n' ' ')"
+printf "%s\n" "$1" |
+	sed 's/-H/\\\n&/g' |
+	sed '/gzip/d' |
+	tee /tmp/curlcommand.sh |
+	sh > /tmp/ehbso.html
+vids="$(grep -oE "youtube\.com/embed/.{11}" /tmp/ehbso.html |
+	cut -d'/' -f 3 |
+	tr '\n' ' ')"
 for i in $vids 
-do
-	echo "https://www.youtube.com/watch?v=$i"
+do printf "%s\n" "https://www.youtube.com/watch?v=$i"
 done > /tmp/todownload
 # yt-dlp -P "$HOME/Downloads/vids" -o "%(title)s" -a /tmp/todownload
