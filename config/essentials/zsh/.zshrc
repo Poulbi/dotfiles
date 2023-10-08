@@ -108,7 +108,7 @@ setopt prompt_subst
 parse_git_remote() {
 	git branch -v 2>/dev/null |
 		grep '^\*' | cut -f2 -d'[' | cut -f1 -d' ' |
-		sed 's/ahead/↑/;s/behind/↓/;s/\*//'
+		sed 's/ahead/↑ /;s/behind/↓ /;s/\*//'
 }
 parse_git_branch() {
     git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null
