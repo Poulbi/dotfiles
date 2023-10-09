@@ -18,7 +18,6 @@ zle -N edit-command-line
 zstyle ':compinstall' filename '/home/aluc/.zshrc'
 zstyle ':completion:*' menu select
 autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 autoload -Uz surround
 zle -N delete-surround surround
 zle -N add-surround surround
@@ -28,6 +27,8 @@ compinit
 # Source files
 . $ZDOTDIR/functions.zsh
 . $ZDOTDIR/aliases.sh
+. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bindkey -v
 bindkey -a cs change-surround
