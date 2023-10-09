@@ -14,12 +14,12 @@ do
 	sleep 20m
 	if [ "$i" -eq 3 ]
 	then
-		i=-1
-		notify-send -u critical -t 20000 "pomodoro" "GIGA BREAK TIME"
+		notify-send -u critical -t 1200000 "pomodoro" "GIGA BREAK TIME"
 		sleep 20m
+		i=0
 	else
-		notify-send -u critical -t 5000 "pomodoro" "BREAK TIME"
+		notify-send -u critical -t 300000 "pomodoro" "BREAK TIME"
 		sleep 5m
+		i=$((i+1))
 	fi
-	i=$((i+1))
 done
