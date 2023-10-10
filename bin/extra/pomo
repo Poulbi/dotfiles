@@ -1,9 +1,19 @@
 #!/bin/sh
-notif() { notify-send -t 1000 "pomo" "$1"; sleep 1; }
+notif() { notify-send -t "${2:-1000}" "pomo" "$1"; sleep 1; }
 
 for msg in "three" "two" "one"
 do notif "$msg"
 done
+
+# $1: time in seconds
+# $2: msg for notification
+ring_ring()
+{
+	time="$(($1*1000*60))"
+	date '+%R B'
+	notif "$time" "$2"
+	sleep "$time"s
+}
 
 i="${1-0}"
 while true
@@ -12,15 +22,12 @@ do
 	notif "<b>START</b>"
 	date '+%R S'
 	sleep 20m
-	date '+%R B'
 	if [ "$i" -eq 3 ]
 	then
-		notify-send -u critical -t 1200000 "pomodoro" "GIGA BREAK TIME"
-		sleep 20m
 		i=0
+		ring_ring 20 "GIGA BREAK TIME"
 	else
-		notify-send -u critical -t 300000 "pomodoro" "BREAK TIME"
-		sleep 5m
+		ring_ring 5 "BREAK TIME"
 		i=$((i+1))
 	fi
 done
