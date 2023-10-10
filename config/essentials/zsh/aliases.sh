@@ -121,7 +121,6 @@ alias trclipo='transmission-remote debuc.com -a "$(clipo)"'
 alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 
 # vim
-alias scr='nvim +"setlocal buftype=nofile bufhidden=hide noswapfile filetype=txt" scratch'
 alias vimp="vim '+PlugInstall'"
 alias nvimp="nvim '+PackerSync'"
 alias nvg='git status > /dev/null 2>&1 && nvim "+Git"'
@@ -247,7 +246,7 @@ alias god='cd "$(find . -mindepth 1 -maxdepth 1 -type d | fzf)"'
 # fzf aliases
 alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
 alias ppjs='cd ~/proj/personal/scripts/"$(find ~/proj/personal/scripts -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
-alias escr='edit_in_dir ~/proj/personal/scripts/'
+alias scr='edit_in_dir ~/proj/personal/scripts/'
 alias fil='edit_in_dir ~/docs/filios/'
 alias cfg='edit_in_dir ~/src/dotfiles'
 alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
