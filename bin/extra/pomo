@@ -5,7 +5,7 @@ for msg in "three" "two" "one"
 do notif "$msg"
 done
 
-# $1: time in seconds
+# $1: time in minutes
 # $2: msg for notification
 ring_ring()
 {
