@@ -9,7 +9,7 @@ for monitor in $monitors
 do
 	file="/tmp/locker-$monitor.png"
 	grim -l 0 -o "$monitor" "$file"
-	pixelate "$file" "$file"
+	pixelate "$file" "$file" > /dev/null 2>&1
 	# Create image command for swaylock
 	img_opt="--image $monitor:$file $img_opt"
 	files="$files $file"
