@@ -36,7 +36,6 @@ case "${ID:=unknown}" in
 	debian|ubuntu) PLUGPATH=/usr/share/ ;;
 	*) PLUGPATH=/usr/share/zsh/plugins ;;
 esac
-echo $PLUGPATH
 . $PLUGPATH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . $PLUGPATH/zsh-autosuggestions/zsh-autosuggestions.zsh
 
