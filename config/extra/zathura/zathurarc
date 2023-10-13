@@ -1,16 +1,14 @@
 # fullscreen mappings
 map   [fullscreen]              r            reload
 map   [fullscreen]              R            rotate
-map   [fullscreen]              +            zoom in
-map   [fullscreen]              -            zoom out
-map   [fullscreen]              i            recolor
+map   [fullscreen]              i            zoom in
+map   [fullscreen]              o            zoom out
 
 # normal mappings
 map   r                         reload
 map   R                         rotate
-map   +                         zoom in
-map   -                         zoom out
-map   i                         recolor
+map   i                         zoom in
+map   o                         zoom out
 
 set   font                      "monospace bold 11"
 set   adjust-open               "best-fit"
