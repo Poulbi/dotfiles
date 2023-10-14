@@ -18,31 +18,26 @@ zle -N edit-command-line
 zstyle ':compinstall' filename '/home/aluc/.zshrc'
 zstyle ':completion:*' menu select
 autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 autoload -Uz surround
 zle -N delete-surround surround
 zle -N add-surround surround
 zle -N change-surround surround
 compinit
 
-if grep -qi "debian\|ubuntu" /usr/lib/os-release /etc/os-release 2>/dev/null
-then
-    sfiles=(
-        /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-        /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    )
-else
-    sfiles=(
-        /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-        /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh)
-fi
-sfiles+=(
-		~/.config/zsh/functions.zsh
-		~/.config/zsh/aliases.sh
-)
-for f in "${sfiles[@]}"; do
-    test -f "$f" && source "$f"
+# Source files
+. $ZDOTDIR/functions.zsh
+. $ZDOTDIR/aliases.sh
+
+local PLUGPATH
+for file in /etc/os-release /usr/lib/os-release
+do [ -f "$file" ] && . "$file" && break
 done
+case "${ID:=unknown}" in
+	debian|ubuntu) PLUGPATH=/usr/share/ ;;
+	*) PLUGPATH=/usr/share/zsh/plugins ;;
+esac
+. $PLUGPATH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. $PLUGPATH/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 bindkey -v
 bindkey -a cs change-surround
@@ -121,14 +116,9 @@ RPROMPT='%F{blue}$(parse_git_remote)%f%F{red}$(parse_git_status)%f%F{green}$(par
 
 setopt prompt_subst
 parse_git_remote() {
-	b="$(git branch -v 2>/dev/null | grep "^*" | cut -f2 -d'[' | cut -f1 -d' ')"
-	if [ "$b" = "behind" ]
-	then
-		printf "↓ "
-	elif [ "$b" = "ahead" ]
-	then
-		printf "↑ "
-	fi
+	git branch -v 2>/dev/null |
+		grep '^\*' | cut -f2 -d'[' | cut -f1 -d' ' |
+		sed 's/ahead/↑ /;s/behind/↓ /;s/\*//'
 }
 parse_git_branch() {
     git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null
@@ -136,6 +126,23 @@ parse_git_branch() {
 parse_git_status() {
 	git status --short 2> /dev/null | head -n1 | awk '{print $1 " "}'
 }
+
+# Completion
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  # If the completion list is empty, just continue with filename selection
+  if [ -z "$completions" ]
+  then
+    _arguments '*::arguments: _normal'
+    return
+  fi
+
+  # This is not a variable assignment, don't remove spaces!
+  _values = "${(ps:\n:)completions}"
+}
+compdef _dotnet_zsh_complete dotnet
 
 export REPORTTIME=2
 export TIMEFMT="-> %*E"

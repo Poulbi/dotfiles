@@ -4,7 +4,7 @@ logn() { printf "%s\n" "$@"; }
 
 if [ "$1" = "-k" ]
 then
-	pgrep -f -- "ssh.*-L.*mc-wd" |
+	pgrep -f -- "ssh.*-L.*vm" |
 		xargs kill
 	exit
 fi
@@ -21,16 +21,21 @@ keyadd ehb/ai
 
 export SSH_ASKPASS="$0"
 export SSH_ASKPASS_REQUIRE="prefer"
-export PASSWORD=aluc
+export PASSWORD=zot/qemu
+
+logn "I: Waiting for connectivity..."
+while ! ssh -o ConnectTimeout=1 -o BatchMode=yes vm 2>&1 | grep -q "Permission denied"
+do sleep 1
+done
 
 logn "I: Activating vpn"
-# ssh mc-wd "rasdial \"vpn.student.ehb.be\" \"luca.raymaekers@student.ehb.be\" \"$(pass school/login.ehb.be)\""
+ssh vm "rasdial \"vpn.student.ehb.be\""
 ssh -f -N \
 	-L 2222:10.2.160.41:22 \
-	mc-wd
+	vm
 
 ssh -t \
 	-L 8188:localhost:8188 \
-	mc-wd \
+	vm \
 	ssh -N -L 8188:localhost:8188 luca@10.2.160.41
 logn "[8188], [2222]"

@@ -32,6 +32,7 @@ ranger() { test -z "$RANGER_LEVEL" && /usr/bin/ranger "$@" || exit }
 # googoo aliases
 _googoo_fzf_opt()
 {
+	unset dest opt
 	if [ "$1" ]
 	then
 		[ -d "$1" ] && dest="$1" || opt="-q $1"
@@ -65,6 +66,7 @@ oclip() { printf "\033]52;c;$(echo -n "$@" | base64)\a"; }
 sms() { ssh -t phone sendmsg "$1" "'$2'"; }
 trcp() { scp "$1" db:/media/basilisk/downloads/transmission/torrents/; }
 rln() { ln -s "$(readlink -f "$1")" "$2"; }
+getgit() { git clone git@db:"$1"; }
 
 ipc() 
 {
@@ -99,9 +101,7 @@ clip() {
 }
 
 unzipp() {
-    file=$1
-    shift
-    unzip $file $@ || exit 1
+	unzip -- "$(readlink -f -- "$1")" || return 1
     rm $file
 }
 
@@ -243,10 +243,9 @@ pacsize()
 mime-default ()
 {
 	logn "Setting '$1' as default for its mimetypes"
-	grep "MimeType=" /usr/share/applications/"$1" |
-		cut -d '=' -f 2- |
-		tr ';' '\n' |
-		xargs -I {} xdg-mime default "$1" "{}"
+	grep "MimeType=" /usr/share/applications/"$1".desktop |
+		cut -d '=' -f 2- | tr ';' '\0' |
+		xargs -0I{} xdg-mime default "$1".desktop "{}"
 	logn "Done."
 }
 
@@ -286,4 +285,10 @@ resize()
 		printf "usage: %s <format> <file> [out]\n" "$0" >&2 &&
 		return 1
 	convert -resize $1^ -gravity center -crop $1+0+0 -- "$2" "${3:-$1}"
+}
+
+edit_in_dir() { 
+	file="$1/$(goo f "$1" | sed "s@^$1@@" | fzf)"
+	[ -f "$file" ] || return 1
+	$EDITOR "$file"
 }

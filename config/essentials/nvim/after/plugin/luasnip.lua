@@ -155,6 +155,10 @@ ls.add_snippets("sh", {
 		stty \$old_stty_cfg
 	}
 	]], {}),
+	parse("fdie",
+	[[
+	die () { >&2 printf '%s\n' "\$@"; exit 1; }
+	]], {}),
 	parse("flogn",
 	[[
 	logn () { >&2 printf '%s\n' "\$@"; }
@@ -200,6 +204,10 @@ ls.add_snippets("javascript", {
 	let {} = document.getElementById('{}');{}
 	]],
 	{ i(1), rep(1), i(0) })),
+})
+
+ls.add_snippets("cs", {
+	parse("cw", "Console.WriteLine($1);$0"),
 })
 
 ls.add_snippets("telekasten", {

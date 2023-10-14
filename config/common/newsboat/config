@@ -1,4 +1,4 @@
-browser firefox
+browser linkhandler
 
 # from contrib
 color background          color15    default
@@ -30,4 +30,12 @@ bind-key a toggle-article-read
 show-keymap-hint no
 swap-title-and-hints yes
 
-browser linkhandler
+download-path "~/dl"
+max-downloads 2
+player "mpv"
+
+urls-source "miniflux"
+miniflux-url "http://192.168.178.79:24961/"
+miniflux-login "debuc"
+miniflux-passwordeval "pass show db/miniflux | head -n 1"
+miniflux-min-items 0

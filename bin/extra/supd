@@ -1,24 +1,44 @@
 #!/bin/sh
 
-print_dir () { printf '%s: ' "$1" | sed "s#$HOME#~#" >&2; }
+usage() {
+	>&2 cat <<-EOF
+	usage: supd
+	       supd <prefix> <dir>
+		   stdout | supd <prefix>
+	EOF
+	exit 1
+}
 
 check ()
 {
 	for dir in $1
 	do
-		print_dir "$2/$dir"
+		printf '%s: ' "$2/$dir" | sed "s#$HOME#~#" >&2
 		cd "$2/$dir" || continue
 		git pull > /dev/null 2>&1 &&
 			printf 'Up to date.' ||
 			printf 'Couldn'\''t update.'
-		printf '\n'
+		printf ' '
+		printf '%s %s\n' "$(git status --short 2> /dev/null |
+			awk 'NR==1 {print $1}')" "$(git branch -v 2>/dev/null |
+			grep '^\*' | cut -f2 -d'[' | cut -f1 -d' ' |
+			sed 's/ahead/↑/;s/behind/↓/;s/\*//')"
+
 	done
 }
 
-dirs="installdrier dotfiles password-store"
-prefix="$HOME/src"
+if [ "$#" -eq 0 ]
+then
+	dirs="installdrier dotfiles password-store"
+	prefix="$HOME/src"
+elif [ ! -t 0 ]
+then
+	prefix="$1"
+	dirs="$(cat)"
+else
+	prefix="$1"
+	shift || usage
+	dirs="$*"
+	[ "$dirs" ] || usage
+fi
 check "$dirs" "$prefix"
-
-# dirs="$(ls -1 "$HOME/proj/personal")"
-# prefix="$HOME/proj/personal"
-# check "$dirs" "$prefix"

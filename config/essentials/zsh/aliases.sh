@@ -121,7 +121,6 @@ alias trclipo='transmission-remote debuc.com -a "$(clipo)"'
 alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 
 # vim
-alias scr='nvim +"setlocal buftype=nofile bufhidden=hide noswapfile filetype=txt" scratch'
 alias vimp="vim '+PlugInstall'"
 alias nvimp="nvim '+PackerSync'"
 alias nvg='git status > /dev/null 2>&1 && nvim "+Git"'
@@ -173,7 +172,7 @@ alias pipreq='pip install -r requirements.txt'
 
 alias ch='chown ${USER}:${USER} -R'
 alias kll='killall'
-alias pi='ping archlinux.org -c4'
+alias pi='ping 9.9.9.9 -c4'
 alias sba='source env/bin/activate || source bin/activate'
 alias smc='systemctl'
 alias dsmc='doas systemctl'
@@ -206,13 +205,16 @@ alias est='$EDITOR ~/proj/suckless/st/config.def.h'
 alias esl='$EDITOR ~/proj/suckless/slock/config.def.h'
 alias esls='$EDITOR ~/proj/suckless/slstatus/config.def.h'
 alias ehy='$EDITOR ~/.config/hypr/hyprland.conf'
+alias ehyb='$EDITOR ~/.config/hypr/binds.conf'
 alias ewbj='$EDITOR ~/src/dotfiles/config/hyprland/waybar/config.jsonc'
 alias ewbs='$EDITOR ~/src/dotfiles/config/hyprland/waybar/style.css'
 alias cfd='$EDITOR config.def.h'
 # /# quick cdjV}k:!sort -t "'" -k 2
 alias cdl='cd ~/dl'
 alias cdoc='cd ~/docs'
+alias czk='cd ~/docs/zk'
 alias cda='cd ~/docs/android/projects'
+alias csv='cd ~/docs/school/Vakken'
 alias cdm='cd ~/music'
 alias cdp='cd ~/pics'
 alias cdpa='cd ~/pics/ai-outputs/'
@@ -239,17 +241,21 @@ alias czo='cd ~/zot/'
 alias cdpw='cd ${PASSWORD_STORE_DIR:-~/.password-store}'
 alias cdng='cd /etc/nginx'
 alias cdrs='cd /srv/'
+alias god='cd "$(find . -mindepth 1 -maxdepth 1 -type d | fzf)"'
 
 # fzf aliases
-alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n"| fzf)"'
-alias fil='$EDITOR ~/docs/filios/"$(find ~/docs/filios -type f -printf "%f\n" | fzf)"'
-alias cfg='find -L ~/src/dotfiles -type f 2> /dev/null | fzf | xargs -r $EDITOR'
+alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
+alias ppjs='cd ~/proj/personal/scripts/"$(find ~/proj/personal/scripts -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
+alias scr='edit_in_dir ~/proj/personal/scripts/'
+alias fil='edit_in_dir ~/docs/filios/'
+alias cfg='edit_in_dir ~/src/dotfiles'
 alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
 alias ffwin='hyprctl clients -j | jq '\''.[].pid'\'' | fzf --preview "hyprctl clients -j | jq '\''.[] | select(.pid == {}) | {class, title, workspace, xwayland}'\''"'
 alias pff='find ${PASSWORD_STORE_DIR:=~/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
 alias fzps='fzf --print0 | xargs -0I{}'
+alias ytdl='yt-dlp --restrict-filenames --embed-chapters -f "b" -S "res:1080" -P "$HOME/vids/youtube/" -o "%(channel)s - %(title)s.%(ext)s"'
 
 alias dcb='docker build'
 alias dcbt='docker build -t'
@@ -265,6 +271,8 @@ alias sshdb='ssh -t db "tmux a || tmux"'
 alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # oh-my-zsh git aliases
+alias gitdotf='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
+alias gmod='git status --short | sed '\''/^\s*M/!d;s/^\s*M\s*//'\'' | fzf | xargs $EDITOR'
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'

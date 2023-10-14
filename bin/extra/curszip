@@ -1,0 +1,17 @@
+#!/bin/sh
+
+list1() { find "$1" -mindepth 1 -maxdepth 1 -type "${2:-d}" -printf '%f\n'; }
+
+curs="$(list1 ~/docs/school/Vakken | fzf)"
+[ "$curs" ] || exit 1
+zip="$(list1 ~/dl f | fzf -f "$curs" | grep '\.zip$')"
+[ "$zip" ] || exit 1
+
+>&2 printf "zip: %s\n" "$zip"
+
+cd -- ~/docs/school/Vakken/"$curs" || exit 1
+rm -rf Cursus
+mv -- ~/dl/"$zip" .
+unzip -- "./$zip"
+mv -- "${zip%%.zip}" Cursus
+rm -- "$zip"
