@@ -8,7 +8,7 @@ then paste() { termux-clipboard-get; }
 else paste() { xclip -o -sel c; }
 fi
 
-inp=”$1”
+inp="$1"
 [ "${inp:=$(paste)}" ] || inp="$(cat /dev/stdin)"
 
 # take last link from clipboard
