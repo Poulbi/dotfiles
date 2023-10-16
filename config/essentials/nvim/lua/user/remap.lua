@@ -79,13 +79,13 @@ vim.keymap.set("n", "<Leader>P", "<cmd>PackerSync<cr>", { noremap = true })
 -- spelling
 vim.keymap.set("n", "<Leader><C-s>", "<cmd>setlocal spell!<cr>", { noremap = true })
 
--- open terminal in file's parent director
--- this needs to be asynchrous
-vim.keymap.set("n", "<Return>", function ()
-    local cmd = "cd " .. vim.fn.expand("%:p:h") .. "; setsid $TERMINAL"
-	-- asynchrous go brr
-    vim.fn.jobstart(cmd, { on_exit = function(job_id, exit_code, event_type) end })
-end, { noremap = true })
+-- -- open terminal in file's parent director
+-- -- this needs to be asynchrous
+-- vim.keymap.set("n", "<Return>", function ()
+--     local cmd = "cd " .. vim.fn.expand("%:p:h") .. "; setsid $TERMINAL"
+-- 	-- asynchrous go brr
+--     vim.fn.jobstart(cmd, { on_exit = function(job_id, exit_code, event_type) end })
+-- end, { noremap = true })
 
 
 -- clear registers
