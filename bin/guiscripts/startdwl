@@ -39,11 +39,6 @@ export IMAGE="imv"
 # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 # env = WLR_NO_HARDWARE_CURSORS,1
 
-(cd ~/.config/waybar/ && ln -sf dwl.jsonc config.jsonc)
-
-eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents gpg,ssh)"
-eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D 2> /dev/null)"
-
 while true;
-do dwl -s $HOME/.config/dwl/startup.sh
+do dwl -s "$HOME"/.config/dwl/startup.sh
 done
