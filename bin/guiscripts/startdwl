@@ -45,5 +45,5 @@ eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents gpg,s
 eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D 2> /dev/null)"
 
 while true;
-do dwl -s $HOME/.config/hypr/startup.sh
+do dwl -s $HOME/.config/dwl/startup.sh
 done
