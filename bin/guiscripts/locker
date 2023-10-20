@@ -1,9 +1,8 @@
 #!/bin/sh
-which swaylock grim pixelate > /dev/null ||
-	exit 1
+which swaylock grim pixelate > /dev/null || exit 1
 umask 077
 
-monitors="$(hyprctl monitors -j | jq -r '.[].name' | xargs)"
+monitors="$(xrandr --listactivemonitors | awk '/^ [0-9]/ {print $4}')"
 
 for monitor in $monitors
 do
@@ -15,5 +14,5 @@ do
 	files="$files $file"
 done
 
-swaylock -f -u $img_opt
+swaylock --indicator-radius 0 $img_opt
 shred -uz -- $files

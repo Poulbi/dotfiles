@@ -1,0 +1,14 @@
+# tofi
+text-color = #e9e3cb
+prompt-color = #ADAB92
+placeholder-color = #ADAB92
+input-color = #e9e3cb
+default-result-color = #E9D68C
+selection-color = #a39e8e
+selection-match-color = #e9e3cb
+
+background-color = #372318f0
+
+outline-color = #ADAB92
+
+border-color = #E9D68C

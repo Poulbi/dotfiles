@@ -28,7 +28,6 @@ compinit
 . $ZDOTDIR/functions.zsh
 . $ZDOTDIR/aliases.sh
 
-local PLUGPATH
 for file in /{etc,usr/lib}/os-release
 do [ -f "$file" ] && . "$file" && break
 done
