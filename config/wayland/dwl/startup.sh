@@ -1,6 +1,7 @@
 #!/bin/sh
 swaybg -i ~/pics/wallpaper &
 dwl-bar &
+dwlblocks &
 gammastep &
 wl-paste --watch cliphist store &
 keyadd id_rsa &
