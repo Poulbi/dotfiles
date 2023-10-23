@@ -258,11 +258,15 @@ alias pff='find ${PASSWORD_STORE_DIR:=~/src/password-store/} -name "*.gpg" | sed
 alias fzps='fzf --print0 | xargs -0I{}'
 alias ytdl='yt-dlp --restrict-filenames --embed-chapters -f "b" -S "res:1080" -P "$HOME/vids/youtube/" -o "%(channel)s - %(title)s.%(ext)s"'
 
+# docker aliases
 alias dcb='docker build'
 alias dcbt='docker build -t'
 alias dce='docker exec'
 alias dcet='docker exec -it'
 alias dcmp='docker compose up -d'
+
+# dotnet aliases
+alias dncns='dotnet new console --use-program-main -o'
 
 # debuc aliases
 alias dbadd='ssh db dladd "'\''$(clipo)'\''"'
