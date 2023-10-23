@@ -1,44 +1,36 @@
 #!/bin/sh
 
-usage() {
+# To add?
+# 	- possibility of changing verb pull/fetch/push
+# 	- adding prefix
+
+ls() { find . -mindepth 1 -maxdepth 1 -type d -not -name ".*" -printf '%f\n';  }
+
+if [ "$1" = '-h' ]
+then
 	>&2 cat <<-EOF
-	usage: supd
-	       supd <prefix> <dir>
-		   stdout | supd <prefix>
+	usage:
+	    supd                              Update dirs in current dir
+	    ls ~/projects | supd              Update dirs read from stdin
+	    supd -h                           Show help
 	EOF
-	exit 1
-}
-
-check ()
-{
-	for dir in $1
-	do
-		printf '%s: ' "$2/$dir" | sed "s#$HOME#~#" >&2
-		cd "$2/$dir" || continue
-		git pull > /dev/null 2>&1 &&
-			printf 'Up to date.' ||
-			printf 'Couldn'\''t update.'
-		printf ' '
-		printf '%s %s\n' "$(git status --short 2> /dev/null |
-			awk 'NR==1 {print $1}')" "$(git branch -v 2>/dev/null |
-			grep '^\*' | cut -f2 -d'[' | cut -f1 -d' ' |
-			sed 's/ahead/↑/;s/behind/↓/;s/\*//')"
-
-	done
-}
-
-if [ "$#" -eq 0 ]
-then
-	dirs="installdrier dotfiles password-store"
-	prefix="$HOME/src"
-elif [ ! -t 0 ]
-then
-	prefix="$1"
-	dirs="$(cat)"
-else
-	prefix="$1"
-	shift || usage
-	dirs="$*"
-	[ "$dirs" ] || usage
+	exit
 fi
-check "$dirs" "$prefix"
+
+[ ! -t 0 ] && dirs="$(cat)" || dirs="$(ls)"
+
+for dir in $dirs
+do
+	printf '%s: ' "$dir" | >&2 sed "s#$HOME#~#"
+	(
+	cd "$dir" || exit
+	git pull > /dev/null 2>&1 &&
+		printf 'Up to date.' ||
+		printf 'Couldn'\''t update.'
+	# Show remote state
+	printf ' %s %s\n' "$(git status --short 2> /dev/null |
+		awk 'NR==1 {print $1}')" "$(git branch -v 2>/dev/null |
+		grep '^\*' | cut -f2 -d'[' | cut -f1 -d' ' |
+		sed 's/ahead/↑/;s/behind/↓/;s/\*//')"
+	)
+done
