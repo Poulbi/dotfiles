@@ -5,3 +5,5 @@
 	name = Raymaekers Luca
 [pull]
 	rebase = false
+[merge]
+	ff = false
