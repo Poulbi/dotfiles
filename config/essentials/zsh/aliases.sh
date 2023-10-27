@@ -188,6 +188,7 @@ alias tpid='tail -f /dev/null --pid'
 alias pwdcp='pwd | clipp'
 alias gw="grep -ri"
 alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} | supd'
+alias nextdeadline='sed -n "/$(grep '\''^#'\'' ~/docs/filios/deadlines | sort -t '\''/'\'' -k 3 -k 2 -k 1 -n | head -n 1 | sed '\''s@/@.@g'\'')/,/^#\|^$/p" ~/docs/filios/deadlines | head -n -1'
 
 alias vbm='vboxmanage'
 alias vbls='vbm list vms'
@@ -277,7 +278,7 @@ alias sshdb='ssh -t db "tmux a || tmux"'
 alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # oh-my-zsh git aliases
-alias gitdotf='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
+alias config='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
 alias gmod='git status --short | sed '\''/^\s*M/!d;s/^\s*M\s*//'\'' | fzf | xargs $EDITOR'
 alias g='git'
 alias ga='git add'
