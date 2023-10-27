@@ -67,6 +67,6 @@ border-color = $color6
 EOF
 
 # waybar
-ln -sf "$walcache/colors-waybar.css" "$HOME/.config/waybar/colors.css"
+ln -sf "$walcache/colors-waybar.css" "$HOME/.config/waybar/styles/colors/colors.css"
 pkill -USR2 waybar
 pywalfox update
