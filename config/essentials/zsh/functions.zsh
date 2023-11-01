@@ -270,13 +270,15 @@ fpass() {
 
 muttmail()
 {
-	log "email set: "
-	ls $HOME/.config/mutt/configs |
+	local config
+	config="$HOME/.config/mutt"
+
+	find "$config"/configs -type f -printf '%f\n' |
 		fzf |
 		tee /dev/stderr |
-		xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc
-	log 'Press [Enter to login]'
-	read && mutt
+		xargs -I {} ln -sf "$config/configs/{}" "$config"/muttrc
+	log 'Press [Enter] to login.'
+	head -n 1 && mutt
 }
 
 resize()
