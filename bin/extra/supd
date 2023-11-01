@@ -27,7 +27,7 @@ do
     # Show remote state
     printf '%s %s\n' "$(git status --short 2> /dev/null |
         awk 'NR==1 {print $1}')" "$(git branch -v 2>/dev/null |
-        awk -F '[][]' '/^\*/ {print $2}')" |
-        sed 's/ahead/↑ /;s/behind/↓ /;s/[^↓↑]*/ /g'
+        awk -F '[][]' '/^\*/ {print $2}' |
+        sed 's/ahead/↑ /;s/behind/↓ /;s/[^↓↑]*/ /g')"
 	)
 done
