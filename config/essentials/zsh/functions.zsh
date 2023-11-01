@@ -270,13 +270,16 @@ fpass() {
 
 muttmail()
 {
-	log "email set: "
-	ls $HOME/.config/mutt/configs |
-		fzf |
-		tee /dev/stderr |
-		xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc
-	log 'Press [Enter to login]'
-	read && mutt
+	local config
+	local mail
+	config="$HOME/.config/mutt"
+
+	mail="$(find "$config"/configs -type f -printf '%f\n' | fzf)"
+	[ "$mail" ] || return 1
+	logn "$mail"
+	ln -sf "$config/configs/$mail" "$config"/muttrc
+	log 'Press [Enter] to login.'
+	head -n 1 && mutt
 }
 
 resize()
@@ -291,4 +294,16 @@ edit_in_dir() {
 	file="$1/$(goo f "$1" | sed "s@^$1@@" | fzf)"
 	[ -f "$file" ] || return 1
 	$EDITOR "$file"
+}
+
+nextddl()
+{
+	local date
+	deadlines="$HOME/docs/filios/deadlines"
+	date="$(grep '^#' "$deadlines" |
+		sort -t '/' -k 3 -k 2 -k 1 -n |
+		sed -n "${1:-1}p" |
+		sed 's@/@.@g')"
+	sed -n "/$date/,/^#\|^$/p" "$deadlines" |
+		head -n -1
 }
