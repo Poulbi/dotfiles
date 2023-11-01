@@ -26,7 +26,7 @@ do
     then
         printf 'o'
     else
-        printf 'x'
+        printf 'x\n'
         return
     fi
     # Show remote state
