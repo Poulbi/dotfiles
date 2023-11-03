@@ -68,7 +68,8 @@ window#waybar.PCSX2 #window {
 }
 
 #workspaces button.active {
-	color: #5e81ac;
+	color: #a3be8c;
+    text-shadow: 0px 0px 1px #a3be8c;
 }
 
 #workspaces button:hover {
