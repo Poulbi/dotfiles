@@ -73,8 +73,8 @@ vim.keymap.set("n", "<LocalLeader>s", function ()
 	print("sourced.")
 end, { noremap = true })
 
--- Packer
-vim.keymap.set("n", "<Leader>P", "<cmd>PackerSync<cr>", { noremap = true })
+-- Lazy
+vim.keymap.set("n", "<Leader>P", "<cmd>Lazy<cr>", { noremap = true })
 
 -- spelling
 vim.keymap.set("n", "<C-s>s", "<cmd>setlocal spell!<cr>", { noremap = true })
