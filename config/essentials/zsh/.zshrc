@@ -22,10 +22,9 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$ZDOTDIR/zcompcache"
 
 # completers
-zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' completer _extensions _complete
 
 # format
-zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- (%e) -!%f'
 zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D%d --%f'
 zstyle ':completion:*:*:*:*:messages' format '%F{purple}-- %d --%f'
 zstyle ':completion:*:*:*:*:warnings' format '%F{red}-- no matches found --%f'
