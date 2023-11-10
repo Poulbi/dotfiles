@@ -42,9 +42,6 @@ zstyle ':completion:*' squeeze-slashes true
 # Prefer completing for an option (think cd -)
 zstyle ':completion:*' complete-options true
 
-# See ZSHCOMPWID "completion matching control"
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
 # keep prefix when completing
 zstyle ':completion:*' keep-prefix true
 
