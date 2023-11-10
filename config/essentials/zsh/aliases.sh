@@ -180,7 +180,7 @@ alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
 alias pwdcp='pwd | clipp'
 alias gw="grep -ri"
-alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} | supd'
+alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/.config/emacs | supd'
 
 # systemctl aliases
 alias smc='systemctl'
