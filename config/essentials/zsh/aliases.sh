@@ -270,6 +270,7 @@ alias cdng='cd /etc/nginx'
 alias cdrs='cd /srv/'
 alias cdv='cd ~/vids'
 alias god='cd "$(find . -mindepth 1 -maxdepth 1 -type d | fzf)"'
+alias gov='go ~/vids d'
 
 # fzf aliases
 alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
