@@ -242,10 +242,17 @@ pacsize()
 
 mime-default ()
 {
-	logn "Setting '$1' as default for its mimetypes"
-	grep "MimeType=" /usr/share/applications/"$1".desktop |
+    local mime
+    [ "${mime:=$1}" ] ||
+        mime="$(find /usr/share/applications/ -iname '*.desktop' -printf '%f\n' |
+            sed 's/\.desktop$//' |
+            fzf)"
+
+	logn "Setting '$mime' as default for its mimetypes"
+    [ "$mime" ] || exit 1
+	grep "MimeType=" /usr/share/applications/"$mime".desktop |
 		cut -d '=' -f 2- | tr ';' '\0' |
-		xargs -0I{} xdg-mime default "$1".desktop "{}"
+		xargs -0I{} xdg-mime default "$mime".desktop "{}"
 	logn "Done."
 }
 
@@ -270,13 +277,13 @@ fpass() {
 
 muttmail()
 {
-	log "email set: "
-	ls $HOME/.config/mutt/configs |
-		fzf |
-		tee /dev/stderr |
-		xargs -I {} ln -sf "$HOME/.config/mutt/configs/{}" $HOME/.config/mutt/muttrc
-	log 'Press [Enter to login]'
-	read && mutt
+	local config
+	local mail
+	config="$HOME/.config/mutt"
+	mail="$(find "$config"/configs -type f -printf '%f\n' | fzf)"
+	[ "$mail" ] || return 1
+	ln -sf "$config/configs/$mail" "$config"/muttrc
+	mutt
 }
 
 resize()
@@ -291,4 +298,9 @@ edit_in_dir() {
 	file="$1/$(goo f "$1" | sed "s@^$1@@" | fzf)"
 	[ -f "$file" ] || return 1
 	$EDITOR "$file"
+}
+
+to_webm()
+{
+    ffmpeg -y -i "$1" -vcodec libvpx -cpu-used -12 -deadline realtime "${1%.*}".webm
 }

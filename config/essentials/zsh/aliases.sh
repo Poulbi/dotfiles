@@ -17,18 +17,13 @@ then
 
 	alias calc='bc <<<'
 
-	if [ "$WAYLAND_DISPLAY" ]
-	then
-		alias -g clipp='wl-copy -n'
-		alias -g clipo='wl-paste -n'
-	else
+	if [ -z "$WAYLAND_DISPLAY" ]
+    then
 		if which devour > /dev/null 2>&1  
 		then
 			alias mpv='devour mpv'
 			alias zathura='devour zathura'
 		fi
-		alias -g clipp='xclip -selection clipboard -r'
-		alias -g clipo='xclip -o -selection clipboard -r'
 	fi
 	alias clipic='clipo > /tmp/pic.png'
 
@@ -174,9 +169,7 @@ alias ch='chown ${USER}:${USER} -R'
 alias kll='killall'
 alias pi='ping 9.9.9.9 -c4'
 alias sba='source env/bin/activate || source bin/activate'
-alias smc='systemctl'
-alias dsmc='doas systemctl'
-alias smcu='smc --user'
+
 alias zsr='source ${ZDOTDIR:-~}/.zshrc && rehash'
 alias rh='rehash'
 alias wf='doas wipefs -a'
@@ -187,9 +180,40 @@ alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
 alias pwdcp='pwd | clipp'
 alias gw="grep -ri"
-alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} | supd'
-alias nextdeadline='sed -n "/$(grep '\''^#'\'' ~/docs/filios/deadlines | sort -t '\''/'\'' -k 3 -k 2 -k 1 -n | head -n 1 | sed '\''s@/@.@g'\'')/,/^#\|^$/p" ~/docs/filios/deadlines | head -n -1'
+alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/.config/emacs | supd'
 
+# systemctl aliases
+alias smc='systemctl'
+alias smcs='systemctl status'
+alias smcst='systemctl start'
+alias smcS='systemctl stop'
+alias smcr='systemctl restart'
+alias smcrl='systemctl reload'
+alias smcd='systemctl daemon-reload'
+alias smce='systemctl edit'
+alias smcen='systemctl enable'
+#user
+alias smcu='systemctl --user'
+alias smcus='systemctl --user status'
+alias smcust='systemctl --user start'
+alias smcuS='systemctl --user stop'
+alias smcur='systemctl --user restart'
+alias smcurl='systemctl --user reload'
+alias smcud='systemctl --user daemon-reload'
+alias smcue='systemctl --user edit'
+alias smcuen='systemctl --user enable'
+#doas
+alias dsmc='doas systemctl'
+alias dsmcs='doas systemctl status'
+alias dsmcst='doas systemctl start'
+alias dsmcS='doas systemctl stop'
+alias dsmcr='doas systemctl restart'
+alias dsmcrl='doas systemctl reload'
+alias dsmcd='doas systemctl daemon-reload'
+alias dsmce='doas systemctl edit'
+alias dsmcen='doas systemctl enable'
+
+# virtualbox aliases
 alias vbm='vboxmanage'
 alias vbls='vbm list vms'
 alias vblsr='vbm list runningvms'
@@ -244,21 +268,27 @@ alias czo='cd ~/zot/'
 alias cdpw='cd ${PASSWORD_STORE_DIR:-~/.password-store}'
 alias cdng='cd /etc/nginx'
 alias cdrs='cd /srv/'
+alias cdv='cd ~/vids'
 alias god='cd "$(find . -mindepth 1 -maxdepth 1 -type d | fzf)"'
+alias gov='go ~/vids d'
 
 # fzf aliases
 alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
 alias ppjs='cd ~/proj/personal/scripts/"$(find ~/proj/personal/scripts -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
 alias scr='edit_in_dir ~/proj/personal/scripts/'
 alias fil='edit_in_dir ~/docs/filios/'
-alias cfg='edit_in_dir ~/src/dotfiles'
 alias fzps='ps aux | tail +2 | fzf | tee /dev/stderr | awk '\''{print $2}'\'' | clipp'
 alias asf='alias | fzf'
 alias fzh="tac $HISTFILE | fzf | tee /dev/stderr | clipp"
 alias ffwin='hyprctl clients -j | jq '\''.[].pid'\'' | fzf --preview "hyprctl clients -j | jq '\''.[] | select(.pid == {}) | {class, title, workspace, xwayland}'\''"'
 alias pff='find ${PASSWORD_STORE_DIR:=~/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
 alias fzps='fzf --print0 | xargs -0I{}'
-alias ytdl='yt-dlp --restrict-filenames --embed-chapters -f "b" -S "res:1080" -P "$HOME/vids/youtube/" -o "%(channel)s - %(title)s.%(ext)s"'
+alias ytdl='yt-dlp --restrict-filenames --embed-chapters -f "b" -S "res:1080" -P "$HOME/vids/youtube/" -o "%(channel)s/%(title)s.%(ext)s"'
+
+# emacs aliases
+alias emacsd='emacs --daemon'
+alias emacsdbg='emacs --debug-init'
+alias e='emacsclient -c -a "emacs"'
 
 # docker aliases
 alias dcb='docker build'
@@ -279,6 +309,7 @@ alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # oh-my-zsh git aliases
 alias config='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
+alias cfg='$EDITOR ~/src/dotfiles/"$(config git ls-files | fzf || exit)"'
 alias gmod='git status --short | sed '\''/^\s*M/!d;s/^\s*M\s*//'\'' | fzf | xargs $EDITOR'
 alias g='git'
 alias ga='git add'
@@ -318,6 +349,7 @@ alias gcasm='git commit --all --signoff --message'
 alias gcb='git checkout -b'
 alias gcf='git config --list'
 alias gcl='git clone'
+alias gclc='git clone "$(clipo)"'
 alias gclr='git clone --recurse-submodules'
 alias gc1='git clone --depth 1'
 alias gclean='git clean --interactive -d'

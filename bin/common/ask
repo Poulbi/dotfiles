@@ -1,36 +1,4 @@
 #!/bin/sh
-
-# requirements
-which pass jq > /dev/null ||
-	exit 1
-
-# input
-test -z "${inp:=$@}" &&
-	inp="$(cat /dev/stdin)"
-
-# \n\t -> ' ' && "->' 
-prompt="$(echo "$inp" | tr "\n\t\"" "  '")"
-test -z "$prompt" && exit 1
-
-API_KEY="$(pass tokens/openai-api)"
-model="text-davinci-003"
-tokens="1024"
-temperature=0
-
-data=$(echo \
-'{
-  "prompt": "'"$prompt"'",
-  "model": "'"$model"'",
-  "max_tokens": '$tokens',
-  "temperature": '$temperature'
-}')
-
-output=$(curl -s -X POST \
-	-H 'Content-Type: application/json' \
-    -H "Authorization: Bearer $API_KEY" \
-	-d "$data" \
-	https://api.openai.com/v1/completions \
-	| jq -r '.choices[0].text')
-
-# remove newline
-echo "${output:1}"
+which tgpt >/dev/null || exit 1
+[ "${inp:=$@}" ] || inp="$(cat /dev/stdin)"
+tgpt "$inp"

@@ -7,7 +7,7 @@ then
 	>&2 cat <<-EOF
 	usage:
 	    supd                              Update dirs in current dir
-	    ls ~/projects | supd              Update dirs read from stdin
+	    ... | supd                        Update dirs read from stdin
 	    supd -h                           Show help
 	EOF
 	exit
@@ -17,16 +17,22 @@ fi
 
 for dir in $dirs
 do
-	printf '%s:' "$dir" | >&2 sed "s#$HOME#~#"
 	(
 	cd "$dir" || return
+    # is git dir
+    if ! git rev-parse > /dev/null 2>&1
+    then
+        printf 'x\n'
+        exit
+    fi
+	printf '%s: ' "$dir" | >&2 sed "s#$HOME#~#"
     git "${1:-fetch}" > /dev/null 2>&1 &&
-        printf ' o' ||
-        printf ' x'
+        printf 'o' ||
+        printf 'x'
     # Show remote state
-    printf '%s %s\n' "$(git status --short 2> /dev/null |
-        awk 'NR==1 {print $1}')" "$(git branch -v 2>/dev/null |
-        awk -F '[][]' '/^\*/ {print $2}')" |
-        sed 's/ahead/↑ /;s/behind/↓ /;s/[^↓↑]*/ /g'
+    printf ' %s%s\n' "$(git status --short 2> /dev/null |
+        awk 'NR==1 {print "(" $1 ")"}')" "$(git branch -v 2>/dev/null |
+        awk -F '[][]' '/^\*/ {print $2}' |
+        sed 's/ahead/↑ /;s/behind/↓ /;s/[^↓↑]*//g')"
 	)
 done

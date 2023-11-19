@@ -1,5 +1,6 @@
 require("user.packer")
 require("user.remap")
+require("user.treesitter")
 require("user.set")
 require("user.cmp")
 require("user.zk")

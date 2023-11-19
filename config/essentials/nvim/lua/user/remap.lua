@@ -54,9 +54,14 @@ end, { noremap = true })
 
 -- utils
 vim.keymap.set("i", "<LocalLeader>r", "<cmd>r!echo -n $RANDOM<cr><esc>kJA", { noremap = true })
+
+-- FORMATTING
 -- ordered list
 vim.keymap.set("n", "<LocalLeader>n", "<C-v>I0. <esc>gvg<C-a>", { noremap = true })
 vim.keymap.set("v", "<Leader>u", "<cmd>'<,'>s/^[0-9]\\+\\. //<cr><esc>", { noremap = true })
+-- table
+vim.keymap.set("v", "<LocalLeader>t", "!column -t -s '|' -o '|'<cr>", { noremap = true })
+
 -- scripts
 vim.keymap.set("n", "<Leader>x", "<cmd>!chmod +x %<cr>", { noremap = true, silent = true})
 -- replace
@@ -73,8 +78,8 @@ vim.keymap.set("n", "<LocalLeader>s", function ()
 	print("sourced.")
 end, { noremap = true })
 
--- Packer
-vim.keymap.set("n", "<Leader>P", "<cmd>PackerSync<cr>", { noremap = true })
+-- Lazy
+vim.keymap.set("n", "<Leader>P", "<cmd>Lazy<cr>", { noremap = true })
 
 -- spelling
 vim.keymap.set("n", "<C-s>s", "<cmd>setlocal spell!<cr>", { noremap = true })

@@ -4,11 +4,11 @@ return require('packer').startup(function(use)
 	-- files
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.2',
-		requires = { {'nvim-lua/plenary.nvim'} }
+		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-	use {'nvim-telescope/telescope-ui-select.nvim' }
-	use {'nvim-telescope/telescope-media-files.nvim'}
+	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+	use { 'nvim-telescope/telescope-ui-select.nvim' }
+	use { 'nvim-telescope/telescope-media-files.nvim' }
 
 	use('nvim-telescope/telescope-symbols.nvim')
 	use('theprimeagen/harpoon')
@@ -18,20 +18,11 @@ return require('packer').startup(function(use)
 	use { 'uZer/pywal16.nvim', as = 'pywal16' }
 	use('norcalli/nvim-colorizer.lua')
 
-	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 	use('nvim-treesitter/playground')
 	use('theRealCarneiro/hyprland-vim-syntax')
 
 	use('mbbill/undotree')
-	use {
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		}
-	}
 
 	use('tpope/vim-capslock')
 	use('tpope/vim-commentary')
@@ -48,10 +39,17 @@ return require('packer').startup(function(use)
 	-- utils
 	use('godlygeek/tabular')
 	use('renerocksai/calendar-vim')
-	use('ojroques/vim-oscyank', {branch = "main"})
+	use('ojroques/vim-oscyank', { branch = "main" })
 	use("potamides/pantran.nvim")
 	use('alx741/vinfo')
+	-- use('sheerun/vim-polyglot') TODO: fix error conflicting with telekasten
 	-- use('github/copilot.vim')
+	--
+	use {
+		'https://gitlab.com/itaranto/plantuml.nvim',
+		tag = '*',
+		config = function() require('plantuml').setup() end
+	}
 
 	-- objects
 	use('michaeljsmith/vim-indent-object')
@@ -69,7 +67,7 @@ return require('packer').startup(function(use)
 
 	-- debugging
 	use('mfussenegger/nvim-dap')
-	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+	use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
 	-- java
 	use('mfussenegger/nvim-jdtls')
