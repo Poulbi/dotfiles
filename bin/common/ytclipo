@@ -11,9 +11,13 @@ fi
 inp="$1"
 [ "${inp:=$(paste)}" ] || inp="$(cat /dev/stdin)"
 
-# take last link from clipboard
-# works when link is from yt-local
-inp="https://youtu.be/$(echo "$inp" | sed 's/.*\(.\{11\}\)$/\1/')"
+# remove util scheme
+inp="${inp#*//}"
+# convert to youtube.com/path url
+# works for:
+# - 'youtu.be/watch?v=xxxxxx'
+# - 'https://piped.video/watch?v=xxxxx'
+inp="https://youtube.com/${inp#*/}"
 >&2 printf "inp: %s\n" "$inp"
 notify-send "ytclipo" "downloading <i>$inp</i>" || :
 
