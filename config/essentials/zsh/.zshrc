@@ -75,7 +75,7 @@ do [ -f "$file" ] && . "$file" && break
 done
 case "${ID:=unknown}" in
 	debian|ubuntu) PLUGPATH=/usr/share/ ;;
-	unknown) PLUGPATH=$HOME/.config/zsh/plugins ;;
+	unknown) PLUGPATH=$ZDOTDIR/plugins ;;
 	*) PLUGPATH=/usr/share/zsh/plugins ;;
 esac
 . $PLUGPATH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
