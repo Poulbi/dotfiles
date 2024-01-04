@@ -145,12 +145,13 @@ function osc7 {
 add-zsh-hook -Uz chpwd osc7
 command_not_found_handler () {
 	if [[ -o interactive ]] && isTextFile "$1"
-	then
-		"$EDITOR" "$1"
-	else
-		echo "zsh: command not found: $1" >&2
+	then "$EDITOR" "$1"
+	else echo "zsh: command not found: $1" >&2
 	fi
 }
+
+# automatic ls after cd
+add-zsh-hook -Uz chpwd (){[ "$PWD" != "$HOME" ] && ls -a; }
 
 # prompt
 PS1=' %K{16}%B%(#.%F{1}.%F{13})%n%b%f@%B%F{6}%m%b%f %3~%k '
