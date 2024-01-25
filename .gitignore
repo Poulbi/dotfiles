@@ -2,8 +2,6 @@ bin/common/stowdots
 config/common/btop/
 config/common/mpd/database
 config/common/mpd/pid
-config/common/mpv/playfile.txt
-config/common/mpv/watch_later/*
 config/essentials/gnupg/*
 config/essentials/nvim/lazy-lock.json
 config/essentials/nvim/lua/.luarc.json
