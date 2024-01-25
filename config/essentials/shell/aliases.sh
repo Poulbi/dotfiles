@@ -310,7 +310,7 @@ alias dbadd='ssh db dladd "'\''$(clipo)'\''"'
 alias dbcons='ssh -t db dlcons'
 alias dbinf='ssh db dlinfo'
 alias sshdb='ssh -t db "tmux a || tmux"'
-alias dbsmu='rsync -aPz db:/media/basilisk/music/ /media/kilimanjaro/music'
+alias dbsmu='rsync -rlpP db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # oh-my-zsh git aliases
 alias config='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
@@ -499,3 +499,4 @@ alias gamc='git am --continue'
 alias gams='git am --skip'
 alias gama='git am --abort'
 alias gamscp='git am --show-current-patch'
+alias xrhdmi='xrandr --auto --output HDMI-4 --left-of DP-1-2'
