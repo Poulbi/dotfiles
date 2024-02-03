@@ -30,6 +30,7 @@ opt.updatetime = 100
 opt.laststatus = 2
 opt.history = 200
 opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
 
 opt.smartindent = true
 opt.scrolloff = 8

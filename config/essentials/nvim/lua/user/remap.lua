@@ -70,9 +70,9 @@ vim.keymap.set("n", "<Leader>sl", [[:s/\<<C-r><C-w>\>/<C-r><C-w><C-w>/gI<Left><L
 vim.keymap.set("n", "<LocalLeader>f", "<cmd>.!fold -w 80 -s<cr>")
 
 -- write
-vim.keymap.set("n", "<LocalLeader>w", "<cmd>write<cr>", { noremap = true })
-vim.keymap.set("n", "<LocalLeader>W", "<cmd>write!<cr>", { noremap = true })
-vim.keymap.set("n", "<LocalLeader>e", "<cmd>edit<cr>", { noremap = true })
+vim.keymap.set("n", "<Leader>w", "<cmd>write<cr>", { noremap = true })
+vim.keymap.set("n", "<Leader>W", "<cmd>write!<cr>", { noremap = true })
+vim.keymap.set("n", "<Leader>e", "<cmd>edit<cr>", { noremap = true })
 vim.keymap.set("n", "<LocalLeader>s", function ()
 	vim.cmd.source()
 	print("sourced.")
