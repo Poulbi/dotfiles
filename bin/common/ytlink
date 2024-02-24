@@ -8,6 +8,8 @@
 inp="$1"
 [ "${inp:=$(clipo)}" ] || inp="$(cat /dev/stdin)"
 
+# if link is http://127.0.0.1:9010/https://www.youtube.com/watch?v=7KpxsqwNF0o
+inp="${inp#*/https://}"
 # remove util scheme
 inp="${inp#*//}"
 inp="https://youtube.com/${inp#*/}"
