@@ -32,15 +32,22 @@ eval "$(zoxide init zsh)"
 
 ### Plugins
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+plug "MichaelAquilina/zsh-you-should-use"
+plug "chivalryq/git-alias"
 plug "kutsan/zsh-system-clipboard"
+# plug "marlonrichert/zsh-autocomplete"
 plug "xPMo/zsh-toggle-command-prefix"
+plug "zap-zsh/fzf"
 plug "zap-zsh/vim"
+plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-completions"
-plug "zap-zsh/fzf"
-plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
-plug "MichaelAquilina/zsh-you-should-use"
+
+plug "MichaelAquilina/zsh-auto-notify"
+export AUTO_NOTIFY_TITLE="zsh"
+export AUTO_NOTIFY_BODY="<b>%command</b> [%exit_code]"
+AUTO_NOTIFY_IGNORE+=("gurk")
 
 # Substring search settings
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=blue,fg=black,bold"
@@ -92,6 +99,7 @@ bindkey "^Xa" _expand_alias
 bindkey "^Xe" edit-command-line
 bindkey "^[." insert-last-word
 bindkey "^['" quote-line
+bindkey '\ea' autosuggest-toggle
 ## Move around using h j k l in completion menu
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
