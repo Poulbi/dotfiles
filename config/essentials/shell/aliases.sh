@@ -318,6 +318,7 @@ alias dbsmu='rsync -rlpP db:/media/basilisk/music/ /media/kilimanjaro/music'
 alias config='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
 alias cfg='vi ~/src/dotfiles/"$(config git ls-files | fzf || exit)"'
 alias gmod='git status --short | sed '\''/^\s*M/!d;s/^\s*M\s*//'\'' | fzf | xargs vi'
+alias gclc='git clone "$(clipo)"'
 
 # docker
 alias dorm='docker container rm $(docker container ls -a | tail -n +2 | fzf -m | awk '\''{print $1}'\'')'
