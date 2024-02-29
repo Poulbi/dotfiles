@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# zmodload zsh/zprof
+
 if [ "$(id -u)" -ne 0 ]
 then
 	[ "${TTY%%tty*}" = '/dev/' ] && clear
@@ -23,6 +25,7 @@ zle -N change-surround surround
 . $XDG_CONFIG_HOME/shell/functions.sh
 . $XDG_CONFIG_HOME/shell/aliases.sh
 . $XDG_CONFIG_HOME/zsh/comp.zsh
+. $XDG_CONFIG_HOME/zsh/widgets.zsh
 # . $XDG_CONFIG_HOME/zsh/prompt.zsh
 # . $XDG_CONFIG_HOME/zsh/plugins.zsh
 
@@ -32,15 +35,22 @@ eval "$(zoxide init zsh)"
 
 ### Plugins
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+plug "MichaelAquilina/zsh-you-should-use"
+plug "chivalryq/git-alias"
 plug "kutsan/zsh-system-clipboard"
+# plug "marlonrichert/zsh-autocomplete"
 plug "xPMo/zsh-toggle-command-prefix"
+plug "zap-zsh/fzf"
 plug "zap-zsh/vim"
+plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-completions"
-plug "zap-zsh/fzf"
-plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
-plug "MichaelAquilina/zsh-you-should-use"
+
+plug "MichaelAquilina/zsh-auto-notify"
+export AUTO_NOTIFY_TITLE="zsh"
+export AUTO_NOTIFY_BODY="<b>%command</b> [%exit_code]"
+AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer")
 
 # Substring search settings
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=blue,fg=black,bold"
@@ -92,6 +102,7 @@ bindkey "^Xa" _expand_alias
 bindkey "^Xe" edit-command-line
 bindkey "^[." insert-last-word
 bindkey "^['" quote-line
+bindkey '\ea' autosuggest-toggle
 ## Move around using h j k l in completion menu
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
@@ -133,3 +144,5 @@ setopt histreduceblanks
 setopt interactivecomments
 setopt notify
 setopt cdablevars
+
+# zprof
