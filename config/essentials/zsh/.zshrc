@@ -116,16 +116,12 @@ bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
 
-set_wt_action () {
-	print -n "\e]0;$1\a\033[0m"
-}
-add-zsh-hook -Uz preexec set_wt_action
-set_wt () {
-	print -Pn "\e]0;%n@%m on %~\a"
-}
-add-zsh-hook -Uz precmd set_wt
+## window title hooks
+add-zsh-hook -Uz preexec () { print -n "\e]0;$1\a\033[0m"; }
+add-zsh-hook -Uz precmd set_wt (){ print -Pn "\e]0;%n@%m on %~\a"; }
+
 ## automatic ls after cd
-add-zsh-hook -Uz chpwd (){[ "$PWD" != "$HOME" ] && ls -a; }
+add-zsh-hook -Uz chpwd (){ [ "$PWD" = "$HOME" ] || ls -a; }
 
 ### Variables
 ## Run menuscripts with fzf
