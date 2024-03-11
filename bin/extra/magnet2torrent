@@ -21,7 +21,11 @@ fi
 hash="${1##*btih:}"
 hash="${hash%%&*}"
 
+url="$(curl -s "https://torrage.info/torrent.php?h=$hash" |
+    pup '#torrent-operation-link attr{href}')"
+>&2 printf "url: %s\n" "$url"
+
 # Download the torrent file from a torrent website
 torrent_file="${hash}.torrent"
-wget "https://itorrents.org/torrent/${hash}.torrent" -O "$torrent_file"
-echo "Torrent file written to ${torrent_file}"
+curl "$url" -H 'Referer: https://torrage.info/' > tmp.torrent
+echo "$torrent_file"

@@ -2,7 +2,7 @@
 
 inp="$(ytlink)"
 >&2 printf "inp: %s\n" "$inp"
-notify-send "ytclipo" "downloading <i>$inp</i>" || :
+notify-send "ytclipo" "$inp" || :
 
 yt-dlp "$inp" \
 	--restrict-filenames \
