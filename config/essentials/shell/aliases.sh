@@ -50,6 +50,8 @@ alias sr='surfraw'
 alias ccu='calcurse'
 alias pf='profanity'
 
+alias f='fg'
+
 alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
@@ -326,3 +328,5 @@ alias doirm='docker image rm $(docker image ls | tail -n +2 | fzf -m | awk '\''{
 alias -g skip='tail -n +2'
 alias ddeps='pactree -r -d 1'
 alias update-mirrors='reflector -p https | rankmirrors -n 10 -p -w - | doas tee /etc/pacman.d/mirrorlist'
+
+alias tmpd='cd $(mktemp -d)'
