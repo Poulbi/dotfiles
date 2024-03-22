@@ -6,6 +6,6 @@ url="$(tr -d '\n' | grep -Eo "$regex" | commander -xcl)"
 
 case $1 in
 	'c') printf '%s' "$url" | clipp ;;
-	'o') linkhandler "$url" ;;
+	'o') lh "$url" ;;
 	*) echo "no option" ;;
 esac
