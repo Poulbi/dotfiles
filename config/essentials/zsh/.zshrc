@@ -22,9 +22,9 @@ zle -N add-surround surround
 zle -N change-surround surround
 
 ### Source files
+. $XDG_CONFIG_HOME/zsh/comp.zsh
 . $XDG_CONFIG_HOME/shell/functions.sh
 . $XDG_CONFIG_HOME/shell/aliases.sh
-. $XDG_CONFIG_HOME/zsh/comp.zsh
 . $XDG_CONFIG_HOME/zsh/widgets.zsh
 # . $XDG_CONFIG_HOME/zsh/prompt.zsh
 # . $XDG_CONFIG_HOME/zsh/plugins.zsh

@@ -68,7 +68,10 @@ sms() { ssh -t phone sendmsg "$1" "'$2'"; }
 trcp() { scp "$1" db:/media/basilisk/downloads/transmission/torrents/; }
 rln() { ln -s "$(readlink -f "$1")" "$2"; }
 getgit() { git clone git@db:"$1"; }
+
 esc() { eval "$EDITOR '$(which $1)'"; }
+compdef esc="which"
+
 delfile() { curl "${2:-https://upfast.cronyakatsuki.xyz/delete/$1}"; }
 upfile() { curl -F "file=@\"$1\"" "${2:-https://0x0.st}"; }
 to_webm() { ffmpeg -y -i "$1" -vcodec libvpx -cpu-used -12 -deadline realtime "${1%.*}".webm; }
@@ -292,3 +295,10 @@ edit_in_dir() {
 	[ -f "$file" ] || return 1
 	$EDITOR "$file"
 }
+
+wgtoggle() { 
+	d="${1:-wg0}"
+	ip -br a | awk '{print $1}' | grep "$d" > /dev/null &&
+        doas wg-quick down "$d" ||
+        doas wg-quick up "$d"
+ }
