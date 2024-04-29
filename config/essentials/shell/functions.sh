@@ -292,3 +292,11 @@ edit_in_dir() {
 	[ -f "$file" ] || return 1
 	$EDITOR "$file"
 }
+
+# Download a file from google drive
+# link like this: https://drive.usercontent.google.com/download?id=1TiJDEftTtF1KTMBI950Bj487ndYqkwpQ&export=download
+gdown () {
+        agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/12$(head /dev/urandom | tr -dc '0-1' | cut -c1).0.0.0 Safari/537.36"
+        uuid=$(curl -sL "$1" -A "$agent" | sed -nE 's|.*(uuid=[^"]*)".*|\1|p')
+        aria2c -x16 -s16 "$1&confirm=t&$uuid" -U "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" --summary-interval=0 -d "${2:-.}"
+}
