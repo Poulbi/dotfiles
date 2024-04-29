@@ -68,6 +68,8 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"
 
+export CM_LAUNCHER="commander -c"
+
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
