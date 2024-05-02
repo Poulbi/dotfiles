@@ -24,3 +24,13 @@ ssh vm "rasdial \"vpn.student.ehb.be\""
 ssh -f -N \
 	-L 2222:10.2.160.41:22 \
 	vm
+
+ssh -f -N \
+	-L 2223:10.2.160.9:22 \
+	vm
+ssh -f -N \
+	-L 2224:10.2.160.10:22 \
+	vm
+ssh -f -N \
+	-L 2225:10.2.160.11:22 \
+	vm
