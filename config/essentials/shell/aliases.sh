@@ -331,3 +331,5 @@ alias update-mirrors='reflector -p https | rankmirrors -n 10 -p -w - | doas tee 
 
 alias tmpd='cd $(mktemp -d)'
 alias brs='$BROWSER'
+which bat > /dev/null 2>&1 &&
+    alias cat="bat -p"
