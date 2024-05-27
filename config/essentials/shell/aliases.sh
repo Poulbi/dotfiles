@@ -170,7 +170,14 @@ alias wgdown='doas wg-quick down wg0'
 alias npi="npm init --yes"
 
 # Python
-alias penv='python3 -m venv env'
+
+if which uv > /dev/null 2>&1
+then
+    alias penv='uv venv env'
+    alias pip='uv pip'
+else
+    alias penv='python3 -m venv env'
+fi
 alias phttp='python3 -m http.server'
 alias pipreq='pip install -r requirements.txt'
 
