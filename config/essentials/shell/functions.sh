@@ -317,17 +317,10 @@ serve() {
     if [ "$1" ]
     then
         logn "Serving $1"
-        docker container run \
-            --rm \
-            --volume "$(readlink -f "$1")":/data \
-            --publish 80:5000 sigoden/dufs /data
+        dufs "$1"
     else
-
         logn "Receiving files.."
-        docker container run \
-            --rm \
-            --volume /tmp/data:/data \
-            --publish 80:5000 sigoden/dufs /data --allow-upload
+        dufs /tmp/data --alow-upload
     fi
 }
 

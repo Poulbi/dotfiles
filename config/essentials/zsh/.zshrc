@@ -31,7 +31,7 @@ eval "$(zoxide init zsh)"
 
 ### Plugins
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-plug "MichaelAquilina/zsh-you-should-use"
+# plug "MichaelAquilina/zsh-you-should-use"
 plug "chivalryq/git-alias"
 plug "kutsan/zsh-system-clipboard"
 # plug "marlonrichert/zsh-autocomplete"
@@ -109,13 +109,6 @@ bindkey -M menuselect '^xi' vi-insert
 bindkey -M menuselect '^xh' accept-and-hold                # Hold
 bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
 bindkey -M menuselect '^xu' undo                           # Undo
-
-space-expand-alias() {
-    zle _expand_alias
-    zle self-insert
-}
-zle -N space-expand-alias
-bindkey -M main ' ' space-expand-alias
 
 ## window title hooks
 add-zsh-hook -Uz preexec () { print -n "\e]0;$1\a\033[0m"; }

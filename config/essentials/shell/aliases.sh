@@ -53,7 +53,8 @@ alias pf='profanity'
 
 alias f='fg'
 
-alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
+which gurk > /dev/null 2>&1 &&
+    alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
