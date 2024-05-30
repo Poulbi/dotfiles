@@ -2,7 +2,7 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-export BROWSER="surf"
+export BROWSER="osurf"
 export VIEWER="zathura"
 export PLAYER="mpv"
 
