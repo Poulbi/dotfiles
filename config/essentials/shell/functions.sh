@@ -45,12 +45,12 @@ o()
 	test "$1" && shift
 	test -f "$f" && $EDITOR $@ "$f"
 }
-go()
+og()
 {
 	_googoo_fzf_opt "$1"
 	cd "$(goo d "$dest" | fzf $opt)"
 }
-ogo()
+oog()
 {
 	_googoo_fzf_opt "$1"
 	cd "$(dirname "$(goo f "$dest" | fzf $opt)")"
