@@ -2,15 +2,21 @@
 
 # convert to youtube.com/path url
 # works for:
-# - 'youtu.be/watch?v=xxxxxx'
+# - 'youtu.be/xxxxxx'
 # - 'https://piped.video/watch?v=xxxxx'
+# - https://youtube.com/watch?v=xxxx
 
-inp="$1"
-[ "${inp:=$(clipo)}" ] || inp="$(cat /dev/stdin)"
+# get from $1 or clipboard if empty
+vid="${1:-$(clipo)}"
 
+# The following subsitutions will try to grab the video id
 # if link is http://127.0.0.1:9010/https://www.youtube.com/watch?v=7KpxsqwNF0o
-inp="${inp#*/https://}"
+vid="${vid#*/https://}"
 # remove util scheme
-inp="${inp#*//}"
-inp="https://youtube.com/${inp#*/}"
-printf "%s" "$inp"
+vid="${vid#*//}"
+# remove domain
+vid="${vid#*/}"
+# remove query string
+vid="${vid#watch?v=}"
+
+printf "https://youtube.com/watch?v=%s\n" "$vid"

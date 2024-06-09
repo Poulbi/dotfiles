@@ -1,6 +1,6 @@
 #!/bin/sh
-[ "$1" = "-p" ] && arg='primary'
+[ "$1" = "-p" ] && i='primary' j="-b"
 if [ "$WAYLAND_DISPLAY" ]
 then wl-paste -n "$1"
-else xclip -o -selection "${arg:-clipboard}" -r
+else xsel -o $j
 fi

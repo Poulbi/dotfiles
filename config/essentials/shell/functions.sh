@@ -109,7 +109,7 @@ clip() {
 	then
 		echo -n "$@" | wl-copy
 	else
-		echo -n "$@" | xclip -selection clipboard -rmlastnl
+		echo -n "$@" | xsel -b
 	fi
 }
 
