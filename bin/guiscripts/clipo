@@ -1,6 +1,6 @@
 #!/bin/sh
-[ "$1" = "-p" ] && i='primary' j="-b"
+[ "$1" = "-p" ] && i='primary' j="-p"
 if [ "$WAYLAND_DISPLAY" ]
 then wl-paste -n "$1"
-else xsel -o $j
+else xsel -o ${j:--b}
 fi

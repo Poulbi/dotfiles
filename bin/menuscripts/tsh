@@ -19,7 +19,7 @@ done
 export results="$tmp/results"
 export links="$tmp/links"
 
-types="music anime movies shows other software games isos books"
+categories="music anime movies shows other software games isos books"
 
 if [ "$WAYLAND_DISPLAY" ]
 then
@@ -42,6 +42,9 @@ help ()
 	                 Available options: seeds, size, name
 	    -m MODULE    Select a module, if MODULE is 'list',
 	                 lists out available modules
+            -c CATEGORY  Select category
+            -f           Do not list files
+            -d		 Download without confirming
 	EOF
 }
 
@@ -121,7 +124,7 @@ show_files()
 # Select a type after having displayed them with 'show_types'
 select_type()
 {
-	for type in $types
+	for type in $categories
 	do printf "%s\n" "$type"
 	done | fzf
 }
@@ -131,10 +134,17 @@ trap "cleanup" EXIT
 
 ## OPTIONS
 skip=0
-while getopts ":hm:rs:" opt
+while getopts ":hm:rs:c:fd" opt
 do
 	case $opt in
 		h) help && exit ;;
+		c)
+			[ "$OPTARG" = "list" ] && >&2 printf '%s\n' "$categories" && exit
+			category="$(printf '%s\n' "$categories" | tr ' ' '\n' | grep -m 1 "^$OPTARG")"
+			[ -z "$category" ] && die "No valid category for '$OPTARG'"
+			logn "category: $category" ;;
+		f) noaskfiles="1" ;;
+		d) noaskdownload="1" ;;
 		m)
 			[ "$OPTARG" = "list" ] && list_modules && exit
 			module="$(list_modules | grep -m 1 "^$OPTARG")"
@@ -185,17 +195,18 @@ getfunctions=1 . "$LIBPFX/$module"
 # select result from "$results"
 for choice in $(select_result | xargs)
 do
-    printf 'choice: %s\n' "$choice"
+    printf 'choice: %s\n' "$(sed -n "${choice}p" "$results" | cut -f 3-)"
     magnet="$(get_magnet "$choice")"
     [ "$magnet" ] || exit 1
 
-    confirm 'files?' && show_files "$magnet"
+    if [ -z "$noaskfiles" ] && confirm 'files?'; then
+	    show_files "$magnet"
+    fi
 
-    if confirm 'download?'
+    if [ "$noaskdownload" ] || confirm 'download?'
     then
-	    type="$(select_type)"
-	    [ "$type" ] || exit 1
-	    transmission-remote debuc.com -a "$magnet" -w "/downloads/$type"
+    	    [ "${category:-$(select_type)}" ] || exit 1
+	    transmission-remote debuc.com -a "$magnet" -w "/downloads/$category"
     elif confirm "copy?"
     then
 	    echo "$magnet" | clipp

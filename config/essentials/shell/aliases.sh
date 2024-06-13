@@ -2,7 +2,7 @@
 # s/alias \([^-]\)/alias -g \1
 
 # The most important one
-alias vi='nvim'
+alias vi='vis'
 alias cd='z'
 
 # Zsh specific aliases
@@ -81,7 +81,7 @@ alias lst2='ls --tree -L2'
 alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which eza >/dev/null 2>&1 &&
-	alias ls='eza --sort extension --group-directories-first --no-time --git' ||
+	alias ls='eza --sort extension --group-directories-first --git' ||
 	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases
