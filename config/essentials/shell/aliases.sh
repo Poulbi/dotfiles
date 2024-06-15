@@ -2,7 +2,7 @@
 # s/alias \([^-]\)/alias -g \1
 
 # The most important one
-alias vi='nvim'
+alias vi='vis'
 alias cd='z'
 
 # Zsh specific aliases
@@ -81,7 +81,7 @@ alias lst2='ls --tree -L2'
 alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which eza >/dev/null 2>&1 &&
-	alias ls='eza --sort extension --group-directories-first --no-time --git' ||
+	alias ls='eza --sort extension --group-directories-first --git' ||
 	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases
@@ -195,7 +195,7 @@ alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
 alias pwdcp='pwd | clipp'
 alias gw="grep -ri"
-alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/proj/suckless/*/ ~/proj/personal/scripts/*/ ~/.config/emacs ~/.config/nvim | supd'
+alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/proj/suckless/*/ ~/.config/emacs ~/.config/nvim | supd'
 
 # systemctl aliases
 alias smc='systemctl'

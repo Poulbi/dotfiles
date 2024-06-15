@@ -1,13 +1,17 @@
 #!/bin/sh
 
-list1() { find "$1" -mindepth 1 -maxdepth 1 -type "${2:-d}" -printf '%f\n'; }
+# $1: dir 
+# $2: type
+list1() { find "$1" -mindepth 1 -maxdepth 1 -type "$2" -printf '%f\n'; }
 
-curs="$(list1 ~/docs/school/Vakken | commander -c)"
+curs="$(list1 ~/docs/school/Vakken d | dmenu -c)"
 [ "$curs" ] || exit 1
-zip="$(list1 ~/dl f | fzf -f "$curs" | grep '\.zip$')"
 >&2 printf "curs: %s\n" "$curs"
-[ "$zip" ] || exit 1
 
+dldir="$(which xdg-user-dir > /dev/null 2>&1 && xdg-user-dir 'DOWNLOAD' || echo '~/dl')"
+
+zip="$(list1 "$dldir" f | fzf -f "$curs" | grep '\.zip$')"
+[ "$zip" ] || exit 1
 >&2 printf "zip: %s\n" "$zip"
 
 cd -- ~/docs/school/Vakken/"$curs" || exit 1

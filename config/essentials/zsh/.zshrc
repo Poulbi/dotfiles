@@ -31,17 +31,12 @@ eval "$(zoxide init zsh)"
 
 ### Plugins
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-plug "MichaelAquilina/zsh-you-should-use"
 plug "chivalryq/git-alias"
-plug "kutsan/zsh-system-clipboard"
 # plug "marlonrichert/zsh-autocomplete"
-plug "xPMo/zsh-toggle-command-prefix"
 plug "zap-zsh/fzf"
-plug "zap-zsh/vim"
 plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-history-substring-search"
 
 plug "MichaelAquilina/zsh-auto-notify"
 export AUTO_NOTIFY_TITLE="zsh"

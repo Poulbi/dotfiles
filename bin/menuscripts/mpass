@@ -14,14 +14,14 @@ list_pswds()
 
 while [ -d "$store/$file" ]
 do
-	choice="$(list_pswds "$store/$file" | commander -c)"
+	choice="$(list_pswds "$store/$file" | dmenu -c -g 4 -l 4)"
 	[ "$choice" ] || exit 1
 	[ -z "$file" ] && file="$choice" || file="$file/$choice"
 done
 [ "$file" ] || exit 1
 
 pass show -c "$file" || exit 1
-notify-send -t 1000 "mpass" "copied <b>$file</b>"
+notify-send -t 1000 "mpass" "copied: $file"
 
 [ "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null && # on wayland and cliphist is running
 	cliphist list | head -n 1 | cliphist delete

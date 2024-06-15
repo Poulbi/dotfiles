@@ -1,2 +1,2 @@
 us
-us -option ctrl:swapcaps,altwin:menu_win -variant colemak
+colemak -option ctrl:swapcaps,altwin:menu_win
