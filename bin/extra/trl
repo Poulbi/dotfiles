@@ -41,10 +41,10 @@ then
 fi
 [ "$word" ] || exit 1
 
-primary="$(languages | fzf)"
+primary="$(languages | fzf --prompt="from:")"
 [ "$primary" ] || exit 1
 
-secondary="$(languages | fzf)"
+secondary="$(languages | fzf --prompt="to:")"
 [ "$secondary" ] || exit 1
 
 curl -s "https://context.reverso.net/translation/$primary-$secondary/$word" \

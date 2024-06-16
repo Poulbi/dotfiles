@@ -1,0 +1,8 @@
+#!/bin/sh
+find "$HOME/.config/surf/fifo" -type p -printf '%f\n' |
+while read -r winid
+do
+	title="$(xprop -id "$winid" 2> /dev/null | awk -F'"' '/^_NET_WM_NAME/ {print $2}')"
+	[ "$title" ] || continue
+	printf '%s %s\n' "$winid" "$title"
+done 

@@ -58,7 +58,7 @@ fi
 
 
 # Add nnn shell level to prompt
-[ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
+[ -n "$NNNLVL" ] && PS1="N$NNNLVL$PS1"
 
 # cd on nnn quiting
 nnn_cd ()

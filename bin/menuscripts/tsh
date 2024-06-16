@@ -5,8 +5,8 @@ PROG="$(basename "$0")"
 # copy command and deps variable
 deps="pup curl $MENUCMD"
 
-LIBPFX=/home/aluc/.local/share/tsh
-module='1337x.sh' # default module
+MODULES_PATH=$HOME/.local/share/tsh
+module='nyaa.sh' # default module
 
 # Files
 export tmp="/tmp/$PROG"
@@ -83,7 +83,7 @@ cleanup ()
 	done
 }
 
-list_modules () { find -L "$LIBPFX" -type f -printf "%f\n"; }
+list_modules () { find -L "$MODULES_PATH" -type f -printf "%f\n"; }
 
 # get a query from user based on MENUCMD
 get_query ()
@@ -179,7 +179,7 @@ then
 	# Get results
 	rm -f "$results" "$links"
 	# shellcheck source=/usr/local/lib/$PROG/nyaa.sh disable=SC1091
-	. "$LIBPFX/$module"
+	. "$MODULES_PATH/$module"
 	[ -f "$results" ] || die "No results."
 
 	# Save which module was used
@@ -190,7 +190,7 @@ fi
 
 # acquire get_magnet function
 # shellcheck source=/usr/local/lib/$PROG/nyaa.sh disable=SC1091
-getfunctions=1 . "$LIBPFX/$module"
+getfunctions=1 . "$MODULES_PATH/$module"
 
 # select result from "$results"
 for choice in $(select_result | xargs)

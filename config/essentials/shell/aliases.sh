@@ -339,6 +339,7 @@ alias ddeps='pactree -r -d 1'
 alias update-mirrors='reflector -p https | rankmirrors -n 10 -p -w - | doas tee /etc/pacman.d/mirrorlist'
 
 alias tmpd='cd $(mktemp -d)'
+alias tmpf='$EDITOR $(mktemp)'
 alias brs='$BROWSER'
 which bat > /dev/null 2>&1 &&
     alias cat="bat -p"

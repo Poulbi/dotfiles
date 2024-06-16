@@ -241,6 +241,7 @@ pacsize()
 
 mime-default ()
 {
+	mime=
     [ "${mime:=$1}" ] ||
         mime="$(find /usr/share/applications/ -iname '*.desktop' -printf '%f\n' |
             sed 's/\.desktop$//' |
@@ -363,4 +364,10 @@ ssh_port()
 {
     ssh -f -N -L 0.0.0.0:"$3":localhost:"$1" "$2"
     >&2 printf "Forwarded port '%s' on '%s' to '%s'.\n" "$1" "$2" "$3"
+}
+ffconcat () {
+	tmp=$(mktemp -p . ffconcat.XXXXX) 
+	sed 's/.*/file &/' > "$tmp"
+	ffmpeg -y -f concat -safe 0 -i $tmp -c copy "$1"
+	rm $tmp
 }
