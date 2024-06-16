@@ -121,14 +121,6 @@ show_files()
 	rm -f "$tmp"/.torrent
 }
 
-# Select a type after having displayed them with 'show_types'
-select_type()
-{
-	for type in $categories
-	do printf "%s\n" "$type"
-	done | fzf
-}
-
 trap "exit 1" INT
 trap "cleanup" EXIT
 
@@ -205,7 +197,8 @@ do
 
     if [ "$noaskdownload" ] || confirm 'download?'
     then
-    	    [ "${category:-$(select_type)}" ] || exit 1
+    	    [ "$category" ] || category="$(printf '%s' "$categories" | tr ' ' '\n' | fzf)"
+    	    [ "$category" ] || exit 2
 	    transmission-remote debuc.com -a "$magnet" -w "/downloads/$category"
     elif confirm "copy?"
     then
