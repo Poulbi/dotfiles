@@ -1,0 +1,2 @@
+#!/bin/sh
+curl -s 'https://subsplease.org/api/?f=schedule&tz=UTC' | jq -r ".schedule.$(date +%A).[] | [.time, .title] | join(\" \")"
