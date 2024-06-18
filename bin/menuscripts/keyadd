@@ -2,7 +2,7 @@
 
 log()
 {
-	notify-send -t 1000 "keyadd" "$1"
+	notify-send -t 1000 "keyadd" "$1" &
 	>&2 printf '%s\n' "$1"
 }
 
