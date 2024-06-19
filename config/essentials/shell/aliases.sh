@@ -3,7 +3,8 @@
 
 # The most important one
 alias vi='nvim'
-alias cd='z'
+which z > /dev/null 2>&1 &&
+    alias cd='z'
 
 # Zsh specific aliases
 if [ $SHELL = "/bin/zsh" ]
