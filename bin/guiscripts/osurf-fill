@@ -1,0 +1,113 @@
+#!/bin/sh
+# bitwarden dmenu script - based off of the autofill userscript from qutebrowser
+# requires the fifo patch
+# $1: winid
+
+fifodir="$HOME/.config/surf/fifo" 
+if [ -z "${winid:=$1}" ]
+then
+    winid="$(osurfls | dmenu -c -F -i | cut -f1 -d' ')"
+fi
+[ "$winid" ] || exit 1
+fifo="$fifodir/$winid"
+[ -p "$fifo" ] || exit 2
+
+url="$(xprop -id "$winid" _SURF_URI |
+	 cut -f 2 -d'"' |
+	 sed 's,^.*://\([^/]*\)/.*,\1,' |
+	 sed -r -e 's/^([^.]+)\.([^.]+)\.([^.]+)$/\2.\3/')"
+[ "$url" ] || exit 3
+>&2 printf 'url: %s\n' "$url"
+
+
+pass="$({ find $PASSWORD_STORE_DIR/websites/ -type f -name '*.gpg' |
+	 grep "$url/" || echo; } | head -n 1 |
+	 sed "s,$PASSWORD_STORE_DIR/,,;s/\.gpg$//" |
+	 dmenu -c)"
+[ $? -gt 0 ] && exit 4
+
+if [ -z "$pass" ]
+then
+ 	store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+ 	while [ -d "$store/$file" ]
+	do
+		choice="$(find "$store/$file" \
+			-maxdepth 1 -mindepth 1 \
+			-not -name '.*' -type d -printf "%y\t%f\n" -o \
+			-not -name '.*' -not -type d -printf "%y\t%f\n" |
+			sort -k1 -k2 |
+			cut -f 2 | sed 's/\.gpg$//' |
+			dmenu -c)"
+		[ "$choice" ] || exit 1
+		[ -z "$file" ] && file="$choice" || file="$file/$choice"
+	done
+	pass="$file"
+fi
+>&2 printf 'pass: %s\n' "$pass"
+
+herbe "filling ${pass#websites/}" &
+
+# Get password and username in variables with only one call to 'pass'
+eval "$(pass show "$pass" |
+	 sed -n "1s/'/'\\\\''/g;1s/.*/password='&'/p;s/^login: \?\(.\+\)/username='\1'/p")"
+printf '%s : %s\n' "$username" "$password"
+
+javascript_escape() {
+    printf '%s' "$1" | sed -s 's,['\''"\\\\],\\\\&,g'
+}
+
+js() {
+cat <<EOF
+    function isVisible(elem) {
+        var style = elem.ownerDocument.defaultView.getComputedStyle(elem, null);
+        if (style.getPropertyValue("visibility") !== "visible" ||
+            style.getPropertyValue("display") === "none" ||
+            style.getPropertyValue("opacity") === "0") {
+            return false;
+        }
+        return elem.offsetWidth > 0 && elem.offsetHeight > 0;
+    };
+    function hasPasswordField(form) {
+        var inputs = form.getElementsByTagName("input");
+        for (var j = 0; j < inputs.length; j++) {
+            var input = inputs[j];
+            if (input.type == "password" || input.autocomplete == "password" || input.name == "password") {
+                return true;
+            }
+        }
+        return false;
+    };
+    function loadData2Form (form) {
+        var inputs = form.getElementsByTagName("input");
+        for (var j = 0; j < inputs.length; j++) {
+            var input = inputs[j];
+            if (isVisible(input) && (input.type == "text" || input.type == "email")) {
+                input.focus();
+                input.value = "$(javascript_escape "$username")";
+                input.blur();
+                console.log("user: $(javascript_escape "$username")")
+            }
+            if (input.type == "password" || input.name == "password" || input.autocomplete == "password" || input.id == "password" ) {
+                input.focus();
+                input.value = "$(javascript_escape "$password")";
+                input.blur();
+                console.log("password: $(javascript_escape "$password")")
+            }
+            console.log(input)
+        }
+    };
+    var forms = document.getElementsByTagName("form");
+    for (i = 0; i < forms.length; i++) {
+        if (hasPasswordField(forms[i])) {
+            loadData2Form(forms[i]);
+	    // forms[i].submit();
+        }
+    }
+EOF
+}
+
+printjs() {
+    js | sed 's,//.*$,,' | tr '\n' ' '
+}
+
+echo "inject $(printjs)" >> "$fifo"

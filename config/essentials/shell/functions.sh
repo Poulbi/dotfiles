@@ -45,12 +45,12 @@ o()
 	test "$1" && shift
 	test -f "$f" && $EDITOR $@ "$f"
 }
-go()
+og()
 {
 	_googoo_fzf_opt "$1"
 	cd "$(goo d "$dest" | fzf $opt)"
 }
-ogo()
+oog()
 {
 	_googoo_fzf_opt "$1"
 	cd "$(dirname "$(goo f "$dest" | fzf $opt)")"
@@ -109,7 +109,7 @@ clip() {
 	then
 		echo -n "$@" | wl-copy
 	else
-		echo -n "$@" | xclip -selection clipboard -rmlastnl
+		echo -n "$@" | xsel -b
 	fi
 }
 
@@ -241,6 +241,7 @@ pacsize()
 
 mime-default ()
 {
+	mime=
     [ "${mime:=$1}" ] ||
         mime="$(find /usr/share/applications/ -iname '*.desktop' -printf '%f\n' |
             sed 's/\.desktop$//' |
@@ -357,3 +358,23 @@ ssh_port()
     ssh -f -N -L 0.0.0.0:"$3":localhost:"$1" "$2"
     >&2 printf "Forwarded port '%s' on '%s' to '%s'.\n" "$1" "$2" "$3"
 }
+ffconcat () {
+	tmp=$(mktemp -p . ffconcat.XXXXX) 
+	sed 's/.*/file &/' > "$tmp"
+	ffmpeg -y -f concat -safe 0 -i $tmp -c copy "$1"
+	rm $tmp
+}
+
+# wrap ssh and add key if exists
+ssh() {
+	if [ "$#" -gt 1 ] 
+	then
+		/usr/bin/ssh $@
+		return
+	fi
+
+	grep -E "Host\s+$1" $HOME/.ssh/config > /dev/null 2>&1 &&
+		keyadd "$1" > /dev/null 2>&1
+	/usr/bin/ssh "$1"
+}
+

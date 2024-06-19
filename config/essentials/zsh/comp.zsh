@@ -2,11 +2,10 @@
 # Find most of the stuff at https://github.com/zap-zsh/completions
 
 zmodload zsh/complist
-autoload -Uz compinit; compinit
 zstyle ':compinstall' filename '/home/aluc/.zshrc'
 # cache
-zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$ZDOTDIR/zcompcache"
+zstyle ':completion:*' use-cache on
 
 # completers
 zstyle ':completion:*' completer _extensions _complete
@@ -36,6 +35,9 @@ zstyle ':completion:*' keep-prefix true
 
 # ui
 zstyle ':completion:*' menu select
+
+ZSH_COMPDUMP="$ZDOTDIR"/zcompcache
+autoload -Uz compinit; compinit -d "$ZSH_COMPDUMP"
 
 _dotnet_zsh_complete()
 {

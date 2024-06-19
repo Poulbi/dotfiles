@@ -33,20 +33,16 @@ eval "$(zoxide init zsh)"
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 # plug "MichaelAquilina/zsh-you-should-use"
 plug "chivalryq/git-alias"
-plug "kutsan/zsh-system-clipboard"
 # plug "marlonrichert/zsh-autocomplete"
-plug "xPMo/zsh-toggle-command-prefix"
 plug "zap-zsh/fzf"
-plug "zap-zsh/vim"
 plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-history-substring-search"
 
 plug "MichaelAquilina/zsh-auto-notify"
 export AUTO_NOTIFY_TITLE="zsh"
 export AUTO_NOTIFY_BODY="%command [%exit_code]"
-AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis")
+AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
 
 # Substring search settings
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=blue,fg=black,bold"
@@ -63,7 +59,7 @@ fi
 
 
 # Add nnn shell level to prompt
-[ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
+[ -n "$NNNLVL" ] && PS1="N$NNNLVL$PS1"
 
 # cd on nnn quiting
 nnn_cd ()

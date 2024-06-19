@@ -2,7 +2,7 @@
 # s/alias \([^-]\)/alias -g \1
 
 # The most important one
-alias vi='nvim'
+alias vi='vis'
 which z > /dev/null 2>&1 &&
     alias cd='z'
 
@@ -83,7 +83,7 @@ alias lst2='ls --tree -L2'
 alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which eza >/dev/null 2>&1 &&
-	alias ls='eza --sort extension --group-directories-first --no-time --git' ||
+	alias ls='eza --sort extension --group-directories-first --git' ||
 	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases
@@ -197,7 +197,7 @@ alias gdate='date +%y_%m_%d-%T'
 alias tpid='tail -f /dev/null --pid'
 alias pwdcp='pwd | clipp'
 alias gw="grep -ri"
-alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/proj/suckless/*/ ~/proj/personal/scripts/*/ ~/.config/emacs ~/.config/nvim | supd'
+alias srcsupd='echo ~/src/{installdrier,dotfiles,password-store} ~/proj/suckless/*/ ~/.config/emacs ~/.config/nvim | supd'
 
 # systemctl aliases
 alias smc='systemctl'
@@ -341,6 +341,12 @@ alias ddeps='pactree -r -d 1'
 alias update-mirrors='reflector -p https | rankmirrors -n 10 -p -w - | doas tee /etc/pacman.d/mirrorlist'
 
 alias tmpd='cd $(mktemp -d)'
+alias tmpf='$EDITOR $(mktemp)'
 alias brs='$BROWSER'
 which bat > /dev/null 2>&1 &&
     alias cat="bat -p"
+
+alias glf='git pull --ff'
+alias glnf='git pull --no-ff'
+alias quickvms='/media/cricket/vms/quickemu/"$(find '\''/media/cricket/vms/quickemu/'\'' -type f -iname '\''*.conf'\'' -printf '\''%f
+'\'' | sed '\''s/\.conf$//'\'' | fzf)".conf 2> /dev/null'

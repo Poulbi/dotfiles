@@ -1,0 +1,5 @@
+#!/bin/sh
+cd "$HOME/pics/wallpapers" || exit 1
+bg="$(find . -type f -printf '%f\n' | sed 's@^\./@@' | dmenu -c -x)"
+[ "$bg" ] || exit 1
+feh --no-fehbg --bg-scale "$bg"

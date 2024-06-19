@@ -1,8 +1,8 @@
 #!/bin/zsh
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="vis"
+export VISUAL="vis"
 
-export BROWSER="surf"
+export BROWSER="osurf"
 export VIEWER="zathura"
 export PLAYER="mpv"
 
@@ -81,8 +81,8 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export LESS="-i -r"
 
 # Colored manpages
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
-export MANROFFOPT="-P -c"
+# export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# export MANROFFOPT="-P -c"
 
 export CM_LAUNCHER="commander -c"
 
@@ -92,3 +92,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$XDG_CONFIG_HOME/cargo/bin:$PATH"
 export PATH="$PATH:./node_modules/.bin"
 export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$GOPATH/bin"
+
+export PLAN9=/usr/lib/plan9
+export PATH="$PATH:$PLAN9/bin"

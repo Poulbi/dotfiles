@@ -1,0 +1,4 @@
+#!/bin/sh
+link="$(ytfzf -D -I l)"
+[ "$link" ] || exit 1
+yt-dlp $@ -o - "$link" | mpv -

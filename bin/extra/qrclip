@@ -1,0 +1,12 @@
+#!/bin/sh
+case $1 in
+	'-o')
+		qrencode -s 16 "$(clipo)" -o - |
+			imv -w "imv - $(clipo)" - ;;
+	'-s')
+		qrencode -s 16 "https://duckduckgo.com/$(clipo)" -o - |
+			imv -w "imv - search $(clipo)" - ;;
+    *)
+        >&2 printf 'qrclip [-s | -o]\n'
+        exit 1
+esac
