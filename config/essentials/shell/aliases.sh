@@ -3,7 +3,8 @@
 
 # The most important one
 alias vi='vis'
-alias cd='z'
+which z > /dev/null 2>&1 &&
+    alias cd='z'
 
 # Zsh specific aliases
 if [ $SHELL = "/bin/zsh" ]
@@ -53,7 +54,8 @@ alias pf='profanity'
 
 alias f='fg'
 
-alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
+which gurk > /dev/null 2>&1 &&
+    alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
@@ -161,9 +163,6 @@ alias hotpsot='nmcli dev wifi hotspot ifname wlan0 ssid wiefie password "peepeep
 alias wtip='wt ip -c -brief addr'
 alias fusephone='sshfs myphone: /media/phone'
 alias ttyper='ttyper -l english1000'
-
-alias wgup='doas wg-quick up wg0'
-alias wgdown='doas wg-quick down wg0'
 
 # NPM
 alias npi="npm init --yes"
