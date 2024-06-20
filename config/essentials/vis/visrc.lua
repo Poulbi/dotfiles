@@ -1,25 +1,45 @@
 ------------------------------------
---- LIBRARIES
+--- REQUIRES
 ------------------------------------
 require("vis")
 
 -- plugins
 require("build")
+-- use Trash directory instead, remove set_dir function
 require("backup")
 require("cursors")
 require("title")
 require("commentary")
 require("complete-line")
+-- removed formatting because already fulfilled by format.lua
+require("vis-go")
+-- set height to 40%
+require("fzf-open")
+require("vis-ultisnips")
+-- TODO: doesn't work when using with 'e|b'
+-- require("yank-highlight")
+
+-- save position before formatting, use vis:redraw
 local format = require("format")
+
+-- set height to 40%
+local fzfmru = require("fzf-mru")
+fzfmru.fzfmru_path = 'grep "^' .. os.getenv("PWD") .. '" | fzf'
+
 
 -- todo:
 -- c-scope
 -- c-tags
+-- ...
+-- vis-goto, favor open-file-under-cursor
+-- ...
+-- ultisnips
+-- ...
+-- vis-yank-highlight
 
 ------------------------------------
 --- VARIABLES
 ------------------------------------
-
 local m = vis.modes
 
 ------------------------------------
@@ -56,12 +76,15 @@ vis:command_register("Q", function()
 	vis:command("qa!")
 end, "Quit all")
 vis:command_register("delws", function()
-	vis:command("x/[ \t]+$|^[ \t]+$/d")
+	vis:command(",x/[ \t]+$|^[ \t]+$/d")
 end, "Remove trailing whitespace")
 
 -------------------------------------
 --- MAPPINGS
 -------------------------------------
+
+vis:map(m.NORMAL, "<C-p>", function() vis:command("fzf") end, "Open file with fzf")
+
 
 vis:map(m.NORMAL, " r", function()
 	wrap_restore(vis.command, vis, "e $vis_filepath")
@@ -107,8 +130,4 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 			"Print variable"
 		)
 	end
-
-	vis:command_register("pipe", function()
-		vis:pipe(win.file, nil, "sed 's/.*/- &/'")
-	end, "pipe test")
 end)
