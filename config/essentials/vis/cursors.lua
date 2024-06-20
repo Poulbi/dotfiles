@@ -6,7 +6,7 @@ local files = {}
 M.maxsize = 1000
 
 -- get the default system cache directory
-local get_default_cache_path = function()
+local function get_default_cache_path()
     local HOME = os.getenv('HOME')
     local XDG_CACHE_HOME = os.getenv('XDG_CACHE_HOME')
     local BASE = XDG_CACHE_HOME or HOME
@@ -16,7 +16,7 @@ end
 -- default save path
 M.path = get_default_cache_path()
 
-local read_files = function()
+local function read_files()
 
     -- read file
     local file = io.open(M.path)
@@ -36,10 +36,10 @@ local read_files = function()
 end
 
 -- read cursors from file on init
-local on_init = function() read_files() end
+local function on_init() read_files() end
 
 -- apply cursor pos on win open
-local on_win_open = function(win)
+local function on_win_open(win)
 
     if win.file == nil or win.file.path == nil then return end
 
@@ -58,7 +58,7 @@ local on_win_open = function(win)
 end
 
 -- set cursor pos on close
-local on_win_close = function(win)
+local function on_win_close(win)
 
     if win.file == nil or win.file.path == nil then return end
 
@@ -81,7 +81,7 @@ local on_win_close = function(win)
 end
 
 -- write cursors to file on quit
-local on_quit = function()
+local function on_quit()
 
     local file = io.open(M.path, 'w+')
     if file == nil then return end

@@ -2,7 +2,7 @@
 
 LUA_FILES := $(shell find . -name "*.lua")
 
-all: check format
+all: format check
 
 check:
 	luacheck --no-color --globals=vis -- $(LUA_FILES)
