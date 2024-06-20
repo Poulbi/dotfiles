@@ -3,48 +3,39 @@
 ------------------------------------
 
 require('vis')
-require('plugins')
 
-------------------------------------
---- EVENTS
-------------------------------------
+-- plugins
+require("backup")
+require("cursors")
+require("title")
 
-vis.events.subscribe(vis.events.INIT, function()
-	vis.options.ignorecase = true
-	vis.options.autoindent = true
-	vis.options.shell = "/bin/sh"
-	theme = "nord"
-	vis:command("set theme " .. theme)
-end)
-
-vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
-	win.options.relativenumbers = true
-end)
 
 ------------------------------------
 --- FUNCTIONS
 ------------------------------------
 
-function map_cmd(mode, map, command, help)
-	vis:map(mode, map, function()
-		vis:command(command)
-	end, help)
+local map_cmd = function(mode, map, command, help)
+	vis:map(mode, map, function() vis:command(command) end, help)
 end
 
-function map_cmd_restore(mode, map, command, help)
+local map_cmd_restore = function(mode, map, command, help)
 	vis:map(mode, map, function()
 		if (mode == vis.modes.INSERT) then
 			vis:feedkeys("<Escape>")
 		end
-			
+
 		vis:feedkeys("m")
 		vis:command(command)
 		vis:feedkeys("M")
 
 		if (mode == vis.modes.INSERT) then
 			vis:feedkeys("i")
-		end 
+		end
 	end, help)
+end
+
+local map_keys = function(mode, map, keys, help)
+	vis:map(mode, map, function() vis:feedkeys(keys) end, help)
 end
 
 ------------------------------------
@@ -55,11 +46,9 @@ local m = vis.modes
 
 ------------------------------------
 --- COMMANDS
-------------------------------------
+-----------------------------------
 
-vis:command_register("Q", function(argv, force, win, selection, range)
-	vis:command("qa!")
-end, "Quit all")
+vis:command_register("Q", function() vis:command("qa!") end, "Quit all")
 
 -------------------------------------
 --- MAPPINGS
@@ -77,7 +66,33 @@ vis:map(m.NORMAL, " eh", function()
 	vis:command("!lowdown $vis_filepath > ${vis_filepath%.md}.html")
 	vis:info("exported.")
 end, "Export markdown to html")
-vis:map(m.NORMAL, " nl", function() vis:feedkeys(":<seq -f '%0.0f. ' 1 ") end, "Insert numbered list")
 
+map_keys(m.NORMAL, " nl", ":<seq -f '%0.0f. ' 1 ", "Insert numbered list")
+map_keys(m.NORMAL, " ws", ":,x/[ \t]+$|^[ \t]+$/d<Enter>", "Remove trailing whitespace")
 
 -- select markdown list element:	,x/^(\d+\.|[-*])\s+.+\n(^ .+\n)*/
+
+
+
+------------------------------------
+--- EVENTS
+------------------------------------
+
+vis.events.subscribe(vis.events.INIT, function()
+	vis.options.ignorecase = true
+	vis.options.autoindent = true
+	vis.options.shell = "/bin/sh"
+	local theme = "nord"
+	vis:command("set theme " .. theme)
+end)
+
+vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
+	win.options.relativenumbers = true
+
+	if win.syntax == "bash" then
+		map_keys(m.NORMAL, " v",
+		"V:x/^(\\s*)(.+)$/ c/\\1>\\&2 printf '\\2: %s\\\\n' \"$\\2\"/<Enter><Escape>", "Print variable")
+	end
+
+end)
+
