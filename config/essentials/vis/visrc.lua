@@ -125,9 +125,28 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 	if win.syntax == "bash" then
 		map_keys(
 			m.NORMAL,
-			" v",
+			";p",
 			"V:x/^(\\s*)(.+)$/ c/\\1>\\&2 printf '\\2: %s\\\\n' \"$\\2\"/<Enter><Escape>",
 			"Print variable"
 		)
+		map_keys(
+			m.NORMAL,
+			";v",
+			"V:x/^(\\s*)(.+)$/ c/\\1\"$(\\2)\"/<Enter><Escape>",
+			"Surround in variable"
+		)
+		map_keys(
+			m.NORMAL,
+			";|",
+			"V:x/\\| / c/|\n\t/<Enter><Escape>",
+			"Wrap one-line multi pipe command"
+		)
+		map_keys(
+			m.NORMAL,
+			";e",
+			"V:x/^(\\s*)(.+)$/ c/\\1[ \"\\2\" ] || exit 1/<Enter><Escape>",
+			"Condition exit if empty"
+		)
+
 	end
 end)
