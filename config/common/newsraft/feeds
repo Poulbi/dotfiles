@@ -25,8 +25,12 @@ https://arthurmelton.com/blogs.rss "Arthur Melton's blog'"
 
 @ Linux
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-V8FVQCUpRRUPNClviki3w "Luke Smith"
-https://youtube.com/feeds/video.xml?channel_id=UCngn7SVujlvskHRvRKc1cTw "Bugswriter"
-https://youtube.com/feeds/video.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "DistroTube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCngn7SVujlvskHRvRKc1cTw "Bugswriter"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "DistroTube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCuGS5mN1_CpPzuOUAu2LluA "NixHero"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCWQaM7SpSECp9FELz-cHzuQ "Dreams of Code"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCuoqzrsHlwv1YyPKLuMDUQ "Jonathan Blow"
+
 
 @ Entertainment
 https://www.youtube.com/feeds/videos.xml?channel_id=UCi8C7TNs2ohrc6hnRQ5Sn2w "Programmers are also human"
@@ -37,5 +41,5 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCVk4b-svNJoeytrrlOixebQ "Th
 https://www.youtube.com/feeds/videos.xml?channel_id=UCd3dNckv1Za2coSaHGHl5aA "TJ DeVries"
 
 @ News
-https://rss.rtbf.be/article/rss/highlight_rtbf_info.xml?source=internal
-https://news.ycombinator.com/rss
+https://rss.rtbf.be/article/rss/highlight_rtbf_info.xml?source=internal "RTBF"
+https://news.ycombinator.com/rss "HackerNews"

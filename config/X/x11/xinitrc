@@ -22,7 +22,7 @@ export MENUCMD="dmenu"
 export IMAGE="feh"
 xcompmgr &
 feh --no-fehbg --bg-scale ~/pics/wallpaper
-setxkbmap us -option ctrl:swapcaps,altwin:menu_win -variant colemak
+setxkbmap colemak -option ctrl:swapcaps,altwin:menu_win
 # xautolock -locker slock &
 gammastep -m randr &
 # dunst &

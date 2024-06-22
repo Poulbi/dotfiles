@@ -1,4 +1,4 @@
 #!/bin/sh
 url="$(ytlink)"
-notify-send "playing: $url" &
+herbe "playing: $url" &
 yt-dlp -o - "$url" | mpv -

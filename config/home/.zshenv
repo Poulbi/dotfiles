@@ -81,8 +81,8 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export LESS="-i -r"
 
 # Colored manpages
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
-export MANROFFOPT="-P -c"
+# export MANPAGER="less -R --use-color -Dd+r -Du+b"
+# export MANROFFOPT="-P -c"
 
 export CM_LAUNCHER="commander -c"
 
@@ -96,3 +96,6 @@ export PATH="$PATH:$GOPATH/bin"
 
 export PLAN9=/usr/lib/plan9
 export PATH="$PATH:$PLAN9/bin"
+
+export SSH_ASKPASS=askpass
+export SSH_ASKPASS_REQUIRE=prefer

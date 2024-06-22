@@ -241,6 +241,7 @@ pacsize()
 
 mime-default ()
 {
+	mime=
     [ "${mime:=$1}" ] ||
         mime="$(find /usr/share/applications/ -iname '*.desktop' -printf '%f\n' |
             sed 's/\.desktop$//' |
@@ -305,7 +306,7 @@ gdown () {
 }
 
 # toggle wireguard vpn on $1 -> interface
-wgtoggle() { 
+wgt() { 
 	d="${1:-wg0}"
 	ip -br a | awk '{print $1}' | grep "$d" > /dev/null &&
         doas wg-quick down "$d" ||
@@ -317,17 +318,10 @@ serve() {
     if [ "$1" ]
     then
         logn "Serving $1"
-        docker container run \
-            --rm \
-            --volume "$(readlink -f "$1")":/data \
-            --publish 80:5000 sigoden/dufs /data
+        dufs "$1"
     else
-
         logn "Receiving files.."
-        docker container run \
-            --rm \
-            --volume /tmp/data:/data \
-            --publish 80:5000 sigoden/dufs /data --allow-upload
+        dufs /tmp/data --alow-upload
     fi
 }
 
@@ -363,4 +357,10 @@ ssh_port()
 {
     ssh -f -N -L 0.0.0.0:"$3":localhost:"$1" "$2"
     >&2 printf "Forwarded port '%s' on '%s' to '%s'.\n" "$1" "$2" "$3"
+}
+ffconcat () {
+	tmp=$(mktemp -p . ffconcat.XXXXX) 
+	sed 's/.*/file &/' > "$tmp"
+	ffmpeg -y -f concat -safe 0 -i $tmp -c copy "$1"
+	rm $tmp
 }

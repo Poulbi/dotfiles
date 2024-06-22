@@ -1,0 +1,13 @@
+#!/bin/sh
+
+trr() { transmission-remote 192.168.178.79 "$@"; }
+
+id="$(trr -t all -l | tail -n +2 | head -n -1 | fzf | awk '{print $1}')"
+[ "$id" ] || exit 1
+name="$(trr -t "$id" -i | grep '^\s*Name:' | cut -f 4- -d ' ')"
+location="$(trr -t "$id" -i | grep '^\s*Location:' | cut -f 4- -d ' ')"
+
+>&2 printf '#%s\n' "$id"
+>&2 printf "old name: %s\n" "$name"
+>&2 printf 'new name: '
+trr -t "$id" --path "$name" --rename "$(head -n 1)"

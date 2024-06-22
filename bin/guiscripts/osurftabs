@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# list surf tabbed windows 
+
+# dependencies: lsw, dmenu, xprop
+# expects the tabbed windows to be named 'tabbed-surf'
+lsw | cut -f1 -d' ' |
+	while read -r winid 
+	do 
+		[ "tabbed-surf" = "$(xprop -id "$winid" WM_CLASS | cut -f2 -d'"')" ] &&
+			 printf '%s %s\n' "$winid"  "$(xprop -id "$winid" WM_NAME | cut -f2 -d'"')"
+	done

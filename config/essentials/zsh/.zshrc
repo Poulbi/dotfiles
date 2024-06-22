@@ -7,8 +7,6 @@ then
 	[ "${TTY%%tty*}" = '/dev/' ] && clear
 	case "${TTY#/dev/tty}" in
 		1) exec startx > /dev/null 2>&1 ;;
-		2) exec startdwl > /dev/null 2>&1 ;;
-		3) exec startw > /dev/null 2>&1 ;;
 		*) false ;;
 	esac && exit
 fi
@@ -18,10 +16,12 @@ autoload -z edit-command-line
 zle -N edit-command-line
 
 ### Source files
-. $XDG_CONFIG_HOME/zsh/comp.zsh
-. $XDG_CONFIG_HOME/shell/functions.sh
-. $XDG_CONFIG_HOME/shell/aliases.sh
-. $XDG_CONFIG_HOME/zsh/widgets.zsh
+source_it() { [ -f "$1" ] && . "$1" }
+source_it /etc/profile.d/plan9.sh
+source_it $XDG_CONFIG_HOME/zsh/comp.zsh
+source_it $XDG_CONFIG_HOME/shell/functions.sh
+source_it $XDG_CONFIG_HOME/shell/aliases.sh
+source_it $XDG_CONFIG_HOME/zsh/widgets.zsh
 # . $XDG_CONFIG_HOME/zsh/prompt.zsh
 # . $XDG_CONFIG_HOME/zsh/plugins.zsh
 
@@ -31,6 +31,7 @@ eval "$(zoxide init zsh)"
 
 ### Plugins
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+# plug "MichaelAquilina/zsh-you-should-use"
 plug "chivalryq/git-alias"
 # plug "marlonrichert/zsh-autocomplete"
 plug "zap-zsh/fzf"
@@ -41,7 +42,7 @@ plug "zsh-users/zsh-completions"
 plug "MichaelAquilina/zsh-auto-notify"
 export AUTO_NOTIFY_TITLE="zsh"
 export AUTO_NOTIFY_BODY="%command [%exit_code]"
-AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis")
+AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
 
 # Substring search settings
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=blue,fg=black,bold"
@@ -58,7 +59,7 @@ fi
 
 
 # Add nnn shell level to prompt
-[ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
+[ -n "$NNNLVL" ] && PS1="N$NNNLVL$PS1"
 
 # cd on nnn quiting
 nnn_cd ()

@@ -1,0 +1,21 @@
+#!/bin/sh
+lock="/tmp/igdl.lock"
+
+if [ -f "$lock" ]
+then
+	herbe "already downloading."
+	exit 1
+fi
+
+
+url="$(clipo)"
+out="/tmp/igdl.mp4"
+
+touch "$lock"
+herbe "igdl" "downloading: $url"  &
+yt-dlp "$url" -o "$out" || rm "$lock"
+
+printf '%s' "$out" | clipp
+herbe "igdl" "copied path."
+
+rm "$lock"

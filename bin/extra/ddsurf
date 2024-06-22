@@ -1,0 +1,4 @@
+#!/bin/sh
+f="$(mktemp)"
+awk '!x[$2]++' ~/.config/surf/history.txt > "$f"
+mv "$f" ~/.config/surf/history.txt
