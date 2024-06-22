@@ -123,7 +123,12 @@ vis.events.subscribe(vis.events.INIT, function()
 end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
-	vis:info(win.file.name)
+	-- automatically cd in parent dir of file
+	if win.file and win.file.path then
+		local dir = win.file.path:match(".*/")
+		vis:command("cd " .. dir)
+	end
+
 	win.options.relativenumbers = true
 
 	if win.syntax == "bash" then
