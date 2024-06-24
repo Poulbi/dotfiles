@@ -1,10 +1,11 @@
 #!/bin/sh
 
-# Fills a password for a given website 
+# Fills a password for a given website
 # original script by Avalon Williams (avalonwilliams@protonmail.com)
 # This version uses the window id to know the url of the surf window
 # and to know which fifo it must use.  Then it injects javascript code.
 # that will fill the forms with the credentials
+printf '\n\n'
 
 # dependencies:
 # - surf fifo patch (http://surf.suckless.org/patches/fifo/)
@@ -13,10 +14,9 @@
 
 # $1: winid
 
-fifodir="$HOME/.config/surf/fifo" 
-if [ -z "${winid:=$1}" ]
-then
-    winid="$(osurfls | dmenu -c -F -i | cut -f1 -d' ')"
+fifodir="$HOME/.config/surf/fifo"
+if [ -z "${winid:=$1}" ]; then
+	winid="$(osurfls | dmenu -c -F -i | cut -f1 -d' ')"
 fi
 [ "$winid" ] || exit 1
 fifo="$fifodir/$winid"
@@ -24,26 +24,24 @@ fifo="$fifodir/$winid"
 
 # Get only domain name + top-level domain
 url="$(xprop -id "$winid" _SURF_URI |
-	 cut -f 2 -d'"' |
-	 sed 's,^.*://\([^/]*\)/.*,\1,' |
-	 sed -r -e 's/^([^.]+)\.([^.]+)\.([^.]+)$/\2.\3/')"
+	cut -f 2 -d'"' |
+	sed 's,^.*://\([^/]*\)/.*,\1,' |
+	sed -r -e 's/^([^.]+)\.([^.]+)\.([^.]+)$/\2.\3/')"
 [ "$url" ] || exit 3
->&2 printf 'url: %s\n' "$url"
+printf >&2 'url: %s\n' "$url"
 
 # get pass with url and ask if multiple are found
 pass="$({ find $PASSWORD_STORE_DIR/websites/ -type f -name '*.gpg' |
-	 grep "$url/" || echo; } | head -n 1 |
-	 sed "s,$PASSWORD_STORE_DIR/,,;s/\.gpg$//" |
-	 dmenu -c)"
+	grep "$url/" || echo; } | head -n 1 |
+	sed "s,$PASSWORD_STORE_DIR/,,;s/\.gpg$//" |
+	dmenu -c)"
 # if dmenu was stopped, exit
 [ $? -gt 0 ] && exit 4
 
 # if no password was found, search through password store manually with dmenu
-if [ -z "$pass" ]
-then
- 	store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
- 	while [ -d "$store/$file" ]
-	do
+if [ -z "$pass" ]; then
+	store="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+	while [ -d "$store/$file" ]; do
 		choice="$(find "$store/$file" \
 			-maxdepth 1 -mindepth 1 \
 			-not -name '.*' -type d -printf "%y\t%f\n" -o \
@@ -56,22 +54,24 @@ then
 	done
 	pass="$file"
 fi
->&2 printf 'pass: %s\n' "$pass"
+printf >&2 'pass: %s\n' "$pass"
 herbe "filling ${pass#websites/}" &
 
 # Get password and username in variables with only one call to 'pass'
 # escape single quotes
 eval "$(pass show "$pass" |
-	 sed -n "1s/'/'\\\\''/g;1s/.*/password='&'/p;s/^login: \?\(.\+\)/username='\1'/p")"
+	sed -n "1s/'/'\\\\''/g;1s/.*/password='&'/p;s/^login: \?\(.\+\)/username='\1'/p")"
 printf '%s : %s\n' "$username" "$password"
 
 # Escape quotes and backslashes for javascript
 javascript_escape() {
-    printf '%s' "$1" | sed -s 's,['\''"\\\\],\\&,g'
+	# The string will be inside double quotes
+	# we need to add 2 backslashes, one for shell (heredoc) and one for javascript
+	printf '%s' "$1" | sed -s 's,["\\],\\\\&,g'
 }
 
 js() {
-cat <<EOF
+	cat <<EOF
     function isVisible(elem) {
         var style = elem.ownerDocument.defaultView.getComputedStyle(elem, null);
         if (style.getPropertyValue("visibility") !== "visible" ||
@@ -118,7 +118,7 @@ EOF
 }
 
 printjs() {
-    js | sed 's,//.*$,,' | tr '\n' ' '
+	js | sed 's,//.*$,,' | tr '\n' ' '
 }
 
-echo "inject $(printjs)" >> "$fifo"
+echo "inject $(printjs)" >>"$fifo"

@@ -119,10 +119,12 @@ end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
 	-- automatically cd in parent dir of file
-	if win.file and win.file.path then
-		local dir = win.file.path:match(".*/")
-		vis:command("cd " .. dir)
-	end
+	vis:command_register("cdp", function()
+		if win.file and win.file.path then
+			local dir = win.file.path:match(".*/")
+			vis:command("cd " .. dir)
+		end
+	end, "Cd to parent dir of file")
 
 	win.options.relativenumbers = true
 
