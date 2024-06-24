@@ -52,8 +52,8 @@ local function map_cmd(mode, map, command, help)
 	end, help)
 end
 
--- TOOD: use window selection to restore position
-local function wrap_restore(f, ...)
+-- Store and pop position with command ran in between
+local function wrap_pos_restore(f, ...)
 	local pos = vis.win.selection.pos
 	f(...)
 	vis.win.selection.pos = pos
@@ -83,27 +83,27 @@ end, "Remove trailing whitespace")
 --- MAPPINGS
 -------------------------------------
 
-vis:map(m.NORMAL, " pf", function()
-	vis:command("fzf")
-end, "Open file with fzf")
-vis:map(m.NORMAL, " pr", function()
-	vis:command("fzfmru")
-end, "Open file with fzf")
+vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
+	map_cmd(m.NORMAL, " pf", "fzf", "Open file with fzf")
+	map_cmd(m.NORMAL, " pr", "fzfmru", "Open file with fzf")
 
-vis:map(m.NORMAL, " r", function()
-	wrap_restore(vis.command, vis, "e $vis_filepath")
-end, "Reload active file")
-
-vis:map(m.NORMAL, "=", format.apply, "Format active file")
-
-map_cmd(m.NORMAL, " c", "e ~/.config/vis/visrc.lua", "Edit config file")
-map_cmd(m.NORMAL, " q", "q!", "Quit (force)")
-map_cmd(m.NORMAL, " s", "!doas vis $vis_filepath", "Edit as superuser")
-map_cmd(m.NORMAL, " w", "w", "Write")
-map_cmd(m.NORMAL, " x", "!chmod u+x $vis_filepath", "Make active file executable")
-map_cmd(m.NORMAL, "!", "!bash", "Run bash")
-
-map_keys(m.NORMAL, " nl", ":<seq -f '%0.0f. ' 1 ", "Insert numbered list")
+	vis:map(m.NORMAL, " r", function()
+		wrap_pos_restore(vis.command, vis, "e $vis_filepath")
+	end, "Reload active file")
+	vis:map(m.NORMAL, "=", format.apply, "Format active file")
+	map_cmd(m.NORMAL, "<M-m>", "make", "Run 'make'")
+	map_cmd(m.NORMAL, " c", "e ~/.config/vis/visrc.lua", "Edit config file")
+	map_cmd(m.NORMAL, " q", "q!", "Quit (force)")
+	map_cmd(m.NORMAL, " s", "!doas vis $vis_filepath", "Edit as superuser")
+	map_cmd(m.NORMAL, " w", "w", "Write")
+	map_cmd(m.NORMAL, " x", "!chmod u+x $vis_filepath", "Make active file executable")
+	map_cmd(m.NORMAL, "!", "!bash", "Run bash")
+	map_keys(m.NORMAL, " y", '"+y', "Copy to system clipboard")
+	map_keys(m.VISUAL, " y", '"+y', "Copy to system clipboard")
+	map_keys(m.NORMAL, " nl", ":<seq -f '%0.0f. ' 1 ", "Insert numbered list")
+	map_keys(m.NORMAL, "<M-S-Down>", "ddp", "Move line down")
+	map_keys(m.NORMAL, "<M-S-Up>", "ddkP", "Move line up") -- Doesn't work at end of file
+end)
 
 ------------------------------------
 --- EVENTS
@@ -139,7 +139,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 			"Print variable"
 		)
 		map_keys(m.NORMAL, "\\v", 'V:x/^(\\s*)(.+)$/ c/\\1"$(\\2)"/<Enter><Escape>', "Surround in variable")
-		map_keys(m.NORMAL, ";|", "V:x/\\| / c/|\n\t/<Enter><Escape>", "Wrap one-line multi pipe command")
+		map_keys(m.NORMAL, "\\|", "V:x/\\| / c/|\n\t/<Enter><Escape>", "Wrap one-line multi pipe command")
 		map_keys(
 			m.NORMAL,
 			"\\e",
@@ -163,5 +163,4 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 	if win.syntax == "ansi_c" then
 		map_keys(m.NORMAL, "\\a", "f,a <Escape>hdw<S-Tab>i<Tab><Escape>", "Align table")
 	end
-
 end)

@@ -67,7 +67,7 @@ printf '%s : %s\n' "$username" "$password"
 
 # Escape quotes and backslashes for javascript
 javascript_escape() {
-    printf '%s' "$1" | sed -s 's,['\''"\\\\],\\\\&,g'
+    printf '%s' "$1" | sed -s 's,['\''"\\\\],\\&,g'
 }
 
 js() {
@@ -99,15 +99,12 @@ cat <<EOF
                 input.focus();
                 input.value = "$(javascript_escape "$username")";
                 input.blur();
-                console.log("user: $(javascript_escape "$username")")
             }
             if (input.type == "password" || input.name == "password" || input.autocomplete == "password" || input.id == "password" ) {
                 input.focus();
                 input.value = "$(javascript_escape "$password")";
                 input.blur();
-                console.log("password: $(javascript_escape "$password")")
             }
-            console.log(input)
         }
     };
     var forms = document.getElementsByTagName("form");

@@ -5,6 +5,7 @@ Changes made:
 - check if line, col in godef()
 - no formatting because already handled by format.lua
 - removed the goimports option
+- set env variable for godef that fixes "no definition found"
 --]]
 
 local function jump_to(path, line, col)
@@ -37,7 +38,7 @@ local function godef()
 
 	local file = win.file
 	local pos = win.selection.pos
-	local cmd = string.format("godef -i -o %d", pos)
+	local cmd = string.format("GO111MODULE=off godef -i -o %d", pos)
 	local status, out, err = vis:pipe(file, { start = 0, finish = file.size }, cmd)
 	if status ~= 0 or not out then
 		if err then
