@@ -160,6 +160,11 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 			vis:info("exported.")
 		end, "Export markdown to html")
 		map_cmd(m.NORMAL, "\\sl", "-+x/(\\d+|[-*])\\s+.+\n/", "Expand to list item")
+		map_cmd(m.NORMAL, "\\sh", "-/^#+/,/^#+/-", "Expand to header")
+		-- select header block by name
+		-- ,x/^# Planning\n([^#]|\n)+
+		win.options.tabwidth = 2
+		win.options.expandtab = true
 	end
 
 	if win.syntax == "ansi_c" then
