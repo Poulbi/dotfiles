@@ -1,11 +1,24 @@
 #!/bin/sh
 
-clocks="${XDG_DATA_HOME:-$HOME}"/clocks.csv
+clocks="$HOME"/sync/share/clocks.csv
 
-if [ ! -f "$clocks" ]
-then
+# Create csv file with headers if not exist
+[ -f "$clocks" ] ||
 	printf 'start,end,message\n' > "$clocks"
+
+
+if [ "$1" = "-h" ]
+then
+	>&2 cat <<EOF
+usage: clock [OPTION]
+-h shows this help
+-p print clockings prettily
+
+With no option it will start clocking and prompt for a task.
+EOF
+	exit 1 
 fi
+
 
 # print clocks file prettily 
 if [ "$1" = "-p" ]

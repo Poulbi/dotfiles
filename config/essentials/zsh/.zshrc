@@ -40,11 +40,10 @@ then
 	plug "zdharma-continuum/fast-syntax-highlighting"
 	plug "zsh-users/zsh-autosuggestions"
 	plug "zsh-users/zsh-completions"
-
 	plug "MichaelAquilina/zsh-auto-notify"
 	export AUTO_NOTIFY_TITLE="zsh"
 	export AUTO_NOTIFY_BODY="%command [%exit_code]"
-	AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
+	AUTO_NOTIFY_IGNORE+=("abduco" "gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
 fi
 
 # Substring search settings
@@ -115,6 +114,13 @@ add-zsh-hook -Uz precmd set_wt (){ print -Pn "\e]0;%n@%m on %~\a"; }
 
 ## automatic ls after cd
 add-zsh-hook -Uz chpwd (){ [ "$PWD" = "$HOME" ] || ls -A; }
+
+bottom_margin() {
+	TBUFFER="$BUFFER"
+	BUFFER="\n\n\n"
+	BUFFER="\n\n\n $TBUFFER"
+}
+add-zsh-hook -Uz precmd bottom_margin
 
 ### Variables
 ## Run menuscripts with fzf
