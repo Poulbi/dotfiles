@@ -30,19 +30,22 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 ### Plugins
-[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-# plug "MichaelAquilina/zsh-you-should-use"
-plug "chivalryq/git-alias"
-# plug "marlonrichert/zsh-autocomplete"
-plug "zap-zsh/fzf"
-plug "zdharma-continuum/fast-syntax-highlighting"
-plug "zsh-users/zsh-autosuggestions"
-plug "zsh-users/zsh-completions"
+if [ -f "$HOME/.local/share/zap/zap.zsh" ]
+then
+	. "$HOME/.local/share/zap/zap.zsh"
+	# plug "MichaelAquilina/zsh-you-should-use"
+	plug "chivalryq/git-alias"
+	# plug "marlonrichert/zsh-autocomplete"
+	plug "zap-zsh/fzf"
+	plug "zdharma-continuum/fast-syntax-highlighting"
+	plug "zsh-users/zsh-autosuggestions"
+	plug "zsh-users/zsh-completions"
 
-plug "MichaelAquilina/zsh-auto-notify"
-export AUTO_NOTIFY_TITLE="zsh"
-export AUTO_NOTIFY_BODY="%command [%exit_code]"
-AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
+	plug "MichaelAquilina/zsh-auto-notify"
+	export AUTO_NOTIFY_TITLE="zsh"
+	export AUTO_NOTIFY_BODY="%command [%exit_code]"
+	AUTO_NOTIFY_IGNORE+=("gurk" "ttyper" "pulsemixer" "tmux" "btop" "vis" "clock")
+fi
 
 # Substring search settings
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=blue,fg=black,bold"

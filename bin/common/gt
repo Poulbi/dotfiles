@@ -8,7 +8,7 @@
 
 repos=$HOME/sync/share/git-track.txt
 # prevent file not found errors
-touch "$repos"
+touch "$repos" || exit 1
 
 help() {
     >&2 cat <<EOF
