@@ -5,21 +5,26 @@
 # dependencies:
 # - git
 # - $EDITOR: -e
+# - parallel: optional, if installed will run the commands on all repos with parallel
 
 repos=$HOME/sync/share/git-track.txt
 # prevent file not found errors
 touch "$repos" || exit 1
 
+which parallel >/dev/null 2>&1 && parallel=1
+
 help() {
 	cat >&2 <<EOF
 usage: gt [OPTION]
 -a PATH         add repo 
--s              update and show status of each repo
+-y              show sync status
 -c COMMAND      run 'git COMMAND' in each repo
 -h              show this help
 -l              list repos
 -e 		edit repos in \$EDITOR
 -f FILE         use FILE as list of repos
+-u 		pull in repos out of sync
+-s 		show status of files and remotes
 EOF
 }
 
@@ -31,53 +36,15 @@ fetch() {
 	done
 }
 
-# Print repositories prettily
-# This function function prints animations (eg. clearing the line)
-# to stderr and the final status line is outputted to stdout.
-status() {
-	while read -r repo; do
-		repo_pretty="$(printf '%s' "$repo" | sed "s@$HOME@~@")"
-
-		if [ ! -d "$repo" ]; then
-			printf '%s missing\n' "$repo_pretty"
-			continue
-		fi
-
-		# absolute path
-		cd "$repo"
-
-		# replace line with status
-		printf >&2 '\r\033[0K'
-
-		status="$(git status --porcelain 2>/dev/null |
-			awk '{print $1}' |
-			sort | uniq | tr -s '?' |
-			tr -d '\n')"
-		remote="$(git branch -v 2>/dev/null |
-			sed '/^*/!d;s/ahead/↑/;s/behind/↓/;s/[^↓↑]*//g')"
-
-		printf '%s %s %s\n' "$repo_pretty" "$status" "$remote"
-	done <"$repos"
-}
-
-# run git command in each repo
-# $1: command
-repos_cmd() {
-	while read -r repo; do
-		if [ ! -d "$repo" ]; then
-			printf '%s missing\n' "$repo_pretty"
-			continue
-		fi
-
-		repo_pretty="$(printf '%s' "$repo" | sed "s@$HOME@~@")"
-		printf ''\''%s'\'' in %s' "$1" "$repo_pretty"
-		(
-			cd "$repo"
-			git "$1" >/dev/null 2>&1
-			[ $? -gt 0 ] && s="x" || s="o"
-			printf '\r\033[0K%s: %s\n' "$repo_pretty" "$s"
-		)
-	done <"$repos"
+sync_status() {
+	if [ "$parallel" ]; then
+		parallel --colsep ' ' gt-sync {1} {2} <"$repos"
+	else
+		IFS=' '
+		while read -r repo remote_url; do
+			gt-sync "$repo" "$remote_url"
+		done <"$repos"
+	fi
 }
 
 # no options
@@ -86,30 +53,49 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-while getopts ":a:c:f:lshe" opt; do
+[ "$(wc -l <"$repos")" -gt 0 ] || exit 0
+
+while getopts ":a:c:f:lsheuy" opt; do
 	case "$opt" in
 	a)
-		cd "$OPTARG" || exit 1
-		r="$(git rev-parse --show-toplevel)"
-		[ "$r" ] || exit 2
-
-		if grep "$r" "$repos" >/dev/null 2>&1; then
-			printf >&2 'added already.\n'
-			exit 2
+		if ! cd "$OPTARG" 2>/dev/null; then
+			>&2 printf 'Not a directory.\n'
+			exit 1
 		fi
 
-		printf '%s\n' "$r" >>"$repos"
+		repo="$(git rev-parse --show-toplevel)"
+		remote_url="$(git remote show -n origin | awk '/^  Fetch/ {print $NF}')"
+
+		if grep "^$repo " "$repos" >/dev/null 2>&1; then
+			printf >&2 'added already.\n'
+			exit 3
+		fi
+
+		printf '%s %s\n' "$repo" "$remote_url" >>"$repos"
 
 		printf >&2 'added.\n'
 		;;
 	c)
-		f_command=1
-		f_arg="$OPTARG"
+		cut -f 1 -d ' ' "$repos" |
+			if [ "$parallel" ]; then
+				parallel gt-cmd "{}" "$OPTARG"
+			else
+				xargs -I{} gt-cmd "{}" "$OPTARG"
+			fi
 		;;
-	s) f_status=1 ;;
-	l) cat "$repos" ;;
+	s) cut -f 1 -d ' ' "$repos" | xargs -I{} gt-st {} ;;
+	y) sync_status ;;
+	l) cut -f 1 -d ' ' "$repos" ;;
 	e) $EDITOR "$repos" ;;
 	f) repos="$OPTARG" ;;
+	u)
+		sync_status | awk -F ':' '/x$/ {print $1}' |
+			if [ "$parallel" ]; then
+				parallel gt-cmd {} pull
+			else
+				xargs -I{} gt-cmd {} pull
+			fi
+		;;
 	h) help ;;
 	:)
 		printf >&2 -- '-%s requires argument\n' "$OPTARG"
@@ -121,17 +107,5 @@ while getopts ":a:c:f:lshe" opt; do
 		;;
 	esac
 done
-
-# commands hereafter must happen in order
-
-[ "$(wc -l <"$repos")" -gt 0 ] || exit 0
-
-if [ "$f_command" ]; then
-	repos_cmd "$f_arg"
-fi
-
-if [ "$f_status" ]; then
-	status
-fi
 
 # eval "herbe $(status | sed 's/"/\"/g;s/.*/"&"/' | tr '\n' ' ')"

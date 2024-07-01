@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Print if repo is out of sync or not
+
+# path to repo
+repo="$1"
+# remote for repo
+remote="$2"
+[ "$#" -lt 2 ] && exit 1
+
+repo_pretty="$(printf '%s' "$repo" | sed "s@$HOME@~@")"
+
+ref="$(git -C "$repo" symbolic-ref HEAD)"
+local_hash="$(git -C "$repo" rev-parse "$ref")"
+remote_hash="$(git ls-remote "$remote" "$ref" | cut -f 1)"
+
+if [ "$remote_hash" != "$local_hash" ]; then
+	printf '%s: x\n' "$repo_pretty"
+else
+	printf '%s: o\n' "$repo_pretty"
+fi

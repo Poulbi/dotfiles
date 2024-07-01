@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# Print status of the repo locally
+
+# path to repo
+repo="$1"
+[ "$1" ] || exit 1
+
+repo_pretty="$(printf '%s' "$repo" | sed "s@$HOME@~@")"
+
+if [ ! -d "$repo" ]; then
+	printf '%s missing\n' "$repo_pretty"
+	exit 1
+fi
+
+# replace line with status
+status="$(git -C "$repo" status  --porcelain 2>/dev/null |
+	awk '{print $1}' |
+	sort | uniq | tr -s '?' |
+	tr -d '\n')"
+remote="$(git -C "$repo" branch -v 2>/dev/null |
+	sed '/^*/!d;s/ahead/↑/;s/behind/↓/;s/[^↓↑]*//g')"
+
+printf '%s %s %s\n' "$repo_pretty" "$status" "$remote"

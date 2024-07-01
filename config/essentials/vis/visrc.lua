@@ -134,6 +134,9 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 
 	-- FILETYPE OPTIONS
 	if win.syntax == "bash" then
+		vis:command_register("curl", function()
+			vis:command("x/ -H/ c/\\\n\t-H/")
+		end, "Split curl command on multiple lines")
 		map_keys(
 			m.NORMAL,
 			"\\p",
