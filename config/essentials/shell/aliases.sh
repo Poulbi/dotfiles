@@ -281,7 +281,7 @@ alias god='cd "$(find . -mindepth 1 -maxdepth 1 -type d | fzf)"'
 alias gov='go ~/vids d'
 
 # fzf aliases
-alias ppj='cd ~/proj/personal/"$(find ~/proj/personal -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
+alias ppj='cd ~/proj/"$(find ~/proj -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
 alias ppjs='cd ~/proj/personal/scripts/"$(find ~/proj/personal/scripts -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | fzf)"'
 alias scr='edit_in_dir ~/proj/personal/scripts/'
 alias fil='edit_in_dir ~/docs/filios/'
