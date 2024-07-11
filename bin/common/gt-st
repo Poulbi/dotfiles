@@ -14,11 +14,15 @@ if [ ! -d "$repo" ]; then
 fi
 
 # replace line with status
-status="$(git -C "$repo" status  --porcelain 2>/dev/null |
+status="$(git -C "$repo" status --porcelain 2>/dev/null |
 	awk '{print $1}' |
 	sort | uniq | tr -s '?' |
 	tr -d '\n')"
 remote="$(git -C "$repo" branch -v 2>/dev/null |
 	sed '/^*/!d;s/ahead/↑/;s/behind/↓/;s/[^↓↑]*//g')"
 
-printf '%s %s %s\n' "$repo_pretty" "$status" "$remote"
+if [ "$status" ] || [ "$remote" ]; then
+	printf '%s: \033[0;31m%s %s\033[0m\n' "$repo_pretty" "$status" "$remote"
+else
+	printf '%s\n' "$repo_pretty"
+fi

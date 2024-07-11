@@ -6,6 +6,7 @@
 # - git
 # - $EDITOR: -e
 # - parallel: optional, if installed will run the commands on all repos with parallel
+# - gt-[cmd,st,sync]
 
 repos=$HOME/sync/share/git-track.txt
 # prevent file not found errors
@@ -36,17 +37,6 @@ fetch() {
 	done
 }
 
-sync_status() {
-	if [ "$parallel" ]; then
-		parallel --colsep ' ' gt-sync {1} {2} <"$repos"
-	else
-		IFS=' '
-		while read -r repo remote_url; do
-			gt-sync "$repo" "$remote_url"
-		done <"$repos"
-	fi
-}
-
 # no options
 if [ -z "$1" ]; then
 	help
@@ -55,7 +45,7 @@ fi
 
 [ "$(wc -l <"$repos")" -gt 0 ] || exit 0
 
-while getopts ":a:c:f:lsheuy" opt; do
+while getopts ":a:c:f:lsheu" opt; do
 	case "$opt" in
 	a)
 		if ! cd "$OPTARG" 2>/dev/null; then
@@ -84,12 +74,18 @@ while getopts ":a:c:f:lsheuy" opt; do
 			fi
 		;;
 	s) cut -f 1 -d ' ' "$repos" | xargs -I{} gt-st {} ;;
-	y) sync_status ;;
 	l) cut -f 1 -d ' ' "$repos" ;;
 	e) $EDITOR "$repos" ;;
 	f) repos="$OPTARG" ;;
 	u)
-		sync_status | awk -F ':' '/x$/ {print $1}' |
+		if [ "$parallel" ]; then
+			parallel --colsep ' ' gt-sync {1} {2} <"$repos"
+		else
+			IFS=' '
+			while read -r repo remote_url; do
+				gt-sync "$repo" "$remote_url"
+			done <"$repos"
+		fi | awk -F ':' '/x$/ {print $1}' |
 			if [ "$parallel" ]; then
 				parallel gt-cmd {} pull
 			else
