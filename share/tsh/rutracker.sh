@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Note(Author): This fails because the request after solving the captcha is blank.
+
 # shellcheck disable=SC2154
 
 # $1: line number for link that will provide magnet link
@@ -7,8 +10,9 @@ get_magnet() { curl -s "$(sed -n "${1}p" "$links")" | pup 'a.magnet-link attr{hr
 get_torrents() {
 	cookies="$tmp"/cookies
 
-	username="$(pass show websites/rutracker.org | awk '/login:/ {print $2}')"
-	password="$(pass show websites/rutracker.org | head -n 1)"
+	pass="$(find "$PASSWORD_STORE_DIR" -type f | sed -e '/rutracker\.org\//!d' -e "s@$PASSWORD_STORE_DIR/@@;s/\.gpg\$//")"
+	username="${pass#*/}"
+	password="$(pass show "$pass" | head -n 1)"
 
 	curl -sL 'https://rutracker.org/forum/login.php' \
 		-X POST --data-raw "login_username=$username&login_password=$password&login=вход" \
