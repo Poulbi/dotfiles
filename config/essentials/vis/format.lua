@@ -63,15 +63,15 @@ M.formatters = {
 		end,
 	},
 	luaformatter = M.stdio_formatter("lua-format"),
-	markdown = M.stdio_formatter(function(win)
-		if win.options and M.wrapwidth ~= 0 then
-			return "prettier --parser markdown --prose-wrap always "
-				.. ("--print-width " .. (M.wrapwidth - 1) .. " ")
-				.. M.with_filename(win, "--stdin-filepath ")
-		else
-			return "prettier --parser markdown " .. M.with_filename(win, "--stdin-filepath ")
-		end
-	end, { ranged = false }),
+	-- markdown = M.stdio_formatter(function(win)
+		-- if win.options and M.wrapwidth ~= 0 then
+			-- return "prettier --parser markdown --prose-wrap always "
+				-- .. ("--print-width " .. (M.wrapwidth - 1) .. " ")
+				-- .. M.with_filename(win, "--stdin-filepath ")
+		-- else
+			-- return "prettier --parser markdown " .. M.with_filename(win, "--stdin-filepath ")
+		-- end
+	-- end, { ranged = false }),
 	powershell = M.stdio_formatter([[
     "$( (command -v powershell.exe || command -v pwsh) 2>/dev/null )" -c '
         Invoke-Formatter  -ScriptDefinition `

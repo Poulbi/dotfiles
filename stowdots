@@ -3,12 +3,11 @@
 trap "exit 1" EXIT INT
 test "$(id -u)" != 0 && sudo=sudo
 
-die () {
+die() {
 	echo "$@" 1>&2
 }
 
-if ! stow --version > /dev/null 2>&1
-then
+if ! stow --version >/dev/null 2>&1; then
 	die "stow not installed or not found."
 	die "install stow? (arch)"
 	die -n ">"
@@ -16,8 +15,7 @@ then
 		$sudo pacman -Sy stow ||
 		exit 1
 fi
-if [ -n "${MACH:=$1}" ]
-then
+if [ -n "${MACH:=$1}" ]; then
 	die "I: stowing for $MACH"
 else
 	die "E: MACH not set"
@@ -29,20 +27,24 @@ fi
 
 mkdir -p "$HOME/bin"
 mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.local/share"
 ln -sf "$(realpath "$0")" $HOME/bin/
 cd "$(dirname "$(realpath "$0")")" || exit 1
 case "$MACH" in
-	"desktop" | "d" | "laptop" | "l")
-		stow -d bin/ -t "$HOME/bin" -R common guiscripts menuscripts extra
-		stow -d config/ -t "$HOME/.config" -R essentials common extra X theme wayland
-		stow -d config/ -t "$HOME/" -R home
-		;;
-	"server" | "s")
-		stow -d bin/ -t "$HOME/bin" -R common serverscripts menuscripts
-		stow -d config/ -t "$HOME/.config" -R essentials common
-		stow -d config/ -t "$HOME/" -R home
-		;;
-	*)
-		die "E: invalid value for 'MACH'"
-		break
+"desktop" | "d" | "laptop" | "l")
+	stow -d bin/ -t "$HOME/bin" -R common guiscripts menuscripts extra
+	stow -d config/ -t "$HOME/.config" -R essentials common extra X theme wayland
+	stow -d config/ -t "$HOME/" -R home
+	stow share/ -t "$HOME/.local/share"
+	;;
+"server" | "s")
+	stow -d bin/ -t "$HOME/bin" -R common serverscripts menuscripts
+	stow -d config/ -t "$HOME/.config" -R essentials common
+	stow -d config/ -t "$HOME/" -R home
+	stow share/ -t "$HOME/.local/share"
+	;;
+*)
+	die "E: invalid value for 'MACH'"
+	break
+	;;
 esac

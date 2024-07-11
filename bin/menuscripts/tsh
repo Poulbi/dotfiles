@@ -170,8 +170,11 @@ then
 
 	# Get results
 	rm -f "$results" "$links"
+
 	# shellcheck source=/usr/local/lib/$PROG/nyaa.sh disable=SC1091
 	. "$MODULES_PATH/$module"
+	get_torrents
+
 	[ -f "$results" ] || die "No results."
 
 	# Save which module was used
@@ -180,9 +183,6 @@ else
 	module="$(tail -n 1 "$links")"
 fi
 
-# acquire get_magnet function
-# shellcheck source=/usr/local/lib/$PROG/nyaa.sh disable=SC1091
-getfunctions=1 . "$MODULES_PATH/$module"
 
 # select result from "$results"
 for choice in $(select_result | xargs)

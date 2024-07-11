@@ -20,6 +20,10 @@ end
 
 -- Before saving the file, copy the current contents of the file to a backup file
 vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
+	if file == nil then
+		return
+	end
+
 	if file.size > backup.byte_limit then
 		return
 	end
@@ -46,7 +50,7 @@ vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
 end)
 
 -- Set defaults
-backup.directory = os.getenv("XDG_DATA_HOME") .. "/Trash/vis-backups"
+backup.directory = (os.getenv("XDG_DATA_HOME") or (os.getenv("HOME") .. "/.local/share")) .. "/Trash/vis-backups"
 
 backup.get_fname = backup.entire_path_with_double_percentage_signs
 
