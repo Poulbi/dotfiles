@@ -3,34 +3,27 @@
 PROG="$(basename "$0")"
 ## VARIABLES
 # copy command and deps variable
-deps="pup curl $MENUCMD"
+deps="pup curl clipp"
 
 MODULES_PATH=$HOME/.local/share/tsh
 module='nyaa.sh' # default module
 
 # Files
 export tmp="/tmp/$PROG"
+
 files="seeds sizes names html tmp_types"
 # Use export so that these variables can be used inside of modules
 for file in $files
 do eval "export $file=$tmp/$file"
 done
+
 # Files not in $files won't be deleted
 export results="$tmp/results"
 export links="$tmp/links"
 
 categories="music anime movies shows other software games isos books"
 
-if [ "$WAYLAND_DISPLAY" ]
-then
-	clipp() { wl-copy -n; }
-	deps="$deps wl-copy"
-else
-	clipp() { xclip -selection clipboard -r; }
-	deps="$deps xclip"
-fi
 ## FUNCTIONS
-
 help ()
 {
 	>&2 cat <<-EOF
@@ -70,10 +63,6 @@ dependencies ()
 	done
 	[ "${error:-0}" -eq 1 ] && exit 1
 }
-
-# shellcheck disable=SC2046
-# (we use word splitting on purpose)
-isOnline () { grep -q '1' $(echo /sys/class/net/*/carrier | sed 's#/sys/class/net/lo/carrier ##'); }
 
 # Remove temp files and quit
 cleanup ()
