@@ -2,9 +2,11 @@
 
 # path to repo
 repo="$1"
+shift 2>/dev/null || exit 1
 # git command
-command="$2"
-[ "$#" -lt 2 ] && exit 1
+command="$1"
+shift 2>/dev/null || exit 1
+args="$*"
 
 repo_pretty="$(printf '%s' "$repo" | sed "s@^$HOME@~@")"
 
@@ -13,6 +15,6 @@ if [ ! -d "$repo" ]; then
 	exit 1
 fi
 
-git -C "$repo" "$command" >/dev/null 2>&1
+git -C "$repo" "$command" $args >/dev/null 2>&1
 [ $? -gt 0 ] && s="x" || s="o"
 printf '%s: %s\n' "$repo_pretty" "$s"
