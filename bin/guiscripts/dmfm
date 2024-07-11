@@ -1,20 +1,20 @@
 #!/bin/sh
 
-while true
-do
-    dir="$(printf '%s' "$PWD" | sed "s#^$HOME#\~#;s#\([^/]\)[^/]*/#\1/#g")"
-	file=$(find . -maxdepth 1 -mindepth 1 -not -name '.*' -printf '%y\t%f\n' |
+[ -d "$1" ] && cd "$1"
+
+while true; do
+	choice=$(find . -maxdepth 1 -mindepth 1 -not -name '.*' -printf '%y\t%f\n' |
 		sort -k 1 -k 2 | cut -f 2- |
-		commander -xc -p "$dir")
+		dmenu -x -c -i -p "$(pwd)")
 
-	[ "$file" ] || break
-	[ ! -e "$file" ] && continue
+	[ "$choice" ] || break
+	[ -e "$choice" ] || continue
 
-	if [ -d "$file" ]
-	then
-		cd "$file" || continue
+	if [ -d "$choice" ]; then
+		cd "$choice" || continue
 	else
-		setsid xdg-open "$PWD/$file" &
+		setsid xdg-open "$choice" &
+		exit
 	fi
 
 done

@@ -10,7 +10,7 @@ Changes made:
 --]]
 
 local M = {}
-M.fzf_filepath = os.getenv("XDG_CACHE_HOME") .. "/vis-fzf-mru"
+M.fzf_filepath = (os.getenv("XDG_CACHE_HOME") or (os.getenv("HOME") .. "/.local/share")).. "/vis-fzf-mru"
 M.fzf_path = "fzf"
 M.fzf_args = "--height=40%"
 M.fzf_history = 20

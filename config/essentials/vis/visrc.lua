@@ -25,7 +25,7 @@ local format = require("format")
 
 -- set height to 40%
 local fzfmru = require("fzf-mru")
-fzfmru.fzfmru_path = 'grep "^' .. os.getenv("PWD") .. '" | fzf'
+fzfmru.fzfmru_path = 'grep "^' .. io.popen("pwd"):read("*a"):gsub("\n$", "") .. '" | fzf'
 
 -- todo:
 -- c-scope
@@ -120,9 +120,9 @@ end)
 vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
 	-- automatically cd in parent dir of file
 	vis:command_register("cdp", function()
-		if win.file and win.file.path then
-			local dir = win.file.path:match(".*/")
-			vis:command("cd " .. dir)
+		if win and win.file and win.file.path then
+			-- local dir = win.file.path:match(".*/")
+			-- vis:info("cd " .. tostring(dir))
 		end
 	end, "Cd to parent dir of file")
 

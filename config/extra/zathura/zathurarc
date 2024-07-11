@@ -1,23 +1,19 @@
-# fullscreen mappings
-map   [fullscreen]              r            reload
-map   [fullscreen]              R            rotate
-map   [fullscreen]              i            zoom in
-map   [fullscreen]              o            zoom out
-
 # normal mappings
-map		r				reload
-map		R				rotate
-map		i				zoom in
-map		o				zoom out
-map		f				toggle_fullscreen
-map		x				toggle_statusbar
-map		X				toggle_index
+map r reload
+map R rotate
+map i zoom in
+map o zoom out
+map f toggle_fullscreen
+map x toggle_statusbar
+map X toggle_index
 
-set   font                      "monospace bold 11"
-set   adjust-open               "best-fit"
-set   pages-per-row             1
-set   scroll-page-aware         "true"
-set   scroll-full-overlap       0.01
-set   scroll-step               100
+set font                      "monospace bold 11"
+set adjust-open               "best-fit"
+set pages-per-row             1
+set scroll-page-aware         "true"
+set scroll-full-overlap       0.01
+set scroll-step               100
 
-set   guioptions                " "
+set guioptions          	" "
+set database            	"sqlite"
+set continuous-hist-save	true
