@@ -1,9 +1,4 @@
 #!/bin/sh
 url="$(ytlink)"
 herbe "playing: $url" &
-yt-dlp "$url" \
-	--embed-chapters \
-	-f "b" \
-	-S "res:1080" \
-	-o - |
-	mpv -
+yt-dlp -S "res:1080" -o - "$url" | mpv -
