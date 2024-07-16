@@ -103,6 +103,3 @@ while getopts ":a:c:f:lsheu" opt; do
 		;;
 	esac
 done
->&2 printf '*: %s\n' "$*"
-
-# eval "herbe $(status | sed 's/"/\"/g;s/.*/"&"/' | tr '\n' ' ')"

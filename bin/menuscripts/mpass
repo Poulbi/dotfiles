@@ -21,7 +21,7 @@ done
 [ "$file" ] || exit 1
 
 pass show -c "$file" || exit 1
-notify-send -t 1000 "mpass" "copied: $file"
+notify-send -t 1000 "mpass" "$file"
 
 [ "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null && # on wayland and cliphist is running
 	cliphist list | head -n 1 | cliphist delete
