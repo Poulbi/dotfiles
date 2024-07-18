@@ -1,9 +1,9 @@
-
+# Start profile
 IMAPStore luca@spacehb.net-remote
 Host mail.spacehb.net
 Port 993
 User luca@spacehb.net
-PassCmd "pass websites/spacehb.net/luca@spacehb.net"
+PassCmd "pass hosts/spacehb/luca"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -24,11 +24,12 @@ MaxMessages 0
 ExpireUnread no
 # End profile
 
+# Start profile
 IMAPStore billy@spacehb.net-remote
 Host mail.spacehb.net
 Port 993
 User billy@spacehb.net
-PassCmd "pass websites/spacehb.net/billy@spacehb.net"
+PassCmd "pass hosts/spacehb/billy"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -48,3 +49,30 @@ SyncState *
 MaxMessages 0
 ExpireUnread no
 # End profile
+
+# Start profile
+IMAPStore tlast@spacehb.net-remote
+Host mail.spacehb.net
+Port 993
+User tlast@spacehb.net
+PassCmd "pass hosts/spacehb/tlast"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore tlast@spacehb.net-local
+Subfolders Verbatim
+Path /home/aluc/.local/share/mail/tlast@spacehb.net/
+Inbox /home/aluc/.local/share/mail/tlast@spacehb.net/INBOX
+
+Channel tlast@spacehb.net
+Expunge Both
+Far :tlast@spacehb.net-remote:
+Near :tlast@spacehb.net-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+

@@ -26,7 +26,7 @@ local colors = {
 lexers.colors = colors
 
 local fg = "fore:" .. colors.fg
-local bg = "back:" .. colors.bg
+local bg = "back:default"
 
 lexers.STYLE_DEFAULT = bg .. "," .. fg
 lexers.STYLE_NOTHING = bg

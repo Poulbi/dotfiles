@@ -157,7 +157,14 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 		map_cmd(m.NORMAL, "\\si", "-/\\<if\\>/,/\\<fi\\>/", "Expand to if")
 	end
 
+	if win.syntax == "yaml" then
+		win.options.tabwidth = 2
+		win.options.expandtab = true
+	end
+
 	if win.syntax == "markdown" then
+		win.options.tabwidth = 2
+		win.options.expandtab = true
 		vis:map(m.NORMAL, "\\h", function()
 			vis:command("!lowdown $vis_filepath > ${vis_filepath%.md}.html")
 			vis:info("exported.")
@@ -166,8 +173,6 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused a
 		map_cmd(m.NORMAL, "\\sh", "-/^#+/,/^#+/-", "Expand to header")
 		-- select header block by name
 		-- ,x/^# Planning\n([^#]|\n)+
-		win.options.tabwidth = 2
-		win.options.expandtab = true
 	end
 
 	if win.syntax == "ansi_c" then
