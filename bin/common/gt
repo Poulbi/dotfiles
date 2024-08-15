@@ -18,7 +18,6 @@ help() {
 	cat >&2 <<EOF
 usage: gt [OPTION]
 -a PATH         add repo 
--y              show sync status
 -c COMMAND      run 'git COMMAND' in each repo
 -h              show this help
 -l              list repos
@@ -80,22 +79,24 @@ while getopts ":a:c:f:lsheu" opt; do
 	e) $EDITOR "$repos" ;;
 	f) repos="$OPTARG" ;;
 	u)
-		>&2 printf 'pull.\n'
+		>&2 printf 'pull:\n'
 		if [ "$parallel" ]; then
 			list_repos | parallel gt-cmd {} pull  
-			>&2 printf 'push.\n'
-			list_repos |
-				xargs -I{} gt-st {} |
-				awk -F: '/↑/ {print $1}' |
-				parallel gt-cmd {} push
 		else
 			list_repos | xargs -I{} gt-cmd {} pull
-			>&2 printf 'push.\n'
-			list_repos |
-				xargs -I{} gt-st {} |
-				awk -F: '/↑/ {print $1}' |
-				xargs -I{} gt-cmd {} push
+
 		fi
+
+		>&2 printf 'push:\n'
+		list_repos |
+			xargs -I{} gt-st {} |
+			awk -F: '/↑/ {print $1}' |
+			sed "s@^~@$HOME@" |
+			if [ "$parallel" ]; then
+					parallel gt-cmd {} push
+			else
+					xargs -I{} gt-cmd {} push
+			fi
 		;;
 	h) help ;;
 	:)
