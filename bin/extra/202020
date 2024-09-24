@@ -7,5 +7,5 @@ do
     herbe '202020' 'avert!'
     sleep 20s
     mpv --volume=100 ~/.local/share/sounds/avert2.ogg &
-    herbe 'stop averting' &
+    herbe '202020' 'stop averting' &
 done

@@ -292,7 +292,7 @@ alias fzh="fzf --tac < $HISTFILE | tee /dev/stderr | clipp"
 alias ffwin='hyprctl clients -j | jq '\''.[].pid'\'' | fzf --preview "hyprctl clients -j | jq '\''.[] | select(.pid == {}) | {class, title, workspace, xwayland}'\''"'
 alias pff='find ${PASSWORD_STORE_DIR:=~/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
 alias fzps='fzf --print0 | xargs -0I{}'
-alias ytdl='yt-dlp --restrict-filenames --embed-chapters -f "b" -S "res:1080" -P "$HOME/vids/youtube/" -o "%(channel)s/%(title)s.%(ext)s"'
+alias ytdl='yt-dlp --restrict-filenames --embed-chapters -S "res:1080" -o "%(channel)s - %(title)s.%(ext)s"'
 
 # emacs aliases
 alias emacsd='emacs --daemon'
@@ -318,7 +318,8 @@ alias dbsmu='rsync -rlpP db:/media/basilisk/music/ /media/kilimanjaro/music'
 
 # git
 alias config='GIT_WORK_TREE=~/src/dotfiles/ GIT_DIR=~/src/dotfiles/.git'
-alias cfg='vi ~/src/dotfiles/"$(config git ls-files | fzf || exit)"'
+alias cfg='edit_git_file ~/src/dotfiles/'
+alias nvcfg='edit_git_file ~/.config/nvim'
 alias gmod='git status --short | sed '\''/^\s*M/!d;s/^\s*M\s*//'\'' | fzf | xargs vi'
 alias gclc='git clone "$(clipo)"'
 

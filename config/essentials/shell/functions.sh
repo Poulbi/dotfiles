@@ -348,3 +348,10 @@ prj () {
     [ -d "$d" ] || exit 1
     cd "$pfx"/"$d"
 }
+
+edit_git_file () {
+    GIT_WORK_TREE="$1" GIT_DIR="$1"/.git git rev-parse --show-toplevel > /dev/null 2>&1 || return 1
+    f="$(GIT_WORK_TREE="$1" GIT_DIR="$1"/.git git ls-files | fzf)"
+    [ "$f" ] || return 2
+    $EDITOR "$1"/"$f"
+}
