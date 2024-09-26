@@ -12,6 +12,5 @@ key="$(printf '%s\n' "$1" |
 pass="keys/$(hostname)/ssh/$key"
 
 # optional: add key to running ssh-agent
-keyadd "$key" &
-
-pass show "$pass" | head -n 1
+keyadd "$key" &&
+    pass show "$pass" | head -n 1

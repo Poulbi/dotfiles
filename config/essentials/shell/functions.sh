@@ -344,9 +344,9 @@ nvim_bindings() {  "$(tmp="$(mktemp)"; nvim +":set nomore | :redir! > $tmp | :ma
 
 prj () {
     pfx="$HOME/proj"
-	d="$(find "$pfx" -mindepth 1 -maxdepth 1 -type d | sed "s@$pfx@@" |fzf)"
-    [ -d "$d" ] || exit 1
-    cd "$pfx"/"$d"
+	d="$(find "$pfx" -mindepth 1 -maxdepth 1 -type d | sed "s@$pfx/@@" |fzf)"
+    [ -d "$pfx/$d" ] || return 1
+    cd "$pfx/$d"
 }
 
 edit_git_file () {
@@ -354,4 +354,18 @@ edit_git_file () {
     f="$(GIT_WORK_TREE="$1" GIT_DIR="$1"/.git git ls-files | fzf)"
     [ "$f" ] || return 2
     $EDITOR "$1"/"$f"
+}
+
+# Wrapper to automatically add the key
+# could have been alias='SSH_ASKPASS=askpass SSH_ASKPASS_REQUIRE=prefer ssh'
+# but this option is very slow for some reason
+ssh() {
+    for arg in $@; do
+        if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
+        then
+            keyadd "$arg" 2> /dev/null
+            break
+        fi
+    done
+    /usr/bin/ssh $@
 }

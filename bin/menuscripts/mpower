@@ -5,6 +5,7 @@ poweroff
 suspend
 reboot
 firmware
+hibernate
 EOF
 )"
 # hibernate
