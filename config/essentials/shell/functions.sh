@@ -340,13 +340,18 @@ ffconcat () {
 	ffmpeg -y -f concat -safe 0 -i $tmp -c copy "$1"
 	rm $tmp
 }
-nvim_bindings() {  "$(tmp="$(mktemp)"; nvim +":set nomore | :redir! > $tmp | :map | :redir END | :q" ; fzf < "$tmp"; rm "$tmp")"; }
+nvim_bindings() {  
+    tmp="$(mktemp)"
+    nvim +":set nomore | :redir! > $tmp | :map | :redir END | :q"  > /dev/null
+    eval "nvim $(fzf < "$tmp" | awk '{print $NF}' | cut -f1 -d'>' | sed 's/:/ +/')"
+    rm "$tmp"
+}
 
 prj () {
     pfx="$HOME/proj"
-	d="$(find "$pfx" -mindepth 1 -maxdepth 1 -type d | sed "s@$pfx@@" |fzf)"
-    [ -d "$d" ] || exit 1
-    cd "$pfx"/"$d"
+	d="$(find "$pfx" -mindepth 1 -maxdepth 1 -type d | sed "s@$pfx/@@" |fzf)"
+    [ -d "$pfx/$d" ] || exit 1
+    cd "$pfx/$d"
 }
 
 edit_git_file () {
