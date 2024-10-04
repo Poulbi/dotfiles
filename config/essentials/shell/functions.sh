@@ -391,7 +391,8 @@ ssh() {
     for arg in $@; do
         if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
         then
-            keyadd "$arg" 2> /dev/null
+            # Disable notification by unsetting the DISPLAY varibles
+            DISPLAY= keyadd "$arg" 2> /dev/null
             break
         fi
     done
