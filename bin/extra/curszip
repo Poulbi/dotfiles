@@ -4,17 +4,17 @@
 # $2: type
 list1() { find "$1" -mindepth 1 -maxdepth 1 -type "$2" -printf '%f\n'; }
 
-curs="$(list1 ~/docs/school/Vakken d | dmenu -c)"
+curs="$(list1 "$VAKKEN" d | dmenu -c)"
 [ "$curs" ] || exit 1
 >&2 printf "curs: %s\n" "$curs"
 
 dldir="$(which xdg-user-dir > /dev/null 2>&1 && xdg-user-dir 'DOWNLOAD' || echo '~/dl')"
 
 zip="$(list1 "$dldir" f | fzf -f "$curs" | grep '\.zip$')"
-[ "$zip" ] || exit 1
+[ "$zip" ] || exit 2
 >&2 printf "zip: %s\n" "$zip"
 
-cd -- ~/docs/school/Vakken/"$curs" || exit 1
+cd -- "$VAKKEN"/"$curs" || exit 3
 rm -rf Cursus
 mv -- ~/dl/"$zip" .
 unzip -- "./$zip"
