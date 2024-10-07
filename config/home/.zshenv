@@ -98,3 +98,5 @@ export PLAN9=/usr/lib/plan9
 export PATH="$PATH:$PLAN9/bin"
 
 export MAKEFLAGS="-j$(nproc)"
+
+export VAKKEN="$HOME/docs/school/2024-2025"
