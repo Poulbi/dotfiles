@@ -344,3 +344,4 @@ alias quickvms='/media/cricket/vms/quickemu/"$(find '\''/media/cricket/vms/quick
 
 alias sqlplus='sqlplus -x'
 alias rsqp='rlwrap sqlplus -x'
+alias gcamc='gca -m "checkpoint"'
