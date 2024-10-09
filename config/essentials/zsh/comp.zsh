@@ -59,4 +59,4 @@ _dotnet_zsh_complete()
 }
 compdef _dotnet_zsh_complete dotnet
 compdef _gnu_generic cpp sqlplus
-
+compdef _gnu_generic air
