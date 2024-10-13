@@ -22,7 +22,7 @@ do
 		-printf '%f ' \
 		-exec grep '^# ' -m1 {} \; |
             sed 's/\(.\+\.md\) # \(.\+\)/- [\2](\1)/' |
-            sort -t '[' -k 2 >> index.md
+            sort -t '[' -k 2 -n >> index.md
 
     if [ "$(find . -mindepth 2 -maxdepth 2 -type f -name '*.md' | wc -l)" -gt 0 ]
     then

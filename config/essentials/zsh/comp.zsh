@@ -58,5 +58,31 @@ _dotnet_zsh_complete()
   _values = "${(ps:\n:)completions}"
 }
 compdef _dotnet_zsh_complete dotnet
+
+_ws_complete() {
+    local -a subcmds
+    ws help 2>&1 |
+        tail -n +3 | # skip usage and COMMANDS line
+        sed -e 's/\s*\([^ ]\+\)\s*\(.\+\)/\1: \2/' |
+        while read -r line; do
+            subcmds+=("$line")
+        done
+    _describe 'ws commands' subcmds 
+}
+compdef _ws_complete ws
+
+_go_flag_complete() {
+    local -a subcmds
+    $name -h  2>&1 | tail -n +2 |
+    while read -r l1; do
+        read -r l2
+        l1="$(printf '%s' "$l1" | sed 's/^\s*\([^ ]\+\).*/\1/')"
+        l2="$(printf '%s' "$l2" | sed 's/^\s*//')"
+        subcmds+=("$l1: $l2")
+    done
+    _describe 'commands' subcmds
+}
+
 compdef _gnu_generic cpp sqlplus
 compdef _gnu_generic air
+compdef _go_flag_complete wbr

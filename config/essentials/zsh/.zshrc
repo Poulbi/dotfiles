@@ -17,6 +17,7 @@ zle -N edit-command-line
 
 ### Source files
 source_ex() { [ -f "$1" ] && . "$1"; } # source if exists
+source_ex /etc/grc.zsh
 source_ex /etc/profile.d/plan9.sh
 source_ex $XDG_CONFIG_HOME/zsh/comp.zsh
 source_ex $XDG_CONFIG_HOME/shell/functions.sh
