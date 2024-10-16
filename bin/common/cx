@@ -1,2 +1,2 @@
 #!/bin/sh
-[ -x "$1" ] && chmod -x "$1" || chmod +x "$1"
+[ -x "$1" ] && chmod u-x "$1" || chmod u+x "$1"

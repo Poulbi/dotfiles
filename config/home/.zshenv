@@ -99,6 +99,8 @@ export PATH="$PATH:$GOPATH/bin"
 export PLAN9=/usr/lib/plan9
 export PATH="$PATH:$PLAN9/bin"
 
+export LD_LIBRARY_PATH=/usr/local/lib/
+
 export MAKEFLAGS="-j$(nproc)"
 
 export VAKKEN="$HOME/docs/school/2024-2025"

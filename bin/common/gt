@@ -56,6 +56,7 @@ while getopts ":a:c:f:lsheu" opt; do
 
 		repo="$(git rev-parse --show-toplevel)"
 		remote_url="$(git remote show -n origin | awk '/^  Fetch/ {print $NF}')"
+        # TODO: check if remote_url is not empty
 
 		if grep "^$repo " "$REPOS" >/dev/null 2>&1; then
 			printf >&2 'added already.\n'
