@@ -140,6 +140,6 @@ setopt histignorealldups
 setopt histreduceblanks
 setopt interactivecomments
 setopt notify
-setopt cdablevars
+# setopt cdablevars
 
 # zprof

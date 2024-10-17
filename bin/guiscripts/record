@@ -93,7 +93,11 @@ case "$option" in
             record_cmd $w $h $x $y $dir $current
         }
         ;;
-    stop) kill "$(pgrep ffmpeg | xargs ps | grep 'x11grab' | awk '{print $1}')"; rm -f "$lock" ;;
+    stop)
+        pid="$(pgrep ffmpeg | xargs ps | grep 'x11grab' | awk '{print $1}')"
+        [ "$pid" ] && kill "$pid"
+        rm -f "$lock" 
+        ;;
     full) record_cmd 0 0 1920 1080 $dir $current ;;
     audio) $0 -a; exit ;;
     help|*) >&2 printf 'record [dir] (active|window|part|stop|full)\n' ;;
