@@ -22,7 +22,7 @@ export MENUCMD="dmenu"
 export IMAGE="feh"
 # Autostart these programs
 { 
-    xcompmgr &
+    picom -b &
     feh --no-fehbg --bg-scale ~/pics/wallpaper
     setxkbmap colemak -option ctrl:swapcaps,altwin:menu_win
     # xautolock -locker slock &
