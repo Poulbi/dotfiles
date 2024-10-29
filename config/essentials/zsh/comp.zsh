@@ -1,7 +1,7 @@
 ### Completion
 # Find most of the stuff at https://github.com/zap-zsh/completions
 
-ZSH_COMPDUMP="$ZDOTDIR"/zcompcache
+export ZSH_COMPDUMP="$ZDOTDIR"/zcompcache
 
 zmodload zsh/complist
 zstyle ':compinstall' filename '/home/aluc/.zshrc'
@@ -41,7 +41,7 @@ zstyle ':completion:*' keep-prefix true
 zstyle ':completion:*' menu select
 
 fpath=($ZDOTDIR/completions $fpath)
-autoload -Uz compinit; compinit -d "$ZSH_COMPDUMP"
+autoload -Uz compinit; compinit
 
 _dotnet_zsh_complete()
 {

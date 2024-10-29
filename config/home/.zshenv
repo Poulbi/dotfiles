@@ -104,3 +104,5 @@ export LD_LIBRARY_PATH=/usr/local/lib/
 export MAKEFLAGS="-j$(nproc)"
 
 export VAKKEN="$HOME/docs/school/2024-2025"
+
+PATH="$PATH:$HOME/proj/chatty/"

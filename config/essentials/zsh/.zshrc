@@ -16,15 +16,15 @@ autoload -z edit-command-line
 zle -N edit-command-line
 
 ### Source files
-source_ex() { [ -f "$1" ] && . "$1"; } # source if exists
-source_ex /etc/grc.zsh
-source_ex /etc/profile.d/plan9.sh
-source_ex $XDG_CONFIG_HOME/zsh/comp.zsh
-source_ex $XDG_CONFIG_HOME/shell/functions.sh
-source_ex $XDG_CONFIG_HOME/shell/aliases.sh
-source_ex $XDG_CONFIG_HOME/zsh/widgets.zsh
-# . $XDG_CONFIG_HOME/zsh/prompt.zsh
-# . $XDG_CONFIG_HOME/zsh/plugins.zsh
+try_source() { [ -f "$1" ] && . "$1"; } # source if exists
+try_source /etc/grc.zsh
+# try_source /etc/profile.d/plan9.sh
+try_source $XDG_CONFIG_HOME/zsh/comp.zsh
+try_source $XDG_CONFIG_HOME/shell/functions.sh
+try_source $XDG_CONFIG_HOME/shell/aliases.sh
+try_source $XDG_CONFIG_HOME/zsh/widgets.zsh
+# try_source $XDG_CONFIG_HOME/zsh/prompt.zsh
+# try_source $XDG_CONFIG_HOME/zsh/plugins.zsh
 
 ### Programs
 eval "$(starship init zsh)"
@@ -144,4 +144,3 @@ setopt notify
 
 # zprof
 
-PATH="$PATH:$HOME/proj/chatty/v2/"
