@@ -3,29 +3,45 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 # format = ' ${custom.upds}'
-format = '$directory($git_branch$git_state$git_status$status)$character'
-right_format = """"""
-
-[character]
-format = '\$ '
-
-[git_branch]
-format = '[$branch(:$remote_branch)]($style) '
-style = 'bold purple'
-
-[git_status]
-format = '[$all_status$ahead_behind]($style) '
+format = '$directory$status$character'
+right_format = '$all'
 
 [directory]
 truncation_length = 4
 style = "bold lavender"
 
-[cmd_duration]
-min_time = 500
-
 [status]
-format = '($status)'
+format = '$status '
 disabled = false
+
+[character]
+format = '\$ '
+
+[cmd_duration]
+format = '( [$duration]($style))'
+min_time = 500
+style = 'yellow'
+
+[git_branch]
+format = '[$branch]($style)'
+style = 'bold purple'
+[git_status]
+format = '( [$all_status$ahead_behind]($style))'
+ahead = '↑'
+behind = '↓'
+diverged = '↕'
+
+[c]
+disabled = true
+[python]
+disabled = true
+[golang]
+disabled = true
+[lua]
+disabled = true
+[nodejs]
+disabled = true
+
 
 # [custom.upds]
 # command = 'cat ~/.cache/updates' # shows output of command
