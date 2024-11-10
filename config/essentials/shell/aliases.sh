@@ -154,7 +154,7 @@ alias airpods='bluetoothctl connect 60:93:16:24:00:10'
 alias hotpsot='nmcli dev wifi hotspot ifname wlan0 ssid wiefie password "peepeepoopoo"'
 alias wtip='wt ip -c -brief addr'
 alias fusephone='sshfs myphone: /media/phone'
-alias ttyper='ttyper -l english1000'
+alias ttyper='ttyper -l english1000 -w 160'
 
 # NPM
 alias npi="npm init --yes"

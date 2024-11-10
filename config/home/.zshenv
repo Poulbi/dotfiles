@@ -93,7 +93,8 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$XDG_CONFIG_HOME/cargo/bin:$PATH"
 export PATH="$PATH:./node_modules/.bin"
-export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$DOTNET_CLI_HOME/.dotnet/tools"
+
 export PATH="$PATH:$GOPATH/bin"
 
 export PLAN9=/usr/lib/plan9
