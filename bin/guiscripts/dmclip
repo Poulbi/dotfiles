@@ -1,24 +1,37 @@
 #!/bin/sh
 
+# dmclip is a menu script to operate on the clipboard selections it can do following operations
+# - image to text
+# - save clipboard
+# - load saved clipboard, caveat: paste must be a single line
+# - text replace
+#
+# arguments:
+# - if '$1' is '-p' then dmclip will use the primary selection
+#
+# dependencies:
+# - 'clipp'
+# - 'clipo' for pasting
+# - 'tesseract' for image to text
+# - 'dmenu' as the menu script
+
 tmp="/tmp/dmclip"
 
-choice="$(printf 'swap\nimage\nload\nsave\nreplace\n' | dmenu -c -g 5 -l 1)"
+clipopt="$1"
+
+# preview string for choosing choice  
+mime="$(clipo "$clipopt" | file --brief --mime-type -)"
+if [ "${mime%%/*}" = "image" ]; then
+    display_clip="IMAGE"
+else
+    display_clip="$(clipo "$clipopt" | head -c 48)"
+fi
+    
+choice="$(printf 'image\nload\nsave\nreplace\n' | dmenu -p "$display_clip" -c -g 5 -l 1)"
 [ "$choice" ] || exit 1
 
-clipboard="$(printf 'primary\nclipboard\n' | dmenu -c -g 2 -l 1)"
-[ "$clipboard" ] || exit 1
-
-# For clipo and clipp
-if [ "$clipboard" = 'primary' ]; then
-    clipopt='-p'
-else
-    clipopt=''
-fi
-
 case "$choice" in
-    swap) swclip ;;
     image) 
-        mime="$(clipo "$clipopt" | file --brief --mime-type -)"
         [ "${mime%%/*}" != "image" ] && exit 1
 
         clipo "$clipopt" | tesseract - stdout | sed '/^$/d' > "$tmp"
@@ -30,9 +43,9 @@ case "$choice" in
         clipp "$clipopt" < "$tmp"
         ;;
     load) 
-        choice="$(sort "${tmp}.txt" | uniq |
-            dmenu -c -g 1 -l 5)"
+        choice="$(sort "${tmp}.txt" | uniq | dmenu -c -g 1 -l 5)"
         [ "$choice" ] || exit 1
+
         printf '%s' "$choice" | clipp "$clipopt"
         ;;
     save) clipo "$clipopt" >> "${tmp}.txt" ;;
@@ -43,7 +56,7 @@ case "$choice" in
         replacement="$(dmenu -c -l 0 -p "by:" < /dev/null)"
         [ "$replacement" ] || exit 1
 
-        clipo  "$clipopt" |
+        clipo "$clipopt" |
 			sed "s/$match/$replacement/g" |
 			clipp "$clipopt"
         ;;
