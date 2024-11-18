@@ -1,23 +1,25 @@
 #!/bin/sh
 
-exclude="
-.cache 
-.mozilla
-.npm
-.git
-site-packages
-objects
-.minecraft/saves
-discord
-Steam
-?eclipse
-VisualParadigm
-intellij
-arduino15"
+# exclude="
+# .cache 
+# .mozilla
+# .npm
+# .git
+# site-packages
+# objects
+# .minecraft/saves
+# discord
+# Steam
+# ?eclipse
+# VisualParadigm
+# intellij
+# arduino15"
+#
+# for dir in $exclude; do
+#     dirs="$dirs -name \"$dir\" -o "
+# done
+# cmd="find ${2:-.} \(${dirs} -false \) -prune -o -type ${1:-f} -mindepth 1 -print"
+#
+# eval "$cmd" 2>/dev/null
 
-for dir in $exclude; do
-    dirs="$dirs -name \"$dir\" -o "
-done
-cmd="find ${2:-.} \(${dirs} -false \) -prune -o -type ${1:-f} -mindepth 1 -print"
-
-eval "$cmd" 2>/dev/null
+fd ${2:-.} -t ${1:-f} 

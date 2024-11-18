@@ -2,15 +2,6 @@
 
 # zmodload zsh/zprof
 
-if [ "$(id -u)" -ne 0 ]
-then
-	[ "${TTY%%tty*}" = '/dev/' ] && clear
-	case "${TTY#/dev/tty}" in
-		2) exec startx > /dev/null 2>&1 ;;
-		*) false ;;
-	esac && exit
-fi
-
 autoload -U select-word-style
 autoload -z edit-command-line
 zle -N edit-command-line
