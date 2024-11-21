@@ -76,7 +76,7 @@ alias lst2='ls --tree -L2'
 alias lst3='ls --tree -L3'
 alias ls.='ls -dl .*'
 which eza >/dev/null 2>&1 &&
-	alias ls='eza --sort extension --group-directories-first --git' ||
+	alias ls='eza --sort name --group-directories-first --git' ||
 	alias ls='ls --color --group-directories-first --sort=extension'
 
 # pacman aliases

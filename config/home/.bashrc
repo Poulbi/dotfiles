@@ -11,3 +11,5 @@ PS1=' \w $ '
 HISTFILE=
 . $HOME/.config/shell/aliases.sh 
 . $HOME/.config/shell/functions.sh
+
+eval "$(zoxide init bash)"
