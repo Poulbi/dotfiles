@@ -1,5 +1,12 @@
 #!/bin/zsh
 
+if { [ "$TTY" = "/dev/tty1" ] || [ "$TTY" = "/dev/tty8" ]; } && [ "$(id -u)" -ne 0 ]; then
+    eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents ssh,gpg)"
+    keychain --dir "$XDG_CONFIG_HOME/keychain" --quiet --agents gpg IDENTITY #FILTERED
+    exec startx > /dev/null 2>&1
+    exit
+fi
+
 # zmodload zsh/zprof
 
 autoload -U select-word-style

@@ -9,5 +9,10 @@ hibernate
 EOF
 )"
 
-[ "$choice" = "firmware" ] && systemctl reboot --firmware-setup
-[ "$choice" ] && systemctl "$choice"
+case "$choice" in
+	"suspend") doas /usr/sbin/zzz ;;
+	"poweroff") doas /usr/sbin/poweroff ;;
+	"reboot"|"firmware") doas /usr/sbin/reboot ;;
+	"") exit 1 ;;
+	*) ;;
+esac 

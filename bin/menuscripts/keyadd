@@ -2,7 +2,7 @@
 
 log()
 {
-	notify-send -t 1000 "keyadd" "$1" &
+	herbe "keyadd" "$1" &
 	>&2 printf '%s\n' "$1"
 }
 
@@ -55,7 +55,7 @@ then
     exit 1
 fi
 
-HOST=$(hostnamectl hostname)
+HOST="$(hostname)"
 export PASSWORD="keys/$HOST/ssh/$key_pretty"
 export SSH_ASKPASS="sshpass"
 ssh-add -q - < "$key" &&

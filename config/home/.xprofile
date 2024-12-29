@@ -1,3 +1,9 @@
+#!/bin/sh
+
+feh --no-fehbg --bg-scale "$HOME"/pics/wallpaper &
+
+setxkbmap us -variant colemak -option ctrl:swapcaps,menu:altwin &
+
 # TODO: check if this is home
 if [ "$(hostname)" = "winter" ]; then
     (
@@ -7,8 +13,6 @@ if [ "$(hostname)" = "winter" ]; then
 fi
 
 picom -b &
-feh --no-fehbg --bg-scale "$HOME"/pics/wallpaper &
-setxkbmap colemak -option ctrl:swapcaps,altwin:menu_win &
 
 # xautolock -locker slock &
 
@@ -20,6 +24,7 @@ slstatus &
 unclutter --timeout 3 --jitter 50 -b &
 202020 &
 
+echo 4
 if [ "$(hostname)" = "winter" ]; then
     signal-desktop &
     discord &
