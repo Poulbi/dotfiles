@@ -22,7 +22,7 @@ done
 [ "$file" ] || exit 1
 
 pass show -c "$file" || exit 1
-herbe "*mpass" "$file"
+herbe "_mpass" "*$file"
 
 [ "$WAYLAND_DISPLAY" ] && cliphist list >/dev/null && # on wayland and cliphist is running
 	cliphist list | head -n 1 | cliphist delete
