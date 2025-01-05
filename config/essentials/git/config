@@ -17,4 +17,4 @@
 [gpg]
 	program = /usr/bin/gpg
 [core]
-	autocrlf = true
+	autocrlf = input
