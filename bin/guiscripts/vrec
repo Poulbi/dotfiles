@@ -72,7 +72,10 @@ fi
 # Set audio variable
 if [ "$1" = "-a" ]
 then
-	audio="-f pulse -ac 2 -i default"
+    ## Mic
+	# audio="-f pulse -ac 2 -i default"
+    ## Desktop
+	audio="-f pulse -i default"
 	shift
 fi
 output="$(date +%F_%H-%M-%S)"
