@@ -1,0 +1,2 @@
+[filter "gpgid"]
+	clean = /home/void/proj/dotfiles/utils/gpgidentity

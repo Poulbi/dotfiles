@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="vis"
+export VISUAL="vis"
 
-export BROWSER="zen-browser"
+export BROWSER="firefox"
 export VIEWER="zathura"
 export PLAYER="mpv"
 export MENUCMD="dmenu"
@@ -47,7 +47,7 @@ alias irssi='irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HO
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME"/isync/mbsyncrc'
 
 export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export XAUTHORITY=$HOME/.Xauthority
 
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export HISTFILE="$ZDOTDIR"/histfile
@@ -64,7 +64,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on'
 
-export PASSWORD_STORE_DIR="$HOME"/src/password-store
+export PASSWORD_STORE_DIR="$HOME"/.password-store
 export PASSWORD_STORE_CLIP_TIME=5
 
 # old
