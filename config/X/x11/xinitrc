@@ -23,5 +23,6 @@ fi
 
 export MENUCMD="dmenu"
 export IMAGE="feh"
+export XDG_CURRENT_DESKTOP="dwm"
 
 exec startdwm

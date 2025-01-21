@@ -5,10 +5,10 @@ sounds="$HOME/sync/share/sounds"
 
 if [ "$1" ]; then
     $mpvCommand "$sounds"/avert1.ogg &
-    herbe '202020' 'avert!' &
+    notify-send '_202020' '*avert!' &
     sleep 20s
     $mpvCommand "$sounds"/avert2.ogg &
-    herbe '202020' 'stop averting' &
+    notify-send '_202020' '*stop averting' &
 
     exit
 fi

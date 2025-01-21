@@ -9,6 +9,15 @@ hibernate
 EOF
 )"
 
+if [ "$(hostname)" = "winter" ]; then 
+	if [ "$choice" = "firmware" ]; then
+		systemctl reboot --firmware-setup
+		exit
+	fi
+	systemctl "$choice"
+	exit
+fi
+
 case "$choice" in
 	"suspend") doas /usr/sbin/zzz ;;
 	"poweroff") doas /usr/sbin/poweroff ;;

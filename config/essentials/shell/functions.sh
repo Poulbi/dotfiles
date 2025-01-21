@@ -76,7 +76,6 @@ to_webm() { ffmpeg -y -i "$1" -vcodec libvpx -cpu-used -12 -deadline realtime "$
 ngenable() { ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/; }
 remove_audio() { ffmpeg -i "$1" -cpu-used -$(nproc) -deadline realtime -c copy -an "${2:-out.mp4}"; }
 nasg() { smbclient //192.168.178.24/Public/ -D ENFANTS/Luca/tmp -N -c "get $1"; }
-trll() { printf "%s\n" "$1" | trl 2>/dev/null; }
 vidlen() { date -u -d @"$(ffprobe -show_entries format=duration -v quiet -of csv="p=0" -i "$1")" +'%T'; }
 pcp() { readlink -f "$1" | tr -d '\n' | clipp; }
 
@@ -386,4 +385,20 @@ ssl_req() {
     [ "$1" ] || return 1
     [ "$2" ] || return 2
     openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out "$1" -keyout "$2"
+}
+
+trclipo()
+{
+    magnet="$(clipo)"
+    if ! printf '%s\n' "$magnet" | grep '^magnet:' > /dev/null 2>&1
+    then
+        >&2 printf 'Not a magnet.\n'
+        return 1
+    fi
+
+    category="$(printf "music\nanime\nmovies\nshows\nother\nsoftware\ngames\nisos\nbooks\n" | fzf)"
+    [ "$category" ] || return 2
+
+    transmission-remote debuc.com -a -w "/downloads/$choice" "$magnet"
+
 }

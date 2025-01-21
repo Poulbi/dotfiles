@@ -11,8 +11,9 @@
 
 cache="$HOME/.cache/gdbcore_prog"
 
-if [ "$#" -lt 1 ]; then
+if [ "$1" = "-h" ]; then
     >&2 printf 'usage: gdbcore [-r] <program>\n'
+    exit 1
 fi
 
 if [ "$1" = "-r" ]; then
@@ -64,6 +65,7 @@ else
     line="$(sed -n "${nr}p" "$tmp")"
     corefile="$coredir"/"${line%% *}"
 fi
+>&2 printf 'corefile: %s\n' "$corefile"
 
 if [ ! -f "$corefile" ]; then
     rm -f "$tmp"

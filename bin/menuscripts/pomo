@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# time in minutes of one pomodoro
+# time in minutes
 [ "$SLEEP_TIME" ] || SLEEP_TIME=25
+[ "$BREAK_TIME" ] || BREAK_TIME=5
+[ "$GIGA_BREAK_TIME" ] || GIGA_BREAK_TIME=20
 
 ### FUNCTIONS
 notif() {
@@ -25,7 +27,7 @@ player_command() {
 # $1: time in minutes
 # $2: msg for notification
 ring_ring() {
-	printf >&2 '%s B %s\n' "$(date '+%R')" "$round"
+	printf >&2 '%s %s [%s]\n' "$(date '+%R')" "Break" "$round"
 	player_command
 	herbe "pomo" "$2" &
 	sleep "${1}m"
@@ -62,13 +64,13 @@ done
 
 while true; do
 	notif "*START"
-	printf >&2 '%s S %s\n' "$(date '+%R')" "$round"
+	printf >&2 '%s %s [%s]\n' "$(date '+%R')" "Start" "$round"
 	sleep "${SLEEP_TIME}m"
 	if [ "$round" -eq 3 ]; then
-		ring_ring 20 "*GIGA BREAK TIME"
+		ring_ring "$GIGA_BREAK_TIME" "*GIGA BREAK TIME"
 		round=0
 	else
-		ring_ring 5 "*BREAK TIME"
+		ring_ring "$BREAK_TIME" "*BREAK TIME"
 		round=$((round + 1))
 	fi
 done

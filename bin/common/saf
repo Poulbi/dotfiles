@@ -2,7 +2,7 @@
 
 # Simple Ass Fetch by futxlii
 
-red="$(printf '\033[31m')"
+cyan="$(printf '\033[36m')"
 blue="$(printf '\033[34m')"
 reset="$(printf '\033[0m')"
 
@@ -24,10 +24,14 @@ done
 KERNEL="$(uname -r)"
 UPTIME="$(uptime -p)"; UPTIME="${UPTIME##up }"
 SHELL="$(basename "$SHELL")"
+MEMORY_USED="$(free --bytes | awk 'NR==2 {print $3}' | numfmt --to=iec-i --format '%.2f')"
+MEMORY_TOTAL="$(free --bytes | awk 'NR==2 {print $2}' | numfmt --to=iec-i --format '%.2f')"
 
 cat <<EOF
-	${red}- ${blue}${ID:-"unknown"}
-	${red}- ${blue}$KERNEL
-	${red}- ${blue}$UPTIME ($(load))
-	${red}- ${blue}$SHELL${reset}
+  ${blue}OS:      ${cyan}${NAME:-"unknown"}
+  ${blue}Kernel:  ${cyan}$KERNEL
+  ${blue}Desktop: ${cyan}$XDG_CURRENT_DESKTOP${reset}
+  ${blue}Shell:   ${cyan}$SHELL${reset}
+  ${blue}Memory:  ${cyan}$MEMORY_USED / $MEMORY_TOTAL
+  ${blue}Uptime:  ${cyan}$UPTIME ($(load))
 EOF

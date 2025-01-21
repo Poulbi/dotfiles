@@ -1,9 +1,28 @@
 #!/bin/sh
 trap "exit 1" INT
 
-music="$(xdg-user-dir MUSIC)"
->&2 printf "music: %s\n" "$music"
+[ "$1" ] && path="$1" || path="/media/basilisk/music/sorted/"
+[ "$2" ] && music="$2" || music="$(xdg-user-dir MUSIC)"
+[ "$3" ] && host="$3" || host="autumn"
 
-while ! rsync --recursive --verbose --partial --progress --ignore-existing --size-only db:/media/basilisk/music/sorted/ "$music"
+>&2 printf '%s:%s -> %s\n' "$host" "$path" "$music"
+
+>&2 printf 'Confirm? [y/N] '
+answer="$(head -n 1)"
+[ "$answer" ] || exit 1
+
+if [ "$answer" != "y" ] && [ "$answer" != "Y" ]; then 
+	exit 1
+fi
+
+# retry until failure
+while ! rsync \
+	--recursive \
+	--verbose \
+	--partial \
+	--progress \
+	--ignore-existing \
+	--size-only \
+	"$host":"$path" "$music"
 do :
 done

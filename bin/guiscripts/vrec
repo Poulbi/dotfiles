@@ -45,15 +45,14 @@ record_cmd()
 	w=$(($3 + $3 % 2))
 	h=$(($4 + $4 % 2))
 	ffmpeg $audio        \
-	    -v 16            \
+            -hide_banner     \
 	    -r 30            \
 	    -f x11grab       \
 	    -s "${w}x${h}"   \
 	    -i ":0.0+$1,$2"  \
-	    -preset slow     \
-	    -c:v h264        \
+	    -preset ultrafast\
+	    -c:v libx264     \
 	    -pix_fmt yuv420p \
-	    -crf 20          \
 	    "$5/$6.mp4"
 	rm -f "$lock"
 	herbe "vrec" "stopped recording." & 
@@ -69,14 +68,21 @@ else
 	dir="$(xdg-user-dir VIDEOS)"
 	[ -d "$dir" ] && dir="$dir/records" || dir="$HOME"
 fi
+mkdir -p "$dir"
+
 # Set audio variable
 if [ "$1" = "-a" ]
 then
-    ## Mic
-	# audio="-f pulse -ac 2 -i default"
-    ## Desktop
-	audio="-f pulse -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor -ac 1"
-	shift
+    if [ "$2" = "-m" ]
+    then
+        ## Mic
+        audio="-f pulse -ac 2 -i default"
+        shift
+    else
+        ## Desktop
+        audio="-f pulse -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor -ac 1"
+    fi
+    shift
 fi
 output="$(date +%F_%H-%M-%S)"
 
@@ -99,7 +105,7 @@ case "$option" in
         ;;
     stop)
         pid="$(pgrep ffmpeg | xargs ps | grep 'x11grab' | awk '{print $1}')"
-        [ "$pid" ] && kill "$pid"
+        [ "$pid" ] && kill -TERM $pid
         rm -f "$lock" 
         herbe "vrec" "stopped recording." &
         ;;
@@ -108,6 +114,16 @@ case "$option" in
         printf '%s' "$file" | clipp
         ;;
     full) record_cmd 0 0 1920 1080 "$dir" "$output" ;;
-    audio) $0 -a; exit ;;
+    audio) 
+    	choice="$(printf 'mic\ndesktop\n' | dmenu -c)"
+    	[ "$choice" ] || exit 1
+    	if [ "$choice" = "desktop" ]
+    	then
+	    $0 -a
+	else
+            $0 -a -m
+	fi
+        exit
+        ;;
     help|*) >&2 printf 'record [dir] (active|part|stop|full|last|audio)\n' ;;
 esac

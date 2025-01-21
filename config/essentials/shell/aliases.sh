@@ -112,7 +112,6 @@ alias pkb='pkgfile -b'
 alias trr='transmission-remote debuc.com'
 alias trls='transmission-remote debuc.com -t all -l'
 alias tradd='transmission-remote debuc.com -a'
-alias trclipo='transmission-remote debuc.com -a "$(clipo)"'
 
 alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 
