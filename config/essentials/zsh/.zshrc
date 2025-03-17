@@ -139,4 +139,6 @@ setopt notify
 
 # zprof
 
-PATH="$PATH:$HOME/proj/chatty/"
+PATH="$PATH:$HOME/proj/metac/build"
+PATH="$PATH:$HOME/proj/metac/misc"
+

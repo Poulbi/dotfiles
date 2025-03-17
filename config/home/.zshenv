@@ -113,9 +113,6 @@ export MAKEFLAGS="-j$(nproc)"
 
 export VAKKEN="$HOME/docs/school/2024-2025"
 
-PATH="$PATH:$HOME/proj/chatty/"
-
-
 if [ "$(hostname)" = "spring" ]; then
     export GIT_TRACK_REPOS="$HOME/git-track.txt" 
 fi
