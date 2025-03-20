@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+PATH="$PATH:$HOME/proj/metac/build"
+PATH="$PATH:$HOME/proj/metac/misc"
+
 if { [ "$TTY" = "/dev/tty1" ] || [ "$TTY" = "/dev/tty8" ]; } && [ "$(id -u)" -ne 0 ]; then
     eval "$(keychain --dir "$XDG_CONFIG_HOME/keychain" --eval --quiet --agents ssh,gpg)"
     keychain --dir "$XDG_CONFIG_HOME/keychain" --quiet --agents gpg 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D #FILTERED
@@ -138,6 +141,3 @@ setopt notify
 # setopt cdablevars
 
 # zprof
-
-PATH="$PATH:$HOME/proj/metac/build"
-PATH="$PATH:$HOME/proj/metac/misc"
