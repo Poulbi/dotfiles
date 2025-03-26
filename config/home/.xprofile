@@ -12,7 +12,12 @@ if [ "$(hostname)" = "winter" ]; then
     ) &
 fi
 
-~/src/xobs/env/bin/python ~/src/xobs/pulse.py | xob &
+if [ "$(hostname)" = "spring" ]
+then
+    tail -f ~/src/xob/scripts/volume.pipe | xob &
+else
+    ~/src/xobs/env/bin/python ~/src/xobs/pulse.py | xob &
+fi
 
 picom -b &
 
@@ -26,7 +31,6 @@ slstatus &
 unclutter --timeout 3 --jitter 50 -b &
 202020 &
 
-echo 4
 if [ "$(hostname)" = "winter" ]; then
     signal-desktop &
     discord &
