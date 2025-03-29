@@ -1,27 +1,32 @@
 #!/bin/sh
 choice="$(
-cat <<EOF | commander -c -w 1 -y 5
+cat <<EOF | commander -c -w 1 -y 7
 poweroff
 suspend
 reboot
 firmware
 hibernate
+eepy
 EOF
 )"
 
 if [ "$(hostname)" = "winter" ]; then 
 	if [ "$choice" = "firmware" ]; then
 		systemctl reboot --firmware-setup
-		exit
+	elif [ "$choice" = "eepy" ]; then
+		systemctl hybrid-sleep
+	else
+		systemctl "$choice"
 	fi
-	systemctl "$choice"
-	exit
+elif [ "$(hostname)" = "spring" ]; then
+	case "$choice" in
+		"suspend") doas /usr/sbin/zzz -z ;;
+		"hibernate") doas /usr/sbin/zzz -Z ;;
+		"eepy") doas /usr/sbin/zzz -H ;;
+		"poweroff") doas /usr/sbin/poweroff ;;
+		"reboot") doas /usr/sbin/reboot ;;
+		"firmware") rebootfw ;;
+		"") exit 1 ;;
+		*) ;;
+	esac 
 fi
-
-case "$choice" in
-	"suspend") doas /usr/sbin/zzz ;;
-	"poweroff") doas /usr/sbin/poweroff ;;
-	"reboot"|"firmware") doas /usr/sbin/reboot ;;
-	"") exit 1 ;;
-	*) ;;
-esac 
