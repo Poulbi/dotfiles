@@ -13,16 +13,15 @@ EOF
 if [ "$(hostname)" = "winter" ]; then 
 	if [ "$choice" = "firmware" ]; then
 		systemctl reboot --firmware-setup
-	elif [ "$choice" = "eepy" ]; then
+	elif [ "$choice" = "suspend" ]; then
 		systemctl hybrid-sleep
 	else
 		systemctl "$choice"
 	fi
 elif [ "$(hostname)" = "spring" ]; then
 	case "$choice" in
-		"suspend") doas /usr/sbin/zzz -z ;;
+		"suspend") doas /usr/sbin/zzz -H ;;
 		"hibernate") doas /usr/sbin/zzz -Z ;;
-		"eepy") doas /usr/sbin/zzz -H ;;
 		"poweroff") doas /usr/sbin/poweroff ;;
 		"reboot") doas /usr/sbin/reboot ;;
 		"firmware") rebootfw ;;
