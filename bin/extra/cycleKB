@@ -35,4 +35,4 @@ notify-send "_cycleKB" "*${Layout%% -option*}" &
 exit 
 
 # THIS LINE IS ADDED AUTOMATICALLY
-us -variant colemak -option ctrl:swapcaps,altwin:menu_win
+us

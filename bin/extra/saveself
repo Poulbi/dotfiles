@@ -1,0 +1,41 @@
+#!/bin/sh
+
+Threshold=5
+
+GetBatteryCapacity()
+{
+	File="$(find /sys/class/power_supply \
+		-maxdepth 1 \
+		-type l \
+		-name 'BAT*' |
+		head -n 1)"
+	cat "$File"/capacity
+}
+
+PrevCapacity="$(GetBatteryCapacity)"
+[ "$PrevCapacity" ] || exit 1
+
+while true
+do
+	sleep 5
+	Capacity="$(GetBatteryCapacity)"
+	if [ "$Capacity" -lt "$PrevCapacity" ] 
+	then
+		if [ "$Capacity" -le "$Threshold" ]
+		then
+			setsid slock
+			HostName="$(hostname)"
+			if [ "$HostName" = "spring" ]
+			then
+				doas /usr/sbin/zzz -Z
+			elif [ "$HostName" = "winter" ] 
+			then
+				systemctl hibernate
+			fi
+		fi
+		PrevCapacity="$Capacity"
+	fi
+done
+
+
+
