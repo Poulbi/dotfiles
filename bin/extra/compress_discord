@@ -11,7 +11,7 @@ audio_codec="aac"
 audio_bitrate="96"
 target_size="8"
 
-MEGABIT="8388"
+MEGABIT="10000"
 
 # Main
 
