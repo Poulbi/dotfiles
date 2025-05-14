@@ -366,20 +366,23 @@ edit_git_file () {
     $EDITOR "$1"/"$f"
 }
 
-# Wrapper to automatically add the key
-# could have been alias='SSH_ASKPASS=askpass SSH_ASKPASS_REQUIRE=prefer ssh'
-# but this option is very slow for some reason
-ssh() {
-    for arg in $@; do
-        if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
-        then
-           # Disable notification by unsetting the DISPLAY varibles
-            keyadd "$arg" 2> /dev/null
-            break
-        fi
-    done
-    /usr/bin/ssh $@
-}
+if false
+then
+    # Wrapper to automatically add the key
+    # could have been alias='SSH_ASKPASS=askpass SSH_ASKPASS_REQUIRE=prefer ssh'
+    # but this option is very slow for some reason
+    ssh() {
+        for arg in $@; do
+            if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
+            then
+               # Disable notification by unsetting the DISPLAY varibles
+                keyadd "$arg" 2> /dev/null
+                break
+            fi
+        done
+        /usr/bin/ssh $@
+    }
+fi
 
 ssl_req() {
     [ "$1" ] || return 1

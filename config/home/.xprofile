@@ -1,28 +1,29 @@
 #!/bin/sh
 
 feh --no-fehbg --bg-scale "$HOME"/pics/wallpaper &
-
 setxkbmap us -variant colemak -option ctrl:swapcaps,altwin:menu_win &
+xset s off -dpms &
 
-# TODO: check if this is home
 if [ "$(hostname)" = "winter" ]; then
     (
         CurrentOutput="$(xrandr | grep '\bconnected\b' | awk '{print $1}')" 
-        xrandr --output "$CurrentOutput" --mode 1920x1080 --rate 144
+        xrandr --output "$CurrentOutput" --mode "1920x1080" --rate "144"
     ) &
+    signal-desktop &
+    discord &
+    ~/src/xobs/env/bin/python ~/src/xobs/pulse.py | xob &
 fi
 
 if [ "$(hostname)" = "spring" ]
 then
     tail -f ~/src/xob/scripts/volume.pipe | xob &
-else
-    ~/src/xobs/env/bin/python ~/src/xobs/pulse.py | xob &
+    xautolock -locker slock &
+    saveself &
 fi
 
+st -e "sh" "-c" "pgrep tmux && tmux a || tmux" &
+
 picom -b &
-
-# xautolock -locker slock &
-
 gammastep -m randr &
 ntfy transmission &
 herbimisu &
@@ -31,11 +32,5 @@ slstatus &
 unclutter --timeout 3 --jitter 50 -b &
 202020 &
 
-if [ "$(hostname)" = "winter" ]; then
-    signal-desktop &
-    discord &
-fi
-st -e "sh" "-c" "pgrep tmux && tmux a || tmux" &
-
-xset s off -dpms &
-saveself &
+keyadd autumn &
+keyadd spacehb.net &
