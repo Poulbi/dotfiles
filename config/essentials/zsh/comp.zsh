@@ -93,7 +93,7 @@ compdef gdbcore="which"
 compdef pkgfile="which"
 #compdef ytui
 compdef _ytui ytui
-
+compdef start="ls"
 # zsh completion for ytui                                 -*- shell-script -*-
 
 __ytui_debug()
