@@ -1,0 +1,15 @@
+#!/bin/sh
+which v4l2-ctl scrcpy > /dev/null || exit 1
+
+V4L2_Sink="$(v4l2-ctl --list-devices | grep 'Virtual Webcam' -A 1 | tail -n 1 | awk '{print $1}')"
+
+scrcpy --video-source=camera \
+	--no-audio \
+	--no-window \
+	--camera-facing=front \
+	--v4l2-sink="$V4L2_Sink" \
+	--camera-fps=60 \
+	--video-codec=h265 \
+	--camera-ar=4:3 \
+	-m1920 \
+	--capture-orientation=flip90

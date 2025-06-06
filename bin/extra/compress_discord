@@ -16,6 +16,8 @@ MEGABIT="10000"
 # Main
 
 input="$1"
+inputDir="$(dirname "$1")"
+inputName="$(basename "$1")"
 if [ -z "$input" ]
 then
 	>&2 printf 'Usage: discord_compress <input>\n'
@@ -32,6 +34,6 @@ common_args="-hide_banner -v quiet -stats -y -hwaccel auto -i $input -c:v $video
 set -ex
 
 ffmpeg $common_args -pass 1 -an -f null /dev/null
-ffmpeg $common_args -pass 2 -c:a "$audio_codec" -b:a "${audio_bitrate}K" compressed_"${input%.*}".mp4
+ffmpeg $common_args -pass 2 -c:a "$audio_codec" -b:a "${audio_bitrate}K" "$inputDir"/compressed_"${inputName%.*}".mp4
 
 rm -f ffmpeg2pass*.log*

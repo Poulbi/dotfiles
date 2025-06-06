@@ -31,5 +31,19 @@ slstatus &
 unclutter --timeout 3 --jitter 50 -b &
 202020 &
 
-keyadd autumn &
-keyadd spacehb.net &
+if [ "$(hostname)" = "spring" ]
+then
+	keyadd autumn &
+	keyadd spacehb.net &
+fi
+
+gpu-screen-recorder \
+	-w screen \
+	-f 60 \
+	-c mkv \
+	-a "default_output|default_input" \
+	-r 60 \
+	-replay-storage ram \
+	-restart-replay-on-save yes \
+	-o ~/vids/replays \
+	-sc "$(which replay.sh)" &

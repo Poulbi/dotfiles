@@ -1,14 +1,9 @@
 #!/bin/zsh
 
-export EDITOR="vis"
-export VISUAL="vis"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
-if [ "$(hostname)" = "winter" ]; then
-    export BROWSER="zen-browser"
-else
-    export BROWSER="firefox"
-fi
-
+export BROWSER="firefox"
 export VIEWER="zathura"
 export PLAYER="mpv"
 export MENUCMD="dmenu"
@@ -108,6 +103,8 @@ export PATH="$PATH:$PLAN9/bin"
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":/usr/local/lib/
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":.
+
+CPATH="$CPATH:$HOME/proj/std_lr"
 
 export MAKEFLAGS="-j$(nproc)"
 
