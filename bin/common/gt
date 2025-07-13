@@ -109,7 +109,7 @@ while getopts ":a:c:f:dlsheu" opt; do
                     git add .
                     git commit --all -m "checkpoint" > /dev/null 2>&1
                     git push > /dev/null 2>&1
-                    printf '%s: done.\n' "$proj"
+                    printf '%s: done.\n' "$proj" | sed "s@^$HOME@~@"
                 )
             done
         fi
