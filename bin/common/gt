@@ -92,11 +92,13 @@ while getopts ":a:c:f:dlsheu" opt; do
         if [ "$parallel" ]; then
             list_repos |
                 parallel 'cd {};
-            cd "$(git rev-parse --show-toplevel || echo .)"
-            git pull --ff
+            cd "$(git rev-parse --show-toplevel || printf '\''.\\n'\'')"
+            git pull --ff > /dev/null
             git add .
-            git commit --all -m "checkpoint"
-            git push'
+            git commit --all -m "checkpoint" > /dev/null
+            git push > /dev/null
+            printf '\''{}: done.\\n'\''
+            '
         else
             list_repos | while read -r proj
             do
