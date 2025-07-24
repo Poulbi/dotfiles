@@ -349,3 +349,7 @@ alias done.='(grt ; ga . ; gcamc ; gp)'
 alias gdb='gdb -q'
 alias gdbr='gdb -ex "target remote :4200"'
 alias gonotes='cd "$(find $HOME/notes/ -mindepth 1 -type d -not -name '\''.*'\'' | sed "s@$HOME/notes/@@" | fzf)"'
+
+alias pkg_list_files='xbps-query -f'
+alias pkg_search='xbps-query -s'
+alias pkg_install='doas xbps-install'
