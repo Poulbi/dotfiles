@@ -216,7 +216,7 @@ pacsize()
 mime-default ()
 {
 	mime=
-    [ "${mime:=$1}" ] ||
+    [ "${mime:=${1%.desktop}}" ] ||
         mime="$(find /usr/share/applications/ -iname '*.desktop' -printf '%f\n' |
             sed 's/\.desktop$//' |
             fzf)"
