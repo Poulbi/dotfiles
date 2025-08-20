@@ -5,6 +5,8 @@
 alias vi='nvim'
 which zoxide > /dev/null 2>&1 && alias cd='z'
 
+alias start='setsid'
+
 # Zsh specific aliases
 if [ $SHELL = "/bin/zsh" ]; then
 	# googoo aliases
@@ -319,6 +321,17 @@ alias gdb='gdb -q'
 alias gdbr='gdb -ex "target remote :4200"'
 alias gonotes='cd "$(find $HOME/notes/ -mindepth 1 -type d -not -name '\''.*'\'' | sed "s@$HOME/notes/@@" | fzf)"'
 
-alias pkg_list_files='xbps-query -f'
-alias pkg_search='xbps-query -s'
-alias pkg_install='doas xbps-install'
+if [ "$(hostname)" = "spring" ]
+then
+ alias pkg_list_files='xbps-query -f'
+ alias pkg_search='xbps-query -s'
+ alias pkg_install='doas xbps-install'
+ alias pkg_search_owned='xbps-query -o --regex'
+else
+ alias pkg_list_files='pacman -Ql'
+ alias pkg_search_local='pacman -Qs'
+ alias pkg_search_online='pacman -Ss'
+ alias pkg_install='doas pacman -S'
+ alias pkg_search_owned='pkgfile'
+ alias 
+fi
