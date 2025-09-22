@@ -315,7 +315,7 @@ alias quickvms='/media/cricket/vms/quickemu/"$(find '\''/media/cricket/vms/quick
 alias sqlplus='sqlplus -x'
 alias rsqp='rlwrap sqlplus -x'
 alias gcamc='gca -m "checkpoint"'
-alias gclcd'gclc --depth 1'
+alias gcld='gcl --depth 1 --filter=blob:none'
 alias done.='(grt ; ga . ; gcamc ; gp)'
 alias gdb='gdb -q'
 alias gdbr='gdb -ex "target remote :4200"'
@@ -327,6 +327,7 @@ then
  alias pkg_search='xbps-query -s'
  alias pkg_install='doas xbps-install'
  alias pkg_search_owned='xbps-query -o --regex'
+ alias pkg_remove_orphaned='doas xbps-remove -o'
 else
  alias pkg_list_files='pacman -Ql'
  alias pkg_search_local='pacman -Qs'

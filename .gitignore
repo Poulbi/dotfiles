@@ -4,3 +4,4 @@ config/essentials/gnupg/*
 config/extra/pikaur.conf
 config/theme/gtk-3.0/bookmarks
 tags
+config/theme/gtk-2.0/gtkfilechooser.ini
