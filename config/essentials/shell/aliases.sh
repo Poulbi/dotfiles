@@ -262,6 +262,7 @@ alias ffwin='hyprctl clients -j | jq '\''.[].pid'\'' | fzf --preview "hyprctl cl
 alias pff='find ${PASSWORD_STORE_DIR:=~/src/password-store/} -name "*.gpg" | sed -e "s@$PASSWORD_STORE_DIR/@@" -e '\''s/\.gpg$//'\'' | fzf | xargs pass show -c'
 alias fzps='fzf --print0 | xargs -0I{}'
 alias ytdl='yt-dlp --restrict-filenames --embed-chapters -S "res:1080" -o "%(channel)s - %(title)s.%(ext)s"'
+alias recent_files_in_dir='find . -type f -printf '\''%Ts %p\n'\'' | sort -n | cut -f 2- -d'\'' '\'' | fzf'
 
 # emacs aliases
 alias emacsd='emacs --daemon'
