@@ -375,20 +375,21 @@ then
     # Wrapper to automatically add the key
     # could have been alias='SSH_ASKPASS=askpass SSH_ASKPASS_REQUIRE=prefer ssh'
     # but this option is very slow for some reason
-    ssh() {
-        for arg in $@; do
-            if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
-            then
-               # Disable notification by unsetting the DISPLAY varibles
-                keyadd "$arg" 2> /dev/null
-                break
-            fi
-        done
-        /usr/bin/ssh $@
+    ssh()
+    {
+     for arg in $@; do
+      if grep "Host $arg\s*\$" ~/.ssh/config > /dev/null 2>&1 ;
+      then
+       Logging=0 keyadd "$arg"
+       break
+      fi
+     done
+     /usr/bin/ssh $@
     }
 fi
 
-ssl_req() {
+ssl_req()
+{
     [ "$1" ] || return 1
     [ "$2" ] || return 2
     openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out "$1" -keyout "$2"

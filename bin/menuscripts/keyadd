@@ -2,8 +2,11 @@
 
 log()
 {
-	herbe "keyadd" "$1" &
-	>&2 printf '%s\n' "$1"
+ if [ "${Logging:-1}" -eq 1 ]
+ then
+  herbe "keyadd" "$1" &
+  >&2 printf '%s\n' "$1"
+ fi
 }
 
 SSHFOLDER="$HOME/.ssh"
