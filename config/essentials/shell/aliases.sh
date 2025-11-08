@@ -1,11 +1,9 @@
 #!/bin/sh
 # s/alias \([^-]\)/alias -g \1
 
-# The most important one
-alias vi='nvim'
+alias vi='nvim' # The most important one
 which zoxide > /dev/null 2>&1 && alias cd='z'
-
-alias start='setsid'
+which trash > /dev/null 2>&1 && alias rm='trash'
 
 # Zsh specific aliases
 if [ $SHELL = "/bin/zsh" ]; then
@@ -48,13 +46,17 @@ alias sr='surfraw'
 alias ccu='calcurse'
 alias pf='profanity'
 
-alias f='fg'
 
 which gurk >/dev/null 2>&1 &&
 	alias gurk='pgrep gurk > /dev/null && printf "Already Running.\n" || gurk'
 
 alias arduino-cli='arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml'
 
+# misc.
+alias boop='mpv --resume-playback=no --volume=100 --msg-level=all=no ~/sync/share/sounds/ring1.ogg'
+alias tuivid='mpv --quiet --vo=tct --vo-tct-256=yes --vo-tct-algo=plain --framedrop=vo'
+
+# ls
 if [ -x /usr/bin/dircolors ] || [ -x $HOME/../usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 	# alias ls='ls -h --color --group-directories-first'
@@ -121,7 +123,7 @@ alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
 alias vimp="vim '+PlugInstall'"
 alias nvimp="nvim '+PackerSync'"
 alias nvg='git status > /dev/null 2>&1 && nvim "+Git"'
-alias nvn='nvim "+Telekasten panel"'
+alias scratch='nvim +Scratch'
 
 alias xrandr-rpgmaker='xrandr --auto --output VGA-1 --mode 1024x768 --left-of HDMI-1 && ~/.fehbg'
 alias xrandr-default='xrandr --auto --output VGA-1 --mode 1920x1080 --left-of HDMI-1 --output HDMI-1 --mode 1920x1080 && ~/.fehbg'
