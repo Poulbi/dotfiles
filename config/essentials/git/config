@@ -6,6 +6,7 @@
 	signingkey = 3A626DD20A32EB2E5DD9CE71CFD9ABC97158CD5D
 [push]
 	autosetupremote = true
+	default = upstream
 [pull]
 	rebase = false
 [merge]
