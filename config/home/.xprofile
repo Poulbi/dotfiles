@@ -35,7 +35,7 @@ unclutter --timeout 3 --jitter 50 -b &
 if [ "$(hostname)" = "spring" ]
 then
 	keyadd autumn &
-	keyadd spacehb.net &
+	keyadd keyfried.com &
 fi
 
 noisetorch -i &
